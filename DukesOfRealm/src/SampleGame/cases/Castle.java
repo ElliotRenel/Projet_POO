@@ -33,6 +33,8 @@ public class Castle extends Tile{
 	}
 	
 		
+	//	addToArmy checks if there is a new soldier to add from production and then adds or not the right soldier to the army
+	
 	private void addToArmy() {
 		int result = fact.update();
 		switch(result) {
@@ -46,9 +48,22 @@ public class Castle extends Tile{
 	}
 	
 	
+	//sendArmy sends maximum 3 soldiers through the gates
+	private void sendArmy() {
+		
+	}
+	
+	
+	//updateRound is called at each turn to update the differents mechanics
+	
 	public void updateRound(){
 		addToArmy();
+		
+		sendArmy();
+		
 	}
+	
+	
 
 
 	public String getDuke_owner() {
