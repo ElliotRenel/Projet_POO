@@ -1,5 +1,5 @@
 package SampleGame.cases;
 
-public abstract class Case {
+public abstract class Tile {
 
 }

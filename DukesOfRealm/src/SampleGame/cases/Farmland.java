@@ -1,5 +1,5 @@
 package SampleGame.cases;
 
-public class Farmland extends Case{
+public class Farmland extends Tile{
 
 }
