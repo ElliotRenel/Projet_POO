@@ -3,5 +3,5 @@ package SampleGame;
 import SampleGame.cases.Tile;
 
 public class Map {
-	private Tile[] listCases;
+	private Tile[][] listCases;
 }
