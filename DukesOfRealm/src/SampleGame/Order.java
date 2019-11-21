@@ -1,6 +1,8 @@
 package SampleGame;
 
+import SampleGame.cases.Castle;
+
 public class Order {
-	Castle target;
-	int troops;
+	private Castle target;
+	private int troops;
 }

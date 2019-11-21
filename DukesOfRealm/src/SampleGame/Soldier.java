@@ -1,12 +1,12 @@
 package SampleGame;
 
 public class Soldier {
-	String name;
-	int cost;
-	int time_prod;
-	int speed;
-	int health;
-	int damage;
+	private String name;
+	private int cost;
+	private int time_prod;
+	private int speed;
+	private int health;
+	private int damage;
 	
 	
 }
