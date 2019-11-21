@@ -1,8 +1,6 @@
 package SampleGame.cases;
 
-import SampleGame.army.Factory;
-import SampleGame.army.Order;
-import SampleGame.army.Soldier;
+import SampleGame.army.*;
 
 public class Castle extends Tile{
 	
@@ -42,7 +40,7 @@ public class Castle extends Tile{
 		case 0:
 			return;
 		case 1:
-			army[army_nb] = new Soldier("Piquier", this, 100, 5, 2, 1, 1);
+			army[army_nb] = new Piquier(this);
 			army_nb ++;
 		}
 	}
