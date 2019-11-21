@@ -1,4 +1,4 @@
-package SampleGame;
+package SampleGame.army;
 
 import SampleGame.cases.Castle;
 

@@ -1,7 +1,7 @@
 package SampleGame.cases;
 
-import SampleGame.Order;
-import SampleGame.Soldier;
+import SampleGame.army.Order;
+import SampleGame.army.Soldier;
 
 public class Castle extends Tile{
 	private String duke_owner;
