@@ -20,7 +20,7 @@ public class Soldier {
 		this.tile_y = home.getY();
 	}
 	
-	public void executeOrder(Castle target) {
+	public void executeOrder66(Castle target) {
 		
 	}
 

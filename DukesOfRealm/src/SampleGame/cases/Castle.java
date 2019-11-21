@@ -40,7 +40,7 @@ public class Castle extends Tile{
 		case 0:
 			return;
 		case 1:
-			army[army_nb] = new Soldier("Piquier", 100, 5, 2, 1, 1);
+			army[army_nb] = new Soldier("Piquier", this, 100, 5, 2, 1, 1);
 			army_nb ++;
 		}
 	}
