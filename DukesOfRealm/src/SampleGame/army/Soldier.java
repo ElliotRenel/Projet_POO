@@ -3,22 +3,12 @@ package SampleGame.army;
 import SampleGame.cases.Castle;
 
 public class Soldier {
-	private String name, duke_owner;
-	private int cost, time_prod;
-	private int speed, health, damage;
-	int tile_x,tile_y;
+	protected String name, duke_owner;
+	protected int cost, time_prod;
+	protected int speed, health, damage;
+	protected int tile_x,tile_y;
 	
-	public Soldier(String name, Castle home, int cost, int time_prod, int speed, int health, int damage) {
-		this.name = name;
-		this.duke_owner = home.getDuke_owner();
-		this.cost = cost;
-		this.time_prod = time_prod;
-		this.speed = speed;
-		this.health = health;
-		this.damage = damage;
-		this.tile_x = home.getX();
-		this.tile_y = home.getY();
-	}
+	public Soldier() {}
 	
 	public void executeOrder66(Castle target) {
 		
