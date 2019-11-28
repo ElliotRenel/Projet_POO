@@ -81,7 +81,7 @@ public class Main extends Application {
 					//player.processInput();
 
 					// add random enemies
-					spawnEnemies(true);
+					//spawnEnemies(true);
 
 					// movement
 					//player.move();
@@ -158,35 +158,33 @@ public class Main extends Application {
 		Castle castle = new Castle(playfieldLayer, castleImage, 0, 0, "Bob", 0, army, Orientation.S, new Factory(army[0]));
 		
 		castle.getView().setOnMousePressed(e -> {
-		//	System.out.println("Click on player");
-		//	e.consume();
-		//});
+			System.out.println("Click on player");
+			e.consume();
+		});
 		
-		//player.getView().setOnContextMenuRequested(e -> {
-		//	ContextMenu contextMenu = new ContextMenu();
-		//	MenuItem low = new MenuItem("Slow");
-		//	MenuItem medium= new MenuItem("Regular");
-		//	MenuItem high= new MenuItem("Fast");
-		//	low.setOnAction(evt -> player.setFireFrequencyLow());
-		//	medium.setOnAction(evt -> player.setFireFrequencyMedium());
-		//	high.setOnAction(evt -> player.setFireFrequencyHigh());
-		//	contextMenu.getItems().addAll(low, medium, high);
-		//	contextMenu.show(player.getView(), e.getScreenX(), e.getScreenY());
-		//});
+		castle.getView().setOnContextMenuRequested(e -> {
+			ContextMenu contextMenu = new ContextMenu();
+			MenuItem low = new MenuItem("Hello");
+			MenuItem medium= new MenuItem("How are you");
+			MenuItem high= new MenuItem("Today?");
+			//low.setOnAction(evt -> player.setFireFrequencyLow());
+			contextMenu.getItems().addAll(low, medium, high);
+			contextMenu.show(player.getView(), e.getScreenX(), e.getScreenY());
+		});
 	}
 
-	private void spawnEnemies(boolean random) {
-		if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
-			return;
-		}
-		double speed = rnd.nextDouble() * 3 + 1.0;
-		double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - enemyImage.getWidth());
-		double y = -enemyImage.getHeight();
-		int health = rnd.nextInt()%5 +1;
-		enemyImage = new Image(getClass().getResource("/images/enemy.png").toExternalForm(), 30 + 20*health, 30 + 20*health, true, true);
+	//private void spawnEnemies(boolean random) {
+	//	if (random && rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
+	//		return;
+	//	}
+	//	double speed = rnd.nextDouble() * 3 + 1.0;
+	//	double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - enemyImage.getWidth());
+	//	double y = -enemyImage.getHeight();
+	//	int health = rnd.nextInt()%5 +1;
+	//	enemyImage = new Image(getClass().getResource("/images/enemy.png").toExternalForm(), 30 + 20*health, 30 + 20*health, true, true);
 		//Enemy enemy = new Enemy(playfieldLayer, enemyImage, x, y, health, 1, speed);	
 		//enemies.add(enemy);
-	}
+	//}
 
 	private void fire(long now) {
 		//if (player.canFire(now)) {
