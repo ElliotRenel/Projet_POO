@@ -26,7 +26,7 @@ public class Castle extends Tile{
 	
 	
 	public Castle(Pane layer, Image image, int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
-		//super(layer, image, x, y );
+		super(layer, image, x, y );
 		
 		this.duke_owner = duke_owner;
 		this.treasure = treasure;
