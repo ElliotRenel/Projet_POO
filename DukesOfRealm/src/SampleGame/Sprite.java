@@ -45,7 +45,7 @@ public abstract class Sprite {
         this.layer.getChildren().remove(this.imageView);
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
@@ -53,7 +53,7 @@ public abstract class Sprite {
         this.x = x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
@@ -61,7 +61,7 @@ public abstract class Sprite {
         this.y = y;
     }
 
-    public double getDx() {
+    public int getDx() {
         return dx;
     }
 
@@ -69,7 +69,7 @@ public abstract class Sprite {
         this.dx = dx;
     }
 
-    public double getDy() {
+    public int getDy() {
         return dy;
     }
 
