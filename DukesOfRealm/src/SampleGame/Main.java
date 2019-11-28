@@ -49,7 +49,7 @@ public class Main extends Application {
 	//private Input input;
 	private AnimationTimer gameLoop;
 	
-	private boolean pause = false;
+	private boolean pause = true;				// !!!!!!!!!!!!!!!!!!!!!!!
 	
 	Group root;
 
@@ -169,7 +169,7 @@ public class Main extends Application {
 			MenuItem high= new MenuItem("Today?");
 			//low.setOnAction(evt -> player.setFireFrequencyLow());
 			contextMenu.getItems().addAll(low, medium, high);
-			contextMenu.show(player.getView(), e.getScreenX(), e.getScreenY());
+			contextMenu.show(castle.getView(), e.getScreenX(), e.getScreenY());
 		});
 	}
 
