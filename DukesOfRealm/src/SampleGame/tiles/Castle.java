@@ -1,6 +1,9 @@
 package SampleGame.tiles;
 
 import SampleGame.army.*;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -22,12 +25,14 @@ public class Castle extends Tile{
 	private Factory fact;
 	
 	
-	public Castle(String duke_owner, int treasure, Soldier[] initial_army, int army_nb, Order target, Orientation door, Factory fact) {
+	public Castle(Pane layer, Image image, int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
+		//super(layer, image, x, y );
+		
 		this.duke_owner = duke_owner;
 		this.treasure = treasure;
+		
+		army = new LinkedList<Soldier>();
 		for(Soldier s : initial_army) this.army.add(s);
-		this.army_nb = army_nb;
-		this.order = target;
 		this.door = door;
 		this.fact = fact;
 	}
@@ -42,7 +47,7 @@ public class Castle extends Tile{
 		case 0:
 			return;
 		case 1:
-			army.add(new Piquier(this));
+			army.add(new Piquier(duke_owner, x, y));
 			army_nb ++;
 		}
 	}
