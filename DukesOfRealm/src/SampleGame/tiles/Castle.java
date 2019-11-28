@@ -46,8 +46,19 @@ public class Castle extends Tile{
 	}
 	
 	
-	//sendArmy sends maximum 3 soldiers through the gates
-	private void sendArmy() {
+	//executeOrder sends maximum 3 soldiers through the gates to attack the castle pointed by order
+	private void executeOrder() {
+		if (target.getTroop()!=0) {
+			for(int i=0; i<3 , target.getTroop()>0;i++, target.sendTroop()) {
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
 		
 	}
 	
@@ -57,7 +68,7 @@ public class Castle extends Tile{
 	public void updateRound(){
 		addToArmy();
 		
-		sendArmy();
+		executeOrder();
 		
 	}
 	
