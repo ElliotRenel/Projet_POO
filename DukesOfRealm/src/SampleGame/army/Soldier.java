@@ -7,10 +7,19 @@ public class Soldier {
 	protected int cost, time_prod;
 	protected int speed, health, damage;
 	protected int tile_x,tile_y;
+	protected boolean moving;
+	protected Castle target;
 	
-	public Soldier() {}
+	public Soldier() {
+		moving = false;
+	}
 	
 	public void executeOrder66(Castle target) {
+		this.target = target;
+		this.moving = true;
+	}
+	
+	private void updateOrder() {
 		int moves = speed;
 		int c_x = target.getX();
 		if(c_x != tile_x) {
@@ -36,11 +45,17 @@ public class Soldier {
 	}
 	
 	public void arrivedCastle(Castle target) {
+		moving = false;
 		if(target.getDuke_owner()==this.duke_owner) {
 			target.addToArmy(this);
 		}else {
 			target.getAttacked(this);
 		}
+	}
+	
+	public void updateRound() {
+		if(moving)
+			updateOrder();
 	}
 
 	public String getName() {
