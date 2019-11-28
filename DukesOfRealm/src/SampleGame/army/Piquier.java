@@ -1,7 +1,5 @@
 package SampleGame.army;
 
-import SampleGame.tiles.Castle;
-
 public class Piquier extends Soldier {
 	
 	public Piquier(String owner, int x, int y) {

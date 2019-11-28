@@ -19,7 +19,6 @@ public class Castle extends Tile{
 	private String duke_owner;
 	private int treasure;
 	private Queue<Soldier> army;
-	private int army_nb;
 	private Order order; 
 	private final Orientation door;						/* Not used*/
 	private Factory fact;
@@ -48,7 +47,6 @@ public class Castle extends Tile{
 			return;
 		case 1:
 			army.add(new Piquier(duke_owner, x, y));
-			army_nb ++;
 		}
 	}
 	
