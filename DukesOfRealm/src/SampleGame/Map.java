@@ -1,6 +1,6 @@
 package SampleGame;
 
-import SampleGame.cases.Tile;
+import SampleGame.tiles.Tile;
 
 public class Map {
 	private Tile[][] listCases;

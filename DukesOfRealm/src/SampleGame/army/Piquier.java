@@ -1,6 +1,6 @@
 package SampleGame.army;
 
-import SampleGame.cases.Castle;
+import SampleGame.tiles.Castle;
 
 public class Piquier extends Soldier {
 	

@@ -1,4 +1,4 @@
-package SampleGame.cases;
+package SampleGame.tiles;
 
 public abstract class Tile {
 	
