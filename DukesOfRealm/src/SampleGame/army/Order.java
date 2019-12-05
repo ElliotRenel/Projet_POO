@@ -6,6 +6,11 @@ public class Order {
 	private Castle target;
 	private int troops;
 	
+	public Order(Castle target, int troops) {
+		this.target = target;
+		this.troops = troops;
+	}
+	
 	public Castle getTarget() {
 		return target;
 	}

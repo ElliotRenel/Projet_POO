@@ -4,7 +4,7 @@ import SampleGame.tiles.Castle;
 
 public class Piquier extends Soldier {
 	
-	public Piquier(String owner, int x, int y) {
+	public Piquier(String owner) {
 		this.name = "Piquier";
 		this.duke_owner = owner;
 		this.cost = 100;
@@ -12,8 +12,6 @@ public class Piquier extends Soldier {
 		this.speed = 2;
 		this.health = 1;
 		this.damage = 1;
-		this.tile_x = x;
-		this.tile_y = y;
 	}
 
 }

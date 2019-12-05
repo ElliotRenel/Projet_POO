@@ -1,5 +1,6 @@
 package SampleGame.tiles;
 
+import SampleGame.Sprite;
 import SampleGame.army.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -7,7 +8,7 @@ import javafx.scene.layout.Pane;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Castle extends Tile{
+public class Castle extends Sprite{
 	
 	public enum Orientation{
 		N,
@@ -28,6 +29,7 @@ public class Castle extends Tile{
 	public Castle(Pane layer, Image image, int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
 		super(layer, image, x, y );
 		
+		this.order = new Order(this, 0);
 		this.duke_owner = duke_owner;
 		this.treasure = treasure;
 		
@@ -47,7 +49,7 @@ public class Castle extends Tile{
 		case 0:
 			return;
 		case 1:
-			army.add(new Piquier(duke_owner, x, y));
+			army.add(new Piquier(duke_owner));
 			army_nb ++;
 		}
 	}
@@ -62,7 +64,6 @@ public class Castle extends Tile{
 			army.add(s);
 		}else {
 			army.remove();
-			present_army.remove(s);
 		}
 	}
 	
@@ -79,13 +80,13 @@ public class Castle extends Tile{
 	
 	//updateRound is called at each turn to update the differents mechanics
 	
-	@Override
 	public void updateRound(){
-		super.updateRound();
 		
 		addToArmy();
 		
 		executeOrder();
+		
+		treasure += 10;
 		
 	}
 	
@@ -99,6 +100,14 @@ public class Castle extends Tile{
 
 	public void setDuke_owner(String duke_owner) {
 		this.duke_owner = duke_owner;
+	}
+
+
+	public void printStatus() {
+		System.out.println("Owner : "+duke_owner+"\n"
+				+ "Army number : "+army_nb+"\n"
+				+ "Treasure : "+treasure+"\n");
+		
 	}
 	
 	
