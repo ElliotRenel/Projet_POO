@@ -20,7 +20,6 @@ public class Castle extends Sprite{
 	private String duke_owner;
 	private int treasure;
 	private Queue<Soldier> army;
-	private int army_nb;
 	private Order order; 
 	private final Orientation door;						/* Not used*/
 	private Factory fact;
