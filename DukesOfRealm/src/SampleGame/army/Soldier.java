@@ -1,16 +1,27 @@
 package SampleGame.army;
 
+import SampleGame.Sprite;
 import SampleGame.tiles.Castle;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
-public class Soldier {
+public class Soldier extends Sprite{
 	protected String name, duke_owner;
 	protected int cost, time_prod;
 	protected int speed, health, damage;
-	protected int tile_x,tile_y;
+	protected int x, y;
 	protected boolean moving;
 	protected Castle target;
 	
-	public Soldier() {
+	public Soldier(Pane layer, Image image, int x, int y, String duke_owner, int speed, int health, int damage) {
+		super(layer, image, x, y);
+		
+		this.duke_owner = duke_owner;
+		this.speed = speed;
+		this.health = health;
+		this.damage = damage;
+		
+		dx = 0; dy = 0;		
 		moving = false;
 	}
 	
@@ -22,24 +33,26 @@ public class Soldier {
 	private void updateOrder() {
 		int moves = speed;
 		int c_x = target.getX();
-		if(c_x != tile_x) {
-			int d_x = c_x - tile_x;
-			int d_ux = d_x<0?-1:1;
-			while(c_x != tile_x && moves>0) {
-				tile_x =+ d_ux;
+		if(c_x != x) {
+			int d_x = c_x - x;
+			dx = d_x<0?-1:1;
+			while(c_x != x && moves>0) {
+				move();
 				moves --;
 			}			
 		}
+		dx = 0;
 		int c_y = target.getY();
-		if(c_y != tile_y) {
-			int d_y = c_y - tile_y;
-			int d_uy = d_y<0?-1:1;
-			while(c_y != tile_y && moves>0) {
-				tile_y =+ d_uy;
+		if(c_y != y) {
+			int d_y = c_y - y;
+			dy = d_y<0?-1:1;
+			while(c_y != y && moves>0) {
+				move();
 				moves --;
 			}			
 		}
-		if(c_x == tile_x && c_y == tile_y) {
+		dy = 0;
+		if(c_x == x && c_y == y) {
 			arrivedCastle(target);
 		}
 	}
@@ -56,6 +69,7 @@ public class Soldier {
 	public void updateRound() {
 		if(moving)
 			updateOrder();
+			updateUI();
 	}
 
 	public String getName() {

@@ -48,8 +48,7 @@ public class Castle extends Sprite{
 		case 0:
 			return;
 		case 1:
-			army.add(new Piquier(duke_owner));
-			army_nb ++;
+			//army.add(new Piquier(layer, null, x, y, duke_owner));
 		}
 	}
 	
@@ -104,7 +103,6 @@ public class Castle extends Sprite{
 
 	public void printStatus() {
 		System.out.println("Owner : "+duke_owner+"\n"
-				+ "Army number : "+army_nb+"\n"
 				+ "Treasure : "+treasure+"\n");
 		
 	}

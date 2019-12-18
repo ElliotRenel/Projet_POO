@@ -2,11 +2,13 @@ package SampleGame;
 
 import java.util.Random;
 
+import SampleGame.army.Soldier;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -76,6 +78,8 @@ public class Main extends Application {
 
 		createKingdom();
 		createStatusBar();
+		
+		
 		
 		scene.setOnMousePressed(e -> {
 			//player.setX(e.getX() - (player.getWidth() / 2));

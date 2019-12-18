@@ -1,15 +1,16 @@
 package SampleGame.army;
 
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+
 public class Piquier extends Soldier {
 	
-	public Piquier(String owner) {
-		this.name = "Piquier";
-		this.duke_owner = owner;
+	public Piquier(Pane layer, Image image, int x, int y, String duke_owner) {
+		super(layer, image, x, y, duke_owner, 2, 1, 1);
 		this.cost = 100;
 		this.time_prod = 5;
-		this.speed = 2;
-		this.health = 1;
-		this.damage = 1;
+		this.name = "peasant";
+		
 	}
 
 }
