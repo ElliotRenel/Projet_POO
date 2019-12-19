@@ -120,7 +120,7 @@ public class Main extends Application {
 		nb_tour++;
 		kingdom.update();
 		System.out.println(nb_tour);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 	}
 
 	public static void main(String[] args) {

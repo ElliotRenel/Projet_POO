@@ -9,7 +9,6 @@ public class Soldier extends Sprite{
 	protected String name, duke_owner;
 	protected int cost, time_prod;
 	protected int speed, health, damage;
-	protected int x, y;
 	protected boolean moving;
 	protected Castle target;
 	
