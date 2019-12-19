@@ -30,8 +30,9 @@ public class Soldier extends Sprite{
 	}
 	
 	private void updateOrder() {
+		int c_x = target.getX(), c_y = target.getX();
+		/*
 		int moves = speed;
-		int c_x = target.getX();
 		if(c_x != x) {
 			int d_x = c_x - x;
 			dx = d_x<0?-1:1;
@@ -41,16 +42,16 @@ public class Soldier extends Sprite{
 			}			
 		}
 		dx = 0;
-		int c_y = target.getY();
 		if(c_y != y) {
 			int d_y = c_y - y;
-			dy = d_y<0?-1:1;
+			dy = d_y<0?-1:1; 
 			while(c_y != y && moves>0) {
 				move();
 				moves --;
 			}			
 		}
 		dy = 0;
+		*/
 		if(c_x == x && c_y == y) {
 			arrivedCastle(target);
 		}

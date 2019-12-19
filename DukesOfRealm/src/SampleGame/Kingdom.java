@@ -12,7 +12,7 @@ import java.util.Random;
 public class Kingdom {
 	Castle[] castles = new Castle[Settings.NB_CASTLE];
 	Random rand = new Random();
-	Soldier s;
+	Soldier[] s;
 	
 	public Kingdom(Pane field) {
 		
@@ -44,8 +44,11 @@ public class Kingdom {
 		
 		
 		//Test movements soldier
-		s = new Soldier(field, SoldierImage, 50, 50, "De Bourgogne", 10, 1, 1);
-		s.executeOrder66(castles[0]);
+		s = new Soldier[5];
+		for(int i=0;i<5;i++) {
+			s[i] = new Soldier(field, SoldierImage, 50, 50, "De Bourgogne", 10, 1, 1);
+			s[i].executeOrder66(castles[i]);
+		}
 		
 		
 	}
@@ -54,7 +57,9 @@ public class Kingdom {
 		for(Castle c :castles)
 			c.updateRound();
 		//Test
-		s.updateRound();
+		for(Soldier bob :s) {
+			bob.updateRound();
+		}
 	}
 	
 	
