@@ -6,13 +6,15 @@ import SampleGame.tiles.Castle.Orientation;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 
 public class Kingdom {
 	Castle[] castles = new Castle[Settings.NB_CASTLE];
 	Random rand = new Random();
-	Soldier[] s;
+	public static Queue<Soldier> moving_soldier;
 	
 	public Kingdom(Pane field) {
 		
@@ -21,11 +23,11 @@ public class Kingdom {
 		for(int i=0; i<Settings.NB_CASTLE; i++) {
 			Castle c;
 			String duke = "Neutral";
-			Soldier[] init_army = new Soldier[1000];
+			Soldier[] init_army = new Soldier[Settings.NB_TROUPE];
 			if(i<Settings.NB_DUKES)
 				duke = Settings.DUKES[i];
-			int pos_x = rand.nextInt((int) Settings.SCENE_WIDTH);
-			int pos_y = rand.nextInt((int) Settings.SCENE_HEIGHT);
+			int pos_x = rand.nextInt((int) Settings.SCENE_WIDTH-100) + 50;
+			int pos_y = rand.nextInt((int) Settings.SCENE_HEIGHT-100) + 50;
 			for(int j=0; j<Settings.NB_TROUPE;j++) {
 				init_army[j] = new Piquier(field, SoldierImage, pos_x, pos_y , duke);
 			}
@@ -41,14 +43,14 @@ public class Kingdom {
 			castles[i] = c;
 		
 		}
-		
-		
-		//Test movements soldier
-		s = new Soldier[5];
-		for(int i=0;i<5;i++) {
-			s[i] = new Soldier(field, SoldierImage, 50, 50, "De Bourgogne", 10, 1, 1);
-			s[i].executeOrder66(castles[i]);
+		for(Castle c : castles) {
+			Castle cible = castles[rand.nextInt(Settings.NB_CASTLE)];
+			while(c==cible)
+				c = castles[rand.nextInt(Settings.NB_CASTLE)];
+			if(c.getDuke_owner()!="Neutral")
+				c.giveOrder(new Order(cible,7));
 		}
+		moving_soldier = new LinkedList<Soldier>();
 		
 		
 	}
@@ -56,10 +58,8 @@ public class Kingdom {
 	public void update() {
 		for(Castle c :castles)
 			c.updateRound();
-		//Test
-		for(Soldier bob :s) {
-			bob.updateRound();
-		}
+		for(Soldier s:moving_soldier)
+			s.updateRound();
 	}
 	
 	

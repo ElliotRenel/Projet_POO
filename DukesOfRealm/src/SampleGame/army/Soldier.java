@@ -30,34 +30,32 @@ public class Soldier extends Sprite{
 	}
 	
 	private void updateOrder() {
-		int c_x = target.getX(), c_y = target.getX();
-		/*
-		int moves = speed;
-		if(c_x != x) {
-			int d_x = c_x - x;
-			dx = d_x<0?-1:1;
-			while(c_x != x && moves>0) {
-				move();
-				moves --;
-			}			
-		}
-		dx = 0;
-		if(c_y != y) {
-			int d_y = c_y - y;
-			dy = d_y<0?-1:1; 
-			while(c_y != y && moves>0) {
-				move();
-				moves --;
-			}			
-		}
-		dy = 0;
-		*/
-		if(c_x == x && c_y == y) {
+		int c_x = target.getX(), c_y = target.getY();
+		dx = 0;dy=0;
+		
+		if(c_x == x && c_y == y) 
 			arrivedCastle(target);
+				
+		int r_x = c_x-x, r_y = c_y-y;
+		if(Math.abs(r_x)>speed)
+			dx = (r_x>0?1:-1)*speed;
+		else {
+			dx = r_x;
+			if(Math.abs(r_y)>(speed-Math.abs(dx)))
+				dy = (r_y>0?1:-1)*(speed-Math.abs(dx));
+			else {
+				x=c_x; y=c_y;
+			}
+				
 		}
+		
+		
+		move();
 	}
 	
 	public void arrivedCastle(Castle target) {
+		removeFromLayer();
+		System.out.println("Arrived !!");
 		moving = false;
 		if(target.getDuke_owner()==this.duke_owner) {
 			target.addToArmy(this);
@@ -67,9 +65,10 @@ public class Soldier extends Sprite{
 	}
 	
 	public void updateRound() {
-		if(moving)
+		if(moving) {
 			updateOrder();
 			updateUI();
+		}
 	}
 
 	public String getName() {

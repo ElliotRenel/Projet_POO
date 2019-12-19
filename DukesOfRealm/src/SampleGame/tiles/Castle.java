@@ -1,5 +1,6 @@
 package SampleGame.tiles;
 
+import SampleGame.Kingdom;
 import SampleGame.Sprite;
 import SampleGame.army.*;
 import javafx.scene.image.Image;
@@ -20,22 +21,23 @@ public class Castle extends Sprite{
 	private String duke_owner;
 	private int treasure;
 	private Queue<Soldier> army;
-	private Order order; 
+	private Order order;
 	private final Orientation door;						/* Not used*/
 	private Factory fact;
 	
 	
 	public Castle(Pane layer, Image image, int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
 		super(layer, image, x, y );
-		
-		this.order = new Order(this, 0);
 		this.duke_owner = duke_owner;
 		this.treasure = treasure;
 		
 		army = new LinkedList<Soldier>();
+		System.out.println(army.size());
 		for(Soldier s : initial_army) this.army.add(s);
+		System.out.println(army.size());
 		this.door = door;
 		this.fact = fact;
+		this.order = null;
 	}
 	
 		
@@ -67,14 +69,23 @@ public class Castle extends Sprite{
 	
 	
 	//executeOrder sends maximum 3 soldiers through the gates to attack the castle pointed by order
-	private void executeOrder() {
-		if (order.getTroops()!=0) {
-			for(int i=0; i<3 && order.getTroops()>0;i++, order.sendTroops()) {
-				Soldier s = army.remove();
-				s.executeOrder66(order.getTarget());
-			}
-		}		
+	public void giveOrder(Order order) {
+		this.order = order;
 	}	
+	
+	private void executeOrder() {
+		if(order!=null) {		
+			if (order.getTroops()!=0) {
+				for(int i=0; i<3 && order.getTroops()>0;i++, order.sendTroops()) {
+					Soldier s = army.remove();
+					Kingdom.moving_soldier.add(s);
+					s.executeOrder66(order.getTarget());
+				}
+			}else {
+				this.order = null;
+			}
+		}
+	}
 	
 	//updateRound is called at each turn to update the differents mechanics
 	
@@ -83,6 +94,8 @@ public class Castle extends Sprite{
 		addToArmy();
 		
 		executeOrder();
+		
+		updateUI();
 		
 		treasure += 10;
 		
@@ -103,8 +116,13 @@ public class Castle extends Sprite{
 
 	public void printStatus() {
 		System.out.println("Owner : "+duke_owner+"\n"
-				+ "Treasure : "+treasure+"\n");
+				+ "Treasure : "+treasure+"\n"
+				+ "Army count : "+army.size()+"\n");
 		
+	}
+	
+	public int getNbTroupe() {
+		return army.size();
 	}
 	
 	

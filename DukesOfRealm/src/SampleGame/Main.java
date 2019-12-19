@@ -119,8 +119,8 @@ public class Main extends Application {
 	private void update() throws InterruptedException {
 		nb_tour++;
 		kingdom.update();
-		System.out.println(nb_tour);
-		//Thread.sleep(1000);
+		//System.out.println(nb_tour);
+		Thread.sleep(Settings.ROUND_TIME);
 	}
 
 	public static void main(String[] args) {
