@@ -55,7 +55,6 @@ public class Soldier extends Sprite{
 	
 	public void arrivedCastle(Castle target) {
 		removeFromLayer();
-		System.out.println("Arrived !!");
 		moving = false;
 		if(target.getDuke_owner()==this.duke_owner) {
 			target.addToArmy(this);
