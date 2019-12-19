@@ -2,6 +2,7 @@ package SampleGame;
 
 import java.util.Random;
 
+
 import SampleGame.army.Soldier;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -13,16 +14,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+/**
+ * Allows to run application.
+ * Main gestion of the window parameters, round time, end game, etc...
+ * 
+ * @author thdupont
+ *
+ */
 public class Main extends Application {
 
 	private Pane playfieldLayer;
-
-	
-	//private Player player;									//Dukes
-	
-	//Elements
-	//private List<Enemy> enemies = new ArrayList<>();			//Castles? Tiles? Map?
-	//private List<Missile> missiles = new ArrayList<>();		//Soldiers
 
 	//HUD
 	private Text scoreMessage = new Text();
@@ -41,6 +42,11 @@ public class Main extends Application {
 	Kingdom kingdom;
 
 	@Override
+	/**
+	 * Called at the start of execution to launch the application and window
+	 * 
+	 * @param primaryStage
+	 */
 	public void start(Stage primaryStage) {
 
 		root = new Group();
@@ -74,6 +80,9 @@ public class Main extends Application {
 		gameLoop.start();
 	}
 
+	/**
+	 * Allows to load game parameters and initialize the game
+	 */
 	private void loadGame() {
 
 		createKingdom();
@@ -87,7 +96,11 @@ public class Main extends Application {
 		});
 	}
 
-
+	/**
+	 * To BE INPLEMENTED
+	 * Allows to print status of a castle in the window
+	 */
+	
 	public void createStatusBar() {
 		HBox statusBar = new HBox();
 		//scoreMessage.setText("Score : 0          Life : " + player.getHealth());
@@ -98,12 +111,18 @@ public class Main extends Application {
 		root.getChildren().add(statusBar);
 	}
 
+	/**
+	 * Creates a new game manager.
+	 */
 	private void createKingdom() {
-		
 		kingdom = new Kingdom(playfieldLayer);
-		
 	}
 
+	
+	/**
+	 * TO BE IMPLEMENTED
+	 * Quits the game when the player has won or lose
+	 */
 	private void gameOver() {
 		HBox hbox = new HBox();
 		hbox.setPrefSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -116,6 +135,11 @@ public class Main extends Application {
 		gameLoop.stop();
 	}
 
+	/**
+	 * Updates game data and actions in the game.
+	 * 
+	 * @throws InterruptedException ?
+	 */
 	private void update() throws InterruptedException {
 		nb_tour++;
 		kingdom.update();
@@ -123,6 +147,12 @@ public class Main extends Application {
 		Thread.sleep(Settings.ROUND_TIME);
 	}
 
+	
+	/**
+	 * Allows to launch an applications with arguments 
+	 * @see launch
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

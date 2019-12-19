@@ -1,7 +1,11 @@
 package SampleGame;
 
 import javafx.scene.image.Image;
-
+/**
+ * Settings regarding the game in general
+ * @author thdupont
+ *
+ */
 public class Settings {
 
 	public static final double SCENE_WIDTH = 1000;
