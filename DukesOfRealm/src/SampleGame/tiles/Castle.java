@@ -48,8 +48,8 @@ public class Castle extends Sprite{
 	 * 
 	 **/
 	
-	public Castle(Pane layer, int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
-		super(layer, Settings.CastleImage, x, y );
+	public Castle(int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
+		super(Settings.field, Settings.CastleImage, x, y );
 		this.duke_owner = duke_owner;
 		this.treasure = treasure;
 		
@@ -65,13 +65,9 @@ public class Castle extends Sprite{
 	 * Checks if there is a new soldier to add from production and then adds or not the right soldier to the army
 	*/
 	private void addToArmy() {
-		int result = fact.update();
-		switch(result) {
-		
-		case 0:
-			return;
-		case 1:
-			//army.add(new Piquier(layer, null, x, y, duke_owner));
+		Soldier result = fact.update();
+		if(result!=null) {
+			army.add(result);
 		}
 	}
 	
@@ -179,6 +175,8 @@ public class Castle extends Sprite{
 		return army.size();
 	}
 	
-	
+	public void produceArmy(Soldier type, int quantity) {
+		fact.addTraining(type, quantity);
+	}
 	
 }

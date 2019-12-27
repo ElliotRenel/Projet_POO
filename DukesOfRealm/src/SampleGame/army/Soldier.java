@@ -1,5 +1,6 @@
 package SampleGame.army;
 
+import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
@@ -33,8 +34,8 @@ public class Soldier extends Sprite{
 	 * @param damage Damage dealt upon attack
 	 * 
 	 */
-	public Soldier(Pane layer, Image image, int x, int y) {
-		super(layer, image, x, y);
+	public Soldier(Image image, int x, int y) {
+		super(Settings.field, image, x, y);
 		
 		dx = 0; dy = 0;		
 		moving = false;
@@ -155,5 +156,14 @@ public class Soldier extends Sprite{
 	public int getDamage() {
 		return damage;
 	}
+	
+	/**
+	 * Create a new Soldier object of the same type and owner as the current object (implemented in daughter class)
+	 * @return a copy of the current soldier (similar to clone())
+	 */
+	public Soldier trainNew() {
+		return null;
+	}
+	
 
 }

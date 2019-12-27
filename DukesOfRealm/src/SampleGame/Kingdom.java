@@ -21,6 +21,8 @@ public class Kingdom {
 		
 		Settings.CastleImage = new Image(getClass().getResource("/images/Castle.jpg").toExternalForm(), 50, 50, true, true);
 		Settings.PiquierImage = new Image(getClass().getResource("/images/Soldier.jpg").toExternalForm(), 25 , 25, false, true);
+		Settings.field = field;
+		
 		for(int i=0; i<Settings.NB_CASTLE; i++) {
 			Castle c;
 			String duke = "Neutral";
@@ -32,8 +34,8 @@ public class Kingdom {
 			for(int j=0; j<Settings.NB_TROUPE;j++) {
 				init_army[j] = new Piquier(field, pos_x, pos_y , duke);
 			}
-			c = new Castle(field, pos_x , pos_y , 
-					duke, 0, init_army, Orientation.E, new Factory(init_army[0]));
+			c = new Castle(pos_x , pos_y , 
+					duke, 0, init_army, Orientation.E, new Factory());
 			
 			c.getView().setOnMousePressed(e -> {
 				c.printStatus();

@@ -1,6 +1,7 @@
 package SampleGame;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 /**
  * Settings regarding the game in general
  * @author thdupont
@@ -19,6 +20,7 @@ public class Settings {
 	public static final String[] DUKES = {"De Valois","De Bougogne","Du Chatelait"};
 	
 	public static Image CastleImage;
-	public static Image PiquierImage;
+	public static Image PiquierImage;	
+	public static Pane field;
 
 }

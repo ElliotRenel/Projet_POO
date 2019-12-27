@@ -1,33 +1,56 @@
 package SampleGame.army;
 
+import java.util.Queue;
+
+import javafx.util.Pair;
+
 /**
  * Allows to produce a Soldier in a number of limited turns
  * @author thdupont
  *
  */
 public class Factory {
-	private int nb_round;
-	private Soldier toTrain;
+	private Queue<Pair<Soldier, Integer>> training_queue;
+	Soldier current;
+	int nb_rounds, nb_to_train;
+	
 	
 	/**
-	 * Creates a new Factory to produce a new soldier
-	 * @param toTrain The soldier to be trained
+	 * Creates a new Factory to produce a new soldiers
 	 */
-	public Factory(Soldier toTrain) {
-		this.toTrain = toTrain;
-		this.nb_round = toTrain.getTime_prod();
+	public Factory() {nb_rounds = 0; nb_to_train = 0;}
+	
+	/**
+	 * Add a training order to the factory
+	 * @param type The soldier you want to train
+	 * @param quantity The quantity of this specific soldiers you want to train
+	 */
+	public void addTraining(Soldier type, int quantity) {
+		training_queue.add(new Pair<Soldier, Integer> (type,quantity));
+	}
+	
+	private void nextTraining() {
+		Pair<Soldier, Integer> tmp = training_queue.remove();
+		current = tmp.getKey();
+		nb_to_train = tmp.getValue();		
+		nb_rounds = current.getTime_prod();
 	}
 	
 	/**
 	 * Verifies if production of the soldier has finished.
-	 * @return 1 if production is finished, 0 else.
+	 * @return The produced soldier, null if nothing was trained.
 	 */
-	public int update() {
-		if(nb_round==0) {
-			nb_round = toTrain.getTime_prod();
-			return 1;
+	public Soldier update() {
+		if(nb_to_train>0) {
+			if(nb_rounds==0) {
+				nb_to_train--;
+				if(nb_to_train>0) {
+					nb_rounds = current.getTime_prod();
+					this.nextTraining();
+				}
+				return current.trainNew();
+			}
 		}
-		nb_round--;
-		return 0;
+		return null;
 	}	
 }

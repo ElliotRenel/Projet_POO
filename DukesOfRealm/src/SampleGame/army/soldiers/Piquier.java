@@ -21,10 +21,10 @@ public class Piquier extends Soldier {
 	 * @param duke_owner The Piquier's owner name
 	 */
 	public Piquier(Pane layer, int x, int y, String duke_owner) {
-		super(layer, Settings.PiquierImage, x, y);
+		super(Settings.PiquierImage, x, y);
 		
 		this.duke_owner = duke_owner;
-		this.speed = 5;
+		this.speed = 2;
 		this.health = 1;
 		this.damage = 1;
 		this.cost = 100;
@@ -40,10 +40,10 @@ public class Piquier extends Soldier {
 	 * @param home The soldier's home
 	 */
 	public Piquier(Pane layer, Castle home) {
-		super(layer, Settings.PiquierImage, home.getX(),home.getY());
+		super(Settings.PiquierImage, home.getX(),home.getY());
 		
 		this.duke_owner = home.getDuke_owner();
-		this.speed = 5;
+		this.speed = 2;
 		this.health = 1;
 		this.damage = 1;
 		this.cost = 100;
@@ -52,4 +52,9 @@ public class Piquier extends Soldier {
 		
 	}
 
+	@Override
+	public Soldier trainNew() {
+		return new Piquier(Settings.field, this.getX(),this.getY(), this.duke_owner);
+	}
+	
 }
