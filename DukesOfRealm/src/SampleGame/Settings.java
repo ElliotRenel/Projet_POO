@@ -19,5 +19,6 @@ public class Settings {
 	public static final String[] DUKES = {"De Valois","De Bougogne","Du Chatelait"};
 	
 	public static Image CastleImage;
+	public static Image PiquierImage;
 
 }

@@ -1,6 +1,7 @@
 package SampleGame.tiles;
 
 import SampleGame.Kingdom;
+import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
 import javafx.scene.image.Image;
@@ -48,15 +49,13 @@ public class Castle extends Sprite{
 	 * 
 	 **/
 	
-	public Castle(Pane layer, Image image, int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
-		super(layer, image, x, y );
+	public Castle(Pane layer, int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
+		super(layer, Settings.CastleImage, x, y );
 		this.duke_owner = duke_owner;
 		this.treasure = treasure;
 		
 		army = new LinkedList<Soldier>();
-		System.out.println(army.size());
 		for(Soldier s : initial_army) this.army.add(s);
-		System.out.println(army.size());
 		this.door = door;
 		this.fact = fact;
 		this.order = null;
@@ -146,14 +145,18 @@ public class Castle extends Sprite{
 		
 	}
 	
-	
-
-
+	/**
+	 * Getter for owner's name
+	 * @return String : duke_owner
+	 */
 	public String getDuke_owner() {
 		return duke_owner;
 	}
 
-
+	/**
+	 * Set castle's owner
+	 * @param duke_owner The name of the new owner
+	 */
 	public void setDuke_owner(String duke_owner) {
 		this.duke_owner = duke_owner;
 	}
@@ -169,6 +172,10 @@ public class Castle extends Sprite{
 		
 	}
 	
+	/**
+	 * Getter for army size
+	 * @return int : Size of the current army
+	 */
 	public int getNbTroupe() {
 		return army.size();
 	}

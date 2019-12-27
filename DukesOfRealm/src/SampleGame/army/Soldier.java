@@ -5,6 +5,12 @@ import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+/**
+ * Class used to represent different type of soldiers into one class.
+ * 
+ * @author elliotrenel
+ *
+ */
 public class Soldier extends Sprite{
 	protected String name, duke_owner;
 	protected int cost, time_prod;
@@ -12,6 +18,21 @@ public class Soldier extends Sprite{
 	protected boolean moving;
 	protected Castle target;
 	
+	
+	/**
+	 * 
+	 * Soldier constructor
+	 * 
+	 * @param layer The global visual window
+	 * @param image	The image of the Soldier
+	 * @param x	The x coordinate of the Soldier's castle in the window
+	 * @param y The y coordinate of the Soldier's castle in the window
+	 * @param duke_owner Owner of the Soldier's castle
+	 * @param speed Number of coordinates movement in one turn
+	 * @param health Number of hitpoints of the soldier
+	 * @param damage Damage dealt upon attack
+	 * 
+	 */
 	public Soldier(Pane layer, Image image, int x, int y, String duke_owner, int speed, int health, int damage) {
 		super(layer, image, x, y);
 		
@@ -24,11 +45,20 @@ public class Soldier extends Sprite{
 		moving = false;
 	}
 	
+	
+	/**
+	 * Initialize a target for the the soldier and set him to move
+	 * 
+	 * @param target The Castle object targeted by the order
+	 */
 	public void executeOrder66(Castle target) {
 		this.target = target;
 		this.moving = true;
 	}
 	
+	/**
+	 * Change the dx and dy of the Sprite according the desired target and speed
+	 */
 	private void updateOrder() {
 		int c_x = target.getX(), c_y = target.getY();
 		dx = 0;dy=0;
@@ -45,14 +75,16 @@ public class Soldier extends Sprite{
 				dy = (r_y>0?1:-1)*(speed-Math.abs(dx));
 			else {
 				x=c_x; y=c_y;
-			}
-				
+			}	
 		}
-		
-		
 		move();
 	}
 	
+	/**
+	 * Function called when the soldier has arrived at it's target and check if he must attack the castle or join its army
+	 * 
+	 * @param target Targeted castle the soldier arrived at
+	 */
 	public void arrivedCastle(Castle target) {
 		removeFromLayer();
 		moving = false;
@@ -62,7 +94,10 @@ public class Soldier extends Sprite{
 			target.getAttacked(this);
 		}
 	}
-	
+
+	/**
+	 * Update function for the Soldier object
+	 */
 	public void updateRound() {
 		if(moving) {
 			updateOrder();
@@ -70,30 +105,58 @@ public class Soldier extends Sprite{
 		}
 	}
 
+	/**
+	 * Getter for soldier name
+	 * @return String : soldier name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Getter for duke name
+	 * @return String : duke name
+	 */
 	public String getDuke_owner() {
 		return duke_owner;
 	}	
-	
+
+	/**
+	 * Getter for soldier costs
+	 * @return int : soldier cost
+	 */
 	public int getCost() {
 		return cost;
 	}
 
+	/**
+	 * Getter for soldier training time
+	 * @return int : training time
+	 */
 	public int getTime_prod() {
 		return time_prod;
 	}
 
+	/**
+	 * Getter for soldier speed
+	 * @return int : soldier speed
+	 */
 	public int getSpeed() {
 		return speed;
 	}
 
+	/**
+	 * Getter for soldier hitpoints
+	 * @return int : soldier health
+	 */
 	public int getHealth() {
 		return health;
 	}
 
+	/**
+	 * Getter for soldier damage
+	 * @return int : soldier damage
+	 */
 	public int getDamage() {
 		return damage;
 	}
