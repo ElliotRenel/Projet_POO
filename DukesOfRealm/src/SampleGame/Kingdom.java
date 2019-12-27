@@ -32,7 +32,7 @@ public class Kingdom {
 			int pos_x = rand.nextInt((int) Settings.SCENE_WIDTH-100) + 50;
 			int pos_y = rand.nextInt((int) Settings.SCENE_HEIGHT-100) + 50;
 			for(int j=0; j<Settings.NB_TROUPE;j++) {
-				init_army[j] = new Piquier(field, pos_x, pos_y , duke);
+				init_army[j] = new Piquier(pos_x, pos_y , duke);
 			}
 			c = new Castle(pos_x , pos_y , 
 					duke, 0, init_army, Orientation.E, new Factory());
@@ -48,11 +48,13 @@ public class Kingdom {
 		}
 		for(Castle c : castles) {
 			Castle cible = castles[rand.nextInt(Settings.NB_CASTLE)];
-			while(c==cible)
+			while(c.getDuke_owner() == cible.getDuke_owner())
 				c = castles[rand.nextInt(Settings.NB_CASTLE)];
-			if(c.getDuke_owner()!="Neutral")
+			if(c.getDuke_owner()!="Neutral") {
 				c.giveOrder(new Order(cible,7));
+			}
 		}
+		castles[0].produceArmy(new Piquier(castles[0]), 1000);
 		moving_soldier = new LinkedList<Soldier>();
 		
 		

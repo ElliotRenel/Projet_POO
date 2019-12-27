@@ -4,7 +4,6 @@ import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 
 /**
  * Class used to represent different type of soldiers into one class.
@@ -37,6 +36,7 @@ public class Soldier extends Sprite{
 	public Soldier(Image image, int x, int y) {
 		super(Settings.field, image, x, y);
 		
+		removeFromLayer();
 		dx = 0; dy = 0;		
 		moving = false;
 	}
@@ -48,6 +48,7 @@ public class Soldier extends Sprite{
 	 * @param target The Castle object targeted by the order
 	 */
 	public void executeOrder66(Castle target) {
+		this.addToLayer();
 		this.target = target;
 		this.moving = true;
 	}

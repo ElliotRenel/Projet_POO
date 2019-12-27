@@ -4,7 +4,6 @@ import SampleGame.Kingdom;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
-import javafx.scene.layout.Pane;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -28,6 +27,7 @@ public class Castle extends Sprite{
 	private int treasure;
 	private Queue<Soldier> army;
 	private Order order;
+	@SuppressWarnings("unused")
 	private final Orientation door;						/* Not used*/
 	private Factory fact;
 	
@@ -175,6 +175,11 @@ public class Castle extends Sprite{
 		return army.size();
 	}
 	
+	/**
+	 * Add a training order to the factory
+	 * @param type The soldier you want to train
+	 * @param quantity The quantity of this specific soldiers you want to train
+	 */
 	public void produceArmy(Soldier type, int quantity) {
 		fact.addTraining(type, quantity);
 	}

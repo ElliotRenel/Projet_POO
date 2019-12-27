@@ -3,7 +3,6 @@ package SampleGame.army.soldiers;
 import SampleGame.Settings;
 import SampleGame.army.Soldier;
 import SampleGame.tiles.Castle;
-import javafx.scene.layout.Pane;
 
 /**
  * Class for creating the soldier type "Piquier"
@@ -20,7 +19,7 @@ public class Piquier extends Soldier {
 	 * @param y The sprite y position (his home position)
 	 * @param duke_owner The Piquier's owner name
 	 */
-	public Piquier(Pane layer, int x, int y, String duke_owner) {
+	public Piquier(int x, int y, String duke_owner) {
 		super(Settings.PiquierImage, x, y);
 		
 		this.duke_owner = duke_owner;
@@ -39,7 +38,7 @@ public class Piquier extends Soldier {
 	 * @param layer The global visual window
 	 * @param home The soldier's home
 	 */
-	public Piquier(Pane layer, Castle home) {
+	public Piquier(Castle home) {
 		super(Settings.PiquierImage, home.getX(),home.getY());
 		
 		this.duke_owner = home.getDuke_owner();
@@ -54,7 +53,7 @@ public class Piquier extends Soldier {
 
 	@Override
 	public Soldier trainNew() {
-		return new Piquier(Settings.field, this.getX(),this.getY(), this.duke_owner);
+		return new Piquier(this.getX(),this.getY(), this.duke_owner);
 	}
 	
 }

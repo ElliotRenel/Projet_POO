@@ -1,15 +1,10 @@
 package SampleGame;
 
-import java.util.Random;
-
-
-import SampleGame.army.Soldier;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -21,6 +16,7 @@ import javafx.scene.text.Text;
  * @author thdupont
  *
  */
+@SuppressWarnings("unused")
 public class Main extends Application {
 
 	private Pane playfieldLayer;
@@ -142,8 +138,8 @@ public class Main extends Application {
 	 */
 	private void update() throws InterruptedException {
 		nb_tour++;
-		kingdom.update();
 		//System.out.println(nb_tour);
+		kingdom.update();
 		Thread.sleep(Settings.ROUND_TIME);
 	}
 
