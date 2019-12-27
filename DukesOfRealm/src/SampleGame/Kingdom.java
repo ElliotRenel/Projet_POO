@@ -1,6 +1,7 @@
 package SampleGame;
 
 import SampleGame.army.*;
+import SampleGame.army.soldiers.Piquier;
 import SampleGame.tiles.Castle;
 import SampleGame.tiles.Castle.Orientation;
 import javafx.scene.image.Image;

@@ -1,7 +1,7 @@
-package SampleGame.army;
+package SampleGame.army.soldiers;
 
 import SampleGame.Settings;
-import javafx.scene.image.Image;
+import SampleGame.army.Soldier;
 import javafx.scene.layout.Pane;
 
 /**
@@ -15,7 +15,7 @@ public class Piquier extends Soldier {
 		super(layer, Settings.PiquierImage, x, y, duke_owner, 5, 1, 1);
 		this.cost = 100;
 		this.time_prod = 5;
-		this.name = "peasant";
+		this.name = "Piquier";
 		
 	}
 
