@@ -33,13 +33,8 @@ public class Soldier extends Sprite{
 	 * @param damage Damage dealt upon attack
 	 * 
 	 */
-	public Soldier(Pane layer, Image image, int x, int y, String duke_owner, int speed, int health, int damage) {
+	public Soldier(Pane layer, Image image, int x, int y) {
 		super(layer, image, x, y);
-		
-		this.duke_owner = duke_owner;
-		this.speed = speed;
-		this.health = health;
-		this.damage = damage;
 		
 		dx = 0; dy = 0;		
 		moving = false;
