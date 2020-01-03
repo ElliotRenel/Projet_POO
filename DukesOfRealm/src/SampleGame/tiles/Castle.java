@@ -4,6 +4,7 @@ import SampleGame.Kingdom;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
+import SampleGame.player.*;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -23,7 +24,7 @@ public class Castle extends Sprite{
 		W;
 	}
 	
-	private String duke_owner;
+	private Player owner;
 	private int treasure;
 	private Queue<Soldier> army;
 	private Order order;
@@ -48,9 +49,10 @@ public class Castle extends Sprite{
 	 * 
 	 **/
 	
-	public Castle(int x, int y, String duke_owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
+	public Castle(int x, int y, Player owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
 		super(Settings.field, Settings.CastleImage, x, y );
-		this.duke_owner = duke_owner;
+		this.owner = owner;
+		owner.addCastle(this);
 		this.treasure = treasure;
 		
 		army = new LinkedList<Soldier>();
@@ -88,8 +90,10 @@ public class Castle extends Sprite{
 	 */
 	public void getAttacked(Soldier s) {
 		if(army.isEmpty()) {
-			this.duke_owner = s.getDuke_owner();
+			this.owner.removeCastle(this);
+			this.owner = s.getOwner();
 			army.add(s);
+			this.owner.addCastle(this);
 		}else {
 			army.remove();
 		}
@@ -102,7 +106,12 @@ public class Castle extends Sprite{
 	 * @param order The new order to assign
 	 */
 	public void giveOrder(Order order) {
-		this.order = order;
+		if(order.getTroops()<=army.size()) {
+			this.order = order;
+		}else {
+			System.out.println("Not enough troops");
+		}
+		
 	}	
 	
 	/**
@@ -126,34 +135,27 @@ public class Castle extends Sprite{
 	}
 	
 	/**
-	 * Called at each turn to update the different mechanics
-	 */
-	public void updateRound(){
-		
-		addToArmy();
-		
-		executeOrder();
-		
-		updateUI();
-		
-		treasure += 10;
-		
-	}
-	
-	/**
 	 * Getter for owner's name
-	 * @return String : duke_owner
+	 * @return String : the player's name
 	 */
-	public String getDuke_owner() {
-		return duke_owner;
+	public String getOwnerName() {
+		return owner.getName();
 	}
 
 	/**
 	 * Set castle's owner
-	 * @param duke_owner The name of the new owner
+	 * @param owner The Player object 
 	 */
-	public void setDuke_owner(String duke_owner) {
-		this.duke_owner = duke_owner;
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+	
+	/**
+	 * Get castle's owner
+	 * @return Player : the owner of the castle
+	 */
+	public Player getOwner() {
+		return this.owner;
 	}
 
 
@@ -161,9 +163,10 @@ public class Castle extends Sprite{
 	 * Prints the status of a castle in the console
 	 */
 	public void printStatus() {
-		System.out.println("Owner : "+duke_owner+"\n"
+		System.out.println("Owner : "+owner.getName()+"\n"
 				+ "Treasure : "+treasure+"\n"
-				+ "Army count : "+army.size()+"\n");
+				+ "Army count : "+army.size()+"\n"
+				+ "Current round : "+Settings.NB_CURRENT_ROUND+"\n");
 		
 	}
 	
@@ -182,6 +185,26 @@ public class Castle extends Sprite{
 	 */
 	public void produceArmy(Soldier type, int quantity) {
 		fact.addTraining(type, quantity);
+	}
+	
+	public void showMenu() {
+		this.printStatus();
+	}
+	
+	
+	/**
+	 * Called at each turn to update the different mechanics
+	 */
+	public void updateRound(){
+		
+		addToArmy();
+		
+		executeOrder();
+		
+		updateUI();
+		
+		treasure += 10;
+		
 	}
 	
 }

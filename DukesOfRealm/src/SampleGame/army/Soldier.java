@@ -2,6 +2,7 @@ package SampleGame.army;
 
 import SampleGame.Settings;
 import SampleGame.Sprite;
+import SampleGame.player.Player;
 import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
 
@@ -12,7 +13,8 @@ import javafx.scene.image.Image;
  *
  */
 public class Soldier extends Sprite{
-	protected String name, duke_owner;
+	protected Player owner;
+	protected String name;
 	protected int cost, time_prod;
 	protected int speed, health, damage;
 	protected boolean moving;
@@ -85,7 +87,7 @@ public class Soldier extends Sprite{
 	public void arrivedCastle(Castle target) {
 		removeFromLayer();
 		moving = false;
-		if(target.getDuke_owner()==this.duke_owner) {
+		if(target.getOwnerName()==this.owner.getName()) {
 			target.addToArmy(this);
 		}else {
 			target.getAttacked(this);
@@ -109,14 +111,6 @@ public class Soldier extends Sprite{
 	public String getName() {
 		return name;
 	}
-
-	/**
-	 * Getter for duke name
-	 * @return String : duke name
-	 */
-	public String getDuke_owner() {
-		return duke_owner;
-	}	
 
 	/**
 	 * Getter for soldier costs
@@ -164,6 +158,11 @@ public class Soldier extends Sprite{
 	 */
 	public Soldier trainNew() {
 		return null;
+	}
+
+
+	public Player getOwner() {
+		return owner;
 	}
 	
 

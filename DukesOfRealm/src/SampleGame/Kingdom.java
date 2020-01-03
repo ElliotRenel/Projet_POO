@@ -2,6 +2,7 @@ package SampleGame;
 
 import SampleGame.army.*;
 import SampleGame.army.soldiers.Piquier;
+import SampleGame.player.*;
 import SampleGame.tiles.Castle;
 import SampleGame.tiles.Castle.Orientation;
 import javafx.scene.image.Image;
@@ -13,7 +14,8 @@ import java.util.Random;
 
 
 public class Kingdom {
-	Castle[] castles = new Castle[Settings.NB_CASTLE];
+	public static Castle[] castles = new Castle[Settings.NB_CASTLE];
+	Player[] players = new Player[Settings.NB_DUKES];
 	Random rand = new Random();
 	public static Queue<Soldier> moving_soldier;
 	
@@ -25,44 +27,32 @@ public class Kingdom {
 		
 		for(int i=0; i<Settings.NB_CASTLE; i++) {
 			Castle c;
-			String duke = "Neutral";
+			Player duke = new VoidPlayer();
 			Soldier[] init_army = new Soldier[Settings.NB_TROUPE];
-			if(i<Settings.NB_DUKES)
-				duke = Settings.DUKES[i];
+			if(i<Settings.NB_DUKES) {
+				duke = new AI(Settings.DUKES[i]);
+				players[i] = duke;
+			}
 			int pos_x = rand.nextInt((int) Settings.SCENE_WIDTH-100) + 50;
 			int pos_y = rand.nextInt((int) Settings.SCENE_HEIGHT-100) + 50;
 			for(int j=0; j<Settings.NB_TROUPE;j++) {
 				init_army[j] = new Piquier(pos_x, pos_y , duke);
 			}
 			c = new Castle(pos_x , pos_y , 
-					duke, 0, init_army, Orientation.E, new Factory());
+					duke, 1000, init_army, Orientation.E, new Factory());
 			
-			c.getView().setOnMousePressed(e -> {
-				c.printStatus();
-			});
+			c.getView().setOnContextMenuRequested(e -> {c.showMenu();});
 			
-			c.getView().setOnContextMenuRequested(e -> {});
-			
-			castles[i] = c;
-		
+			castles[i] = c;		
 		}
-		for(Castle c : castles) {
-			Castle cible = castles[rand.nextInt(Settings.NB_CASTLE)];
-			while(c.getDuke_owner() == cible.getDuke_owner())
-				c = castles[rand.nextInt(Settings.NB_CASTLE)];
-			if(c.getDuke_owner()!="Neutral") {
-				c.giveOrder(new Order(cible,7));
-			}
-		}
-		castles[0].produceArmy(new Piquier(castles[0]), 1000);
 		moving_soldier = new LinkedList<Soldier>();
 		
 		
 	}
 	
 	public void update() {
-		for(Castle c :castles)
-			c.updateRound();
+		for(Player p : players)
+			p.update();
 		for(Soldier s:moving_soldier)
 			s.updateRound();
 	}

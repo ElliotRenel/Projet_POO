@@ -137,8 +137,7 @@ public class Main extends Application {
 	 * @throws InterruptedException ?
 	 */
 	private void update() throws InterruptedException {
-		nb_tour++;
-		//System.out.println(nb_tour);
+		Settings.NB_CURRENT_ROUND++;
 		kingdom.update();
 		Thread.sleep(Settings.ROUND_TIME);
 	}

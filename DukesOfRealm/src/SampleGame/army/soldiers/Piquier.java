@@ -2,6 +2,7 @@ package SampleGame.army.soldiers;
 
 import SampleGame.Settings;
 import SampleGame.army.Soldier;
+import SampleGame.player.Player;
 import SampleGame.tiles.Castle;
 
 /**
@@ -17,12 +18,12 @@ public class Piquier extends Soldier {
 	 * @param layer The global visual window
 	 * @param x The sprite x position (his home position)
 	 * @param y The sprite y position (his home position)
-	 * @param duke_owner The Piquier's owner name
+	 * @param duke The Piquier's owner name
 	 */
-	public Piquier(int x, int y, String duke_owner) {
+	public Piquier(int x, int y, Player owner) {
 		super(Settings.PiquierImage, x, y);
 		
-		this.duke_owner = duke_owner;
+		this.owner = owner;
 		this.speed = 2;
 		this.health = 1;
 		this.damage = 1;
@@ -41,7 +42,7 @@ public class Piquier extends Soldier {
 	public Piquier(Castle home) {
 		super(Settings.PiquierImage, home.getX(),home.getY());
 		
-		this.duke_owner = home.getDuke_owner();
+		this.owner = home.getOwner();
 		this.speed = 2;
 		this.health = 1;
 		this.damage = 1;
@@ -53,7 +54,7 @@ public class Piquier extends Soldier {
 
 	@Override
 	public Soldier trainNew() {
-		return new Piquier(this.getX(),this.getY(), this.duke_owner);
+		return new Piquier(this.getX(),this.getY(), this.owner);
 	}
 	
 }

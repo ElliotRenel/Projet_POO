@@ -2,15 +2,16 @@ package SampleGame.army.soldiers;
 
 import SampleGame.Settings;
 import SampleGame.army.Soldier;
+import SampleGame.player.Player;
 import SampleGame.tiles.Castle;
 import javafx.scene.layout.Pane;
 
 public class Chevalier extends Soldier {
 	
-	public Chevalier(Pane layer, int x, int y, String duke_owner) {
+	public Chevalier(Pane layer, int x, int y, Player owner) {
 		super(Settings.PiquierImage, x, y);
 		
-		this.duke_owner = duke_owner;
+		this.owner = owner;
 		this.speed = 6;
 		this.health = 3;
 		this.damage = 5;
@@ -22,7 +23,7 @@ public class Chevalier extends Soldier {
 	public Chevalier(Pane layer, Castle home) {
 		super(Settings.PiquierImage, home.getX(), home.getY());
 		
-		this.duke_owner = home.getDuke_owner();
+		this.owner = home.getOwner();
 		this.speed = 6;
 		this.health = 3;
 		this.damage = 5;
@@ -33,6 +34,6 @@ public class Chevalier extends Soldier {
 	
 	@Override
 	public Soldier trainNew() {
-		return new Chevalier(Settings.field, this.getX(),this.getY(), this.duke_owner);
+		return new Chevalier(Settings.field, this.getX(),this.getY(), this.owner);
 	}
 }
