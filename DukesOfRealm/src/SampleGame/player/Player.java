@@ -1,6 +1,6 @@
 package SampleGame.player;
 
-import SampleGame.player.Player.Player_Type;
+
 import SampleGame.tiles.Castle;
 
 import java.util.LinkedList;
