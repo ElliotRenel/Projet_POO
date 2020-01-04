@@ -4,8 +4,10 @@ import SampleGame.Kingdom;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
+import SampleGame.army.Soldier.SoldierType;
 import SampleGame.player.*;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -26,7 +28,8 @@ public class Castle extends Sprite{
 	
 	private Player owner;
 	private int treasure;
-	private Queue<Soldier> army;
+	//private Queue<Soldier> army;
+	private Hashtable<SoldierType, Queue<Soldier>> army;
 	private Order order;
 	@SuppressWarnings("unused")
 	private final Orientation door;						/* Not used*/
@@ -55,8 +58,12 @@ public class Castle extends Sprite{
 		owner.addCastle(this);
 		this.treasure = treasure;
 		
-		army = new LinkedList<Soldier>();
-		for(Soldier s : initial_army) this.army.add(s);
+		army = new Hashtable<SoldierType, Queue<Soldier>>();
+		army.put(SoldierType.P, new LinkedList<Soldier>());
+		army.put(SoldierType.C, new LinkedList<Soldier>());
+		army.put(SoldierType.O, new LinkedList<Soldier>());
+		for(Soldier s : initial_army)
+			addToArmy(s);
 		this.door = door;
 		this.fact = fact;
 		this.order = null;
@@ -69,7 +76,7 @@ public class Castle extends Sprite{
 	private void addToArmy() {
 		Soldier result = fact.update();
 		if(result!=null) {
-			army.add(result);
+			addToArmy(result);
 		}
 	}
 	
@@ -79,9 +86,18 @@ public class Castle extends Sprite{
 	 * @param s The soldier to add
 	*/
 	public void addToArmy(Soldier s) {
-		army.add(s);
+		army.get(s.getType()).add(s);
 	}
 	
+	/**
+	 * Remove a specific type of soldiers from the castle army
+	 * 
+	 * @param t The type of soldier
+	 * @return The removed soldier
+	 */
+	private Soldier removeFromArmy(SoldierType t) {
+		return army.get(t).remove();
+	}
 	
 	/**
 	 * When the castle gets attacked by an ennemy soldier
@@ -92,7 +108,7 @@ public class Castle extends Sprite{
 		if(army.isEmpty()) {
 			this.owner.removeCastle(this);
 			this.owner = s.getOwner();
-			army.add(s);
+			addToArmy(s);
 			this.owner.addCastle(this);
 		}else {
 			army.remove();

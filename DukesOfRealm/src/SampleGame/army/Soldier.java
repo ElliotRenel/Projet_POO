@@ -13,8 +13,13 @@ import javafx.scene.image.Image;
  *
  */
 public class Soldier extends Sprite{
+	public enum SoldierType{
+		P,
+		C,
+		O;
+	}
 	protected Player owner;
-	protected String name;
+	protected SoldierType type;
 	protected int cost, time_prod;
 	protected int speed, health, damage;
 	protected boolean moving;
@@ -105,11 +110,11 @@ public class Soldier extends Sprite{
 	}
 
 	/**
-	 * Getter for soldier name
-	 * @return String : soldier name
+	 * Getter for soldier type
+	 * @return enum SoldierType : soldier type
 	 */
-	public String getName() {
-		return name;
+	public SoldierType getType() {
+		return type;
 	}
 
 	/**

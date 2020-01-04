@@ -17,7 +17,7 @@ public class Onagre extends Soldier {
 		this.damage = 10;
 		this.cost = 1000;
 		this.time_prod = 50;
-		this.name = "Onagre";
+		this.type = SoldierType.O;
 	}
 	
 	public Onagre(Pane layer, Castle home) {
@@ -29,7 +29,7 @@ public class Onagre extends Soldier {
 		this.damage = 10;
 		this.cost = 1000;
 		this.time_prod = 50;
-		this.name = "Onagre";
+		this.type = SoldierType.O;
 	}
 	
 	@Override

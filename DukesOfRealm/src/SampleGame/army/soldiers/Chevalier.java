@@ -17,7 +17,7 @@ public class Chevalier extends Soldier {
 		this.damage = 5;
 		this.cost = 500;
 		this.time_prod = 20;
-		this.name = "Chevalier";
+		this.type = SoldierType.C;
 	}
 	
 	public Chevalier(Pane layer, Castle home) {
@@ -29,7 +29,7 @@ public class Chevalier extends Soldier {
 		this.damage = 5;
 		this.cost = 500;
 		this.time_prod = 20;
-		this.name = "Chevalier";
+		this.type = SoldierType.C;
 	}
 	
 	@Override

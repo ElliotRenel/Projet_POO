@@ -29,7 +29,7 @@ public class Piquier extends Soldier {
 		this.damage = 1;
 		this.cost = 100;
 		this.time_prod = 5;
-		this.name = "Piquier";
+		this.type = SoldierType.P;
 		
 	}
 	
@@ -48,7 +48,7 @@ public class Piquier extends Soldier {
 		this.damage = 1;
 		this.cost = 100;
 		this.time_prod = 5;
-		this.name = "Piquier";
+		this.type = SoldierType.P;
 		
 	}
 
