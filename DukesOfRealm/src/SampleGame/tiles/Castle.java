@@ -187,6 +187,10 @@ public class Castle extends Sprite{
 		fact.addTraining(type, quantity);
 	}
 	
+	/**
+	 * Show castle menu when the castle owner is the player, only show information if the castle
+	 * is owned by an opponent.
+	 */
 	public void showMenu() {
 		this.printStatus();
 	}
