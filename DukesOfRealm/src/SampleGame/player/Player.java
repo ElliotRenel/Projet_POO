@@ -1,7 +1,13 @@
 package SampleGame.player;
 
 
+import SampleGame.Settings;
 import SampleGame.tiles.Castle;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -19,6 +25,8 @@ public class Player {
 	protected String name;
 	protected Queue<Castle> owned_castle;
 	protected Player_Type type;
+	protected Color Player_Color;
+	protected WritableImage Castle_Image;
 	
 	/**
 	 * Class constructor.
@@ -27,11 +35,28 @@ public class Player {
 	 * @param name A String containing the name of the player (Human or AI)
 	 * @param initial_castles Array of initial castles
 	 */
-	protected Player(String name,Castle[] initial_castles) {
+	protected Player(String name,Castle[] initial_castles, Color color) {
 		this.name = name;
 		this.owned_castle = new LinkedList<Castle>();
 		for(Castle c : initial_castles)
 			this.owned_castle.add(c);
+		
+		this.Player_Color = color;
+		int width = (int)Settings.CastleImage.getWidth();
+		int height = (int)Settings.CastleImage.getHeight();
+		
+		Castle_Image =  new WritableImage(width , height );
+		
+		PixelReader pixRead = Settings.CastleImage.getPixelReader();
+		PixelWriter pixWrite = Castle_Image.getPixelWriter();
+		
+		for(int y=0; y<height; y++) {
+			for(int x=0; x<width; x++) {
+				if(true)
+					pixWrite.setColor(x,y,pixRead.getColor(x, y));
+			}
+		}
+		
 	}
 	
 	/**
@@ -43,6 +68,23 @@ public class Player {
 	protected Player(String name) {
 		this.name = name;
 		this.owned_castle = new LinkedList<Castle>();
+		
+		this.Player_Color = Color.PURPLE;
+		int width = (int)Settings.CastleImage.getWidth();
+		int height = (int)Settings.CastleImage.getHeight();
+		
+		Castle_Image =  new WritableImage(width , height );
+		
+		PixelReader pixRead = Settings.CastleImage.getPixelReader();
+		PixelWriter pixWrite = Castle_Image.getPixelWriter();
+		
+		for(int y=0; y<height; y++) {
+			for(int x=0; x<width; x++) {
+				if(true)
+					pixWrite.setColor(x,y,pixRead.getColor(x, y));
+			}
+		}
+		
 	}
 	
 	/**
@@ -51,6 +93,22 @@ public class Player {
 	protected Player() {
 		this.name = "Neutral";
 		this.owned_castle = new LinkedList<Castle>();
+		
+		this.Player_Color = Color.RED;
+		int width = (int)Settings.CastleImage.getWidth();
+		int height = (int)Settings.CastleImage.getHeight();
+		
+		Castle_Image =  new WritableImage(width , height );
+		
+		PixelReader pixRead = Settings.CastleImage.getPixelReader();
+		PixelWriter pixWrite = Castle_Image.getPixelWriter();
+		
+		for(int y=0; y<height; y++) {
+			for(int x=0; x<width; x++) {
+				if(true)
+					pixWrite.setColor(x,y,pixRead.getColor(x, y));
+			}
+		}
 	}
 	
 	/**
@@ -60,6 +118,10 @@ public class Player {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	public Image getCastleImage() {
+		return Castle_Image;
 	}
 	
 	/**

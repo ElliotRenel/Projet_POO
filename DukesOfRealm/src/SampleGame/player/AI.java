@@ -8,6 +8,7 @@ import SampleGame.army.Order;
 import SampleGame.army.Soldier.SoldierType;
 import SampleGame.army.soldiers.Piquier;
 import SampleGame.tiles.Castle;
+import javafx.scene.paint.Color;
 
 /**
  * Subclass of Player creating computer type actions.
@@ -20,8 +21,8 @@ import SampleGame.tiles.Castle;
 public class AI extends Player {
 	Random rand = new Random();
 	
-	public AI(String name, Castle[] initial_castles) {
-		super(name,initial_castles);
+	public AI(String name, Castle[] initial_castles, Color color) {
+		super(name,initial_castles, color);
 		this.type = Player_Type.C;
 	}
 	

@@ -1,6 +1,7 @@
 package SampleGame.player;
 
 import SampleGame.tiles.Castle;
+import javafx.scene.paint.Color;
 
 
 /**
@@ -12,8 +13,8 @@ import SampleGame.tiles.Castle;
 
 public class Human extends Player {
 
-	public Human(String name, Castle[] initial_castles) {
-		super(name,initial_castles);
+	public Human(String name, Castle[] initial_castles, Color color) {
+		super(name,initial_castles, color);
 		this.type = Player_Type.H;
 	}
 	

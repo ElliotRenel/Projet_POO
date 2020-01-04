@@ -1,0 +1,30 @@
+Player Features:
+
+-Click sur un chateau:
+	+Reçoit les infos
+		*Proprio
+		
+		*Si proprio:
+		*Nb troupes de chaque type
+		*Trésor
+		*Lvl du chateau
+		*Production en cours
+		
+	+Si proprio, possibilité d'envoi de troupes
+		*Choisir combien de troupes (de chaque type)
+		*Choisir ou les envoyer
+	
+	+Si proprio, possibilité d'amélio/ Build
+		*Choisir troupe
+		*Choisir amélio du chateau
+		
+-Pause
+-Recommencer?
+
+
+
+Idée pour les soldats (affichage):
+Petit point pour les lanciers, chevaux pour les chevaux etc...
+Problème: affichage en 3 quand ils sont 3, 2 qd 2 etc...
+
+Ne pas oublier de faire des tests!

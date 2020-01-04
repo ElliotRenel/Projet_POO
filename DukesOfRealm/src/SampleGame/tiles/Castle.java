@@ -54,8 +54,8 @@ public class Castle extends Sprite{
 	 * 
 	 **/
 	
-	public Castle(int x, int y, Player owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {
-		super(Settings.field, Settings.CastleImage, x, y );
+	public Castle(int x, int y, Player owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {		
+		super(Settings.field, owner.getCastleImage(), x, y );
 		this.owner = owner;
 		owner.addCastle(this);
 		this.treasure = treasure;

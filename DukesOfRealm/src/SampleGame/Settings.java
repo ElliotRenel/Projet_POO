@@ -20,7 +20,8 @@ public class Settings {
 	public static final String[] DUKES = {"De Valois","De Bougogne","Du Chatelait"};
 	
 	public static Image CastleImage;
-	public static Image PiquierImage;	
+	public static Image PiquierImage;
+	public static Image DoorImage;
 	public static Pane field;
 	
 	public static int NB_CURRENT_ROUND = 0;

@@ -5,6 +5,7 @@ import SampleGame.army.soldiers.Piquier;
 import SampleGame.player.*;
 import SampleGame.tiles.Castle;
 import SampleGame.tiles.Castle.Orientation;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -21,8 +22,15 @@ public class Kingdom {
 	
 	public Kingdom(Pane field) {
 		
+		
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setHue(-0.5);
+		colorAdjust.setBrightness(0.3);
 		Settings.CastleImage = new Image(getClass().getResource("/images/Castle.jpg").toExternalForm(), 50, 50, true, true);
+		
+		
 		Settings.PiquierImage = new Image(getClass().getResource("/images/Soldier.jpg").toExternalForm(), 25 , 25, false, true);
+		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), 25 , 25, false, true);
 		Settings.field = field;
 		
 		for(int i=0; i<Settings.NB_CASTLE; i++) {
