@@ -32,17 +32,22 @@ public class AI extends Player {
 	
 	
 	@Override
-	public void update() {
-		super.update();
-		Castle c = ((Castle) owned_castle.toArray()[0]);
-		if(Settings.NB_CURRENT_ROUND == 1)
-			c.produceArmy(new Piquier(c), 100);
-		if(Settings.NB_CURRENT_ROUND == 100) {
-			Castle cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
-				while(isMine(cible))
-					cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
-				c.giveOrder(new Order(cible,c.getNbTroupe()-1,SoldierType.P));
+	public boolean update() {
+		if(owned_castle.isEmpty())
+			return false;
+		
+		for(Castle c : owned_castle) {
+			c.updateRound();
+			if(Settings.NB_CURRENT_ROUND%100 == 1)
+				c.produceArmy(new Piquier(c), 100);
+			if(Settings.NB_CURRENT_ROUND!=0 && Settings.NB_CURRENT_ROUND%100==0) {
+				Castle cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
+					while(isMine(cible))
+						cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
+					c.giveOrder(new Order(cible,c.getNbTroupe(SoldierType.P)-1,SoldierType.P));
+			}
 		}
+		return true;
 	}
 }
 

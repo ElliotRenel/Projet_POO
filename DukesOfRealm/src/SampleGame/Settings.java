@@ -12,7 +12,7 @@ public class Settings {
 	public static final double SCENE_WIDTH = 1000;
     public static final double SCENE_HEIGHT = 1000;
 	public static final double STATUS_BAR_HEIGHT = 50;
-	public static final int ROUND_TIME = 150;
+	public static final int ROUND_TIME = 50;
 	
 	public static final int NB_CASTLE = 6;
 	public static final int NB_DUKES = 3;

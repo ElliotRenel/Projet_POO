@@ -1,5 +1,6 @@
 package SampleGame;
 
+import SampleGame.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -119,13 +120,13 @@ public class Main extends Application {
 	 * TO BE IMPLEMENTED
 	 * Quits the game when the player has won or lose
 	 */
-	private void gameOver() {
+	private void gameOver(Player p) {
 		HBox hbox = new HBox();
 		hbox.setPrefSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
 		hbox.getStyleClass().add("message");
 		Text message = new Text();
 		message.getStyleClass().add("message");
-		message.setText("Game over");
+		message.setText(p.getName()+" has won !\nGame Over !");
 		hbox.getChildren().add(message);
 		root.getChildren().add(hbox);
 		gameLoop.stop();
@@ -138,7 +139,9 @@ public class Main extends Application {
 	 */
 	private void update() throws InterruptedException {
 		Settings.NB_CURRENT_ROUND++;
-		kingdom.update();
+		Player p;
+		if((p = kingdom.update())!=null)
+			gameOver(p);
 		Thread.sleep(Settings.ROUND_TIME);
 	}
 

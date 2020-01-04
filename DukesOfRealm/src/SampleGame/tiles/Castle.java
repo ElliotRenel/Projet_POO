@@ -164,7 +164,7 @@ public class Castle extends Sprite{
 	 * @param order The new order to assign
 	 */
 	public void giveOrder(Order order) {
-		if(order.getTroops()<=army.size()) {
+		if(order.getTroops()<=getNbTroupe(order.getType())) {
 			this.orders.add(order);
 		}else {
 			System.out.println("Not enough troops");
@@ -227,19 +227,20 @@ public class Castle extends Sprite{
 		System.out.println("Owner : "+owner.getName()+"\n"
 				+ "Treasure : "+treasure+"\n"
 				+ "Army count : \n"
-				+ "\t> Stinger : "+army.get(SoldierType.P).size()+"\n"
-				+ "\t> Knights : "+army.get(SoldierType.C).size()+"\n"
-				+ "\t> Onagra : "+army.get(SoldierType.O).size()+"\n"
+				+ "\t> Stinger : "+getNbTroupe(SoldierType.P)+"\n"
+				+ "\t> Knights : "+getNbTroupe(SoldierType.C)+"\n"
+				+ "\t> Onagra : "+getNbTroupe(SoldierType.O)+"\n"
 				+ "Current round : "+Settings.NB_CURRENT_ROUND+"\n");
 		
 	}
 	
 	/**
 	 * Getter for army size
+	 * @param t The type of soldier
 	 * @return int : Size of the current army
 	 */
-	public int getNbTroupe() {
-		return army.size();
+	public int getNbTroupe(SoldierType t) {
+		return army.get(t).size();
 	}
 	
 	/**

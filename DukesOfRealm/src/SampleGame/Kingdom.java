@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Kingdom {
 	public static Castle[] castles = new Castle[Settings.NB_CASTLE];
-	Player[] players = new Player[Settings.NB_DUKES];
+	public static Queue<Player> players = new LinkedList<Player>();
 	Random rand = new Random();
 	public static Queue<Soldier> moving_soldier;
 	
@@ -31,7 +31,7 @@ public class Kingdom {
 			Soldier[] init_army = new Soldier[Settings.NB_TROUPE];
 			if(i<Settings.NB_DUKES) {
 				duke = new AI(Settings.DUKES[i]);
-				players[i] = duke;
+				players.add(duke);
 			}
 			int pos_x = rand.nextInt((int) Settings.SCENE_WIDTH-100) + 50;
 			int pos_y = rand.nextInt((int) Settings.SCENE_HEIGHT-100) + 50;
@@ -50,11 +50,26 @@ public class Kingdom {
 		
 	}
 	
-	public void update() {
-		for(Player p : players)
-			p.update();
-		for(Soldier s:moving_soldier)
-			s.updateRound();
+	public Player update() {
+		if(players.size()==1)
+			return players.remove();
+		
+		for(Player p : players) {
+			if(!p.update()) {
+				players.remove(p);
+				System.out.println(p.getName()+" is no more.");
+			}
+				
+		}
+			
+		for(Soldier s:moving_soldier) {
+			if(s.isMoving())
+				s.updateRound();
+			else
+				moving_soldier.remove(s);
+		}
+		
+		return null;
 	}
 	
 	

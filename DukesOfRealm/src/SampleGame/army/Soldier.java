@@ -1,5 +1,6 @@
 package SampleGame.army;
 
+import SampleGame.Kingdom;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.player.Player;
@@ -92,8 +93,10 @@ public class Soldier extends Sprite{
 	public void arrivedCastle(Castle target) {
 		removeFromLayer();
 		moving = false;
-		if(target.getOwnerName()==this.owner.getName()) {
+		//Kingdom.moving_soldier.remove(this);
+		if(target.getOwnerName()==this.owner.getName() || !Kingdom.players.contains(owner)) {
 			target.addToArmy(this);
+			this.owner = target.getOwner();
 		}else {
 			target.getAttacked(this);
 		}
@@ -189,9 +192,20 @@ public class Soldier extends Sprite{
 		return null;
 	}
 
-
+	/**
+	 * Getter for the Soldier corresponding Duke
+	 * @return The Player object representing the soldier's Duke
+	 */
 	public Player getOwner() {
 		return owner;
+	}
+	
+	/**
+	 * Tells if the soldier is moving or not
+	 * @return True if it is, false otherwise
+	 */
+	public boolean isMoving() {
+		return moving;
 	}
 	
 

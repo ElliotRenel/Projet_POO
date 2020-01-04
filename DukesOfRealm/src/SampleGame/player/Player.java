@@ -104,9 +104,13 @@ public class Player {
 	/**
 	 * Update function called at each turn
 	 */
-	public void update() {
-		for(Castle c : owned_castle)
-			c.updateRound();
+	public boolean update() {
+		if(!owned_castle.isEmpty())
+			for(Castle c : owned_castle)
+				c.updateRound();
+		else
+			return false;
+		return true;
 	}
 
 }
