@@ -98,6 +98,30 @@ public class Soldier extends Sprite{
 			target.getAttacked(this);
 		}
 	}
+	
+	/**
+	 * Simulate attack with another soldier and check who wins.
+	 * @param s The other soldier
+	 * @return True if the object who called the method wins, false if it is defeated
+	 */
+	public boolean attackSoldier(Soldier s) {
+		int s_damage = s.getDamage();
+		while(this.health!=0 && s.health!=0) {
+			this.takeDamage(s_damage);
+			s.takeDamage(this.damage);
+		}
+		return this.health==0?false:true;
+	}
+	
+	/**
+	 * Loose health according to the amount of damage dealt
+	 * @param hitPoints The opponent's damage
+	 */
+	protected void takeDamage(int hitPoints) {
+		this.health -= hitPoints;
+		if(this.health<0)
+			this.health = 0;
+	}
 
 	/**
 	 * Update function for the Soldier object

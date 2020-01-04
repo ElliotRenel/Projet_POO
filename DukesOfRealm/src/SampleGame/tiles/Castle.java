@@ -10,6 +10,7 @@ import SampleGame.player.*;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 
 /**
@@ -28,12 +29,12 @@ public class Castle extends Sprite{
 	
 	private Player owner;
 	private int treasure;
-	//private Queue<Soldier> army;
 	private Hashtable<SoldierType, Queue<Soldier>> army;
 	private Order order;
 	@SuppressWarnings("unused")
 	private final Orientation door;						/* Not used*/
 	private Factory fact;
+	private Random rand = new Random();
 	
 	/**
 	 * 
@@ -100,19 +101,58 @@ public class Castle extends Sprite{
 	}
 	
 	/**
+	 * Remove a specific soldier from the castle army
+	 * 
+	 * @param s The soldier object to remove
+	 */
+	private void removeFromArmy(Soldier s) {
+		army.get(s.getType()).remove(s);
+	}
+	
+	/**
 	 * When the castle gets attacked by an ennemy soldier
 	 * 
 	 * @param s the attacker
 	 */
 	public void getAttacked(Soldier s) {
-		if(army.isEmpty()) {
+		if(this.noMoreArmy()) {
 			this.owner.removeCastle(this);
 			this.owner = s.getOwner();
 			addToArmy(s);
 			this.owner.addCastle(this);
 		}else {
-			army.remove();
+			Soldier challenger = this.chooseChallenger();
+			while(s.attackSoldier(challenger) && !this.noMoreArmy()) {
+				this.removeFromArmy(challenger);
+				challenger = this.chooseChallenger();
+			}
+			if(challenger.getHealth()==0) this.removeFromArmy(challenger);
 		}
+	}
+	
+	/**
+	 * Choose a random opponent in the army to fight an intruder
+	 * @return The chosen warrior
+	 */
+	private Soldier chooseChallenger() {
+		SoldierType t = SoldierType.values()[rand.nextInt(3)];
+		while(army.get(t).isEmpty())
+			t = SoldierType.values()[rand.nextInt(3)];
+		Soldier s = this.removeFromArmy(t);
+		this.addToArmy(s);
+		return s;
+	}
+
+
+	/**
+	 * Check if the castle has any soldier left.
+	 * @return True if there are no more soldiers, false if it found at least one.
+	 */
+	private boolean noMoreArmy() {
+		for(SoldierType t : SoldierType.values())
+			if(!army.get(t).isEmpty())
+				return false;
+		return true;
 	}
 	
 	
