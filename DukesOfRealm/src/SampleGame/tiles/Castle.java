@@ -30,7 +30,8 @@ public class Castle extends Sprite{
 	private Player owner;
 	private int treasure;
 	private Hashtable<SoldierType, Queue<Soldier>> army;
-	private Order order;
+	private Queue<Order> orders;
+	private Order current_order;
 	@SuppressWarnings("unused")
 	private final Orientation door;						/* Not used*/
 	private Factory fact;
@@ -67,7 +68,8 @@ public class Castle extends Sprite{
 			addToArmy(s);
 		this.door = door;
 		this.fact = fact;
-		this.order = null;
+		this.orders = new LinkedList<Order>();
+		this.current_order = null;
 	}
 	
 		
@@ -163,7 +165,7 @@ public class Castle extends Sprite{
 	 */
 	public void giveOrder(Order order) {
 		if(order.getTroops()<=army.size()) {
-			this.order = order;
+			this.orders.add(order);
 		}else {
 			System.out.println("Not enough troops");
 		}
@@ -177,15 +179,18 @@ public class Castle extends Sprite{
 	 */
 	
 	private void executeOrder() {
-		if(order!=null) {		
-			if (order.getTroops()!=0) {
-				for(int i=0; i<3 && order.getTroops()>0;i++, order.sendTroops()) {
-					Soldier s = army.remove();
+		if(current_order==null && !orders.isEmpty()) {
+			current_order=orders.remove();
+		}
+		if(current_order!=null){
+			if (current_order.getTroops()!=0) {
+				for(int i=0; i<3 && current_order.getTroops()>0;i++, current_order.sendTroops()) {
+					Soldier s = removeFromArmy(current_order.getType());
 					Kingdom.moving_soldier.add(s);
-					s.executeOrder66(order.getTarget());
+					s.executeOrder66(current_order.getTarget());
 				}
 			}else {
-				this.order = null;
+				this.current_order = null;
 			}
 		}
 	}
@@ -221,7 +226,10 @@ public class Castle extends Sprite{
 	public void printStatus() {
 		System.out.println("Owner : "+owner.getName()+"\n"
 				+ "Treasure : "+treasure+"\n"
-				+ "Army count : "+army.size()+"\n"
+				+ "Army count : \n"
+				+ "\t> Stinger : "+army.get(SoldierType.P).size()+"\n"
+				+ "\t> Knights : "+army.get(SoldierType.C).size()+"\n"
+				+ "\t> Onagra : "+army.get(SoldierType.O).size()+"\n"
 				+ "Current round : "+Settings.NB_CURRENT_ROUND+"\n");
 		
 	}

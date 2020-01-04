@@ -5,6 +5,7 @@ import java.util.Random;
 import SampleGame.Kingdom;
 import SampleGame.Settings;
 import SampleGame.army.Order;
+import SampleGame.army.Soldier.SoldierType;
 import SampleGame.army.soldiers.Piquier;
 import SampleGame.tiles.Castle;
 
@@ -40,7 +41,7 @@ public class AI extends Player {
 			Castle cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
 				while(isMine(cible))
 					cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
-				c.giveOrder(new Order(cible,c.getNbTroupe()-1));
+				c.giveOrder(new Order(cible,c.getNbTroupe()-1,SoldierType.P));
 		}
 	}
 }
