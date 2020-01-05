@@ -150,4 +150,9 @@ public class Player {
 		return true;
 	}
 
+	public void won() {
+		for(Soldier s: moving_soldiers)
+			s.removeFromLayer();
+	}
+
 }

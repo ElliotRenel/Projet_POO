@@ -3,9 +3,11 @@ package SampleGame;
 import SampleGame.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -17,7 +19,6 @@ import javafx.scene.text.Text;
  * @author thdupont
  *
  */
-@SuppressWarnings("unused")
 public class Main extends Application {
 
 	private Pane playfieldLayer;
@@ -31,8 +32,7 @@ public class Main extends Application {
 	private AnimationTimer gameLoop;
 	
 	private boolean pause = false;	
-	
-	private int nb_tour = 0;
+	private boolean released = false;
 	
 	Group root;
 	
@@ -84,12 +84,30 @@ public class Main extends Application {
 
 		createKingdom();
 		createStatusBar();
-		
-		
-		
-		scene.setOnMousePressed(e -> {
-			//player.setX(e.getX() - (player.getWidth() / 2));
-			//player.setY(e.getY() - (player.getHeight() / 2));
+
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if(event.getCode().toString()=="P") {
+					if(!pause) {
+						pause = true;
+						gameLoop.stop();
+					}else if(released) {
+						pause = false;
+						released = false;
+						gameLoop.start();
+					}
+				}
+			}
+		});
+		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) { 	
+				if(event.getCode().toString()=="P" && pause) {
+					released = true;
+				}				
+			}
 		});
 	}
 
@@ -121,6 +139,7 @@ public class Main extends Application {
 	 * Quits the game when the player has won or lose
 	 */
 	private void gameOver(Player p) {
+		p.won();
 		HBox hbox = new HBox();
 		hbox.setPrefSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
 		hbox.getStyleClass().add("message");
