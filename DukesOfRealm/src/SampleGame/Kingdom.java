@@ -82,18 +82,16 @@ public class Kingdom {
 			}
 		}				
 		
-		return new Point(x,y);
+		return new Point(x+50,y+50);
 	}
 	
 	public Player update() {
-		if(players.size()==1)
+		if(players.size()==1) {
 			return players.remove();
-		
+		}
 		for(Player p : players)
-			if(!p.update()) {
+			if(!p.update())
 				players.remove(p);
-				System.out.println(p.getName()+" is no more.");
-			}
 		return null;
 	}
 	

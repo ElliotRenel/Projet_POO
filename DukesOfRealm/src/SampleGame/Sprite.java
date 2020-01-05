@@ -27,11 +27,11 @@ public abstract class Sprite {
         this.x = x;
         this.y = y;
 
-        this.imageView = new ImageView(image);
-        this.imageView.relocate(x, y);
-
         this.w = image.getWidth(); 
         this.h = image.getHeight(); 
+        
+        this.imageView = new ImageView(image);
+        this.imageView.relocate(x-w/2, y-h/2);
 
         addToLayer();
 
@@ -98,7 +98,7 @@ public abstract class Sprite {
     }
 
     public void updateUI() {
-        imageView.relocate(x, y);
+        imageView.relocate(x-w/2, y-h/2);
     }
 
     public double getWidth() {
