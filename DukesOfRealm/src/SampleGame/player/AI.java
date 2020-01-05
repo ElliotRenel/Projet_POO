@@ -10,6 +10,8 @@ import SampleGame.army.Soldier;
 import SampleGame.army.Soldier.SoldierType;
 import SampleGame.army.soldiers.Piquier;
 import SampleGame.tiles.Castle;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 
 /**
  * Subclass of Player creating computer type actions.
@@ -24,15 +26,16 @@ public class AI extends Player {
 	
 	public AI(String name, Castle[] initial_castles) {
 		super(name,initial_castles);
-		this.type = Player_Type.C;
+		this.type = PlayerType.C;
 	}
 	
 	public AI(String name) {
 		super(name);
-		this.type = Player_Type.C;
+		this.type = PlayerType.C;
 	}
 	
-	private void doStuff() {
+	@Override
+	protected void doStuff() {
 		if(!owned_castle.isEmpty())
 			for(Castle c : owned_castle) {
 				c.updateRound();
@@ -47,26 +50,18 @@ public class AI extends Player {
 			}
 	}
 	
-	@Override
-	public boolean update() {
-		LinkedList<Soldier> toDelete = new LinkedList<Soldier>();
-		if(owned_castle.isEmpty() && moving_soldiers.isEmpty()) {
-			System.out.println(name + " is no more");
-			return false;
-		}
+	public ContextMenu giveMenu(Castle castle) {
+		ContextMenu menu = new ContextMenu();
+		MenuItem info = new MenuItem();
 		
-		doStuff();
-		
-		if(!moving_soldiers.isEmpty())
-			for(Soldier s : moving_soldiers) {
-				if(s.isMoving())
-					s.updateRound();
-				else
-					toDelete.add(s);
-			}
-		for(Soldier s : toDelete)
-			moving_soldiers.remove(s);
-		return true;
+		info.setText("Owner : "+name+"\n"
+				+ "Treasure : "+castle.getTreasure()+"\n"
+				+ "Army count : \n"
+				+ "\t> Stinger : "+castle.getNbTroupe(SoldierType.P)+"\n"
+				+ "\t> Knights : "+castle.getNbTroupe(SoldierType.C)+"\n"
+				+ "\t> Onagra : "+castle.getNbTroupe(SoldierType.O)+"\n");
+		menu.getItems().add(info);
+		return menu;
 	}
 }
 

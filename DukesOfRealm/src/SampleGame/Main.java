@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -33,6 +34,8 @@ public class Main extends Application {
 	
 	private boolean pause = false;	
 	private boolean released = false;
+	
+	Label round;
 	
 	Group root;
 	
@@ -109,6 +112,39 @@ public class Main extends Application {
 				}				
 			}
 		});
+		
+		round = new Label();
+		playfieldLayer.getChildren().add(round);
+		/*
+		ContextMenu menu = new ContextMenu();
+		MenuItem item1 = new MenuItem("Item 1");
+		item1.setOnAction(new EventHandler<ActionEvent>() {
+			 
+            @Override
+            public void handle(ActionEvent event) {
+            }
+        });
+		MenuItem item2 = new MenuItem("Item 2");
+		item2.setOnAction(new EventHandler<ActionEvent>() {
+			 
+            @Override
+            public void handle(ActionEvent event) {
+            }
+        });
+		Menu sub =new Menu("submenu");
+		sub.getItems().addAll(item2);
+		
+		menu.getItems().addAll(item1,sub);
+		
+		playfieldLayer.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+ 
+            @Override
+            public void handle(ContextMenuEvent event) {
+ 
+                menu.show(playfieldLayer, event.getScreenX(), event.getScreenY());
+            }
+        });
+        */
 	}
 
 	/**
@@ -158,6 +194,7 @@ public class Main extends Application {
 	 */
 	private void update() throws InterruptedException {
 		Settings.NB_CURRENT_ROUND++;
+		round.setText(""+Settings.NB_CURRENT_ROUND);
 		Player p;
 		if((p = kingdom.update())!=null)
 			gameOver(p);

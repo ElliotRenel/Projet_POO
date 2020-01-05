@@ -8,7 +8,7 @@ public abstract class Sprite {
 
     private ImageView imageView;
 
-    private Pane layer;
+    protected Pane layer;
 
     protected int x;
     protected int y;

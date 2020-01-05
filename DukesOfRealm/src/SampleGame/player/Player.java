@@ -4,6 +4,7 @@ package SampleGame.player;
 import SampleGame.Settings;
 import SampleGame.army.*;
 import SampleGame.tiles.Castle;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
@@ -19,12 +20,12 @@ import java.util.Queue;
  */
 
 public class Player {
-	public enum Player_Type{H,C,V;}
+	public enum PlayerType{H,C,V;}
 	
 	protected String name;
 	protected Queue<Castle> owned_castle;
 	protected Queue<Soldier> moving_soldiers;
-	protected Player_Type type;
+	protected PlayerType type;
 	protected Image castleImage;
 	protected Color playerColor;
 	
@@ -100,7 +101,7 @@ public class Player {
 	 * 
 	 * @return Player_Type : the type of player
 	 */
-	public Player_Type getType() {
+	public PlayerType getType() {
 		return type;
 	}
 	
@@ -134,19 +135,59 @@ public class Player {
 		return owned_castle.contains(c);
 	}
 	
+	/**
+	 * Add a soldier to the player's moving army
+	 * @param s The soldier to add
+	 */
 	public void addToMovingArmy(Soldier s) {
 		moving_soldiers.add(s);
 	}
-	
+
+	/**
+	 * Remove a soldier to the player's moving army
+	 * @param s The soldier to remove
+	 */
 	public void removeFromMovingArmy(Soldier s) {
 		moving_soldiers.remove(s);
+	}
+	
+	/**
+	 * What the player do (mostly used by the AI subclass)
+	 */
+	protected void doStuff() {}
+	
+	/**
+	 * Create the menu for a Specific castle
+	 * @param castle The castle we want the menu of
+	 * @return The ContextMenu object created to be used
+	 */
+	public ContextMenu giveMenu(Castle castle) {
+		return null;
 	}
 	
 	/**
 	 * Update function called at each turn
 	 */
 	public boolean update() {
+		if(type==PlayerType.V)
+			return true;
+		LinkedList<Soldier> toDelete = new LinkedList<Soldier>();
+		if(owned_castle.isEmpty() && moving_soldiers.isEmpty()) {
+			System.out.println(name + " is no more");
+			return false;
+		}
 		
+		doStuff();
+		
+		if(!moving_soldiers.isEmpty())
+			for(Soldier s : moving_soldiers) {
+				if(s.isMoving())
+					s.updateRound();
+				else
+					toDelete.add(s);
+			}
+		for(Soldier s : toDelete)
+			moving_soldiers.remove(s);
 		return true;
 	}
 

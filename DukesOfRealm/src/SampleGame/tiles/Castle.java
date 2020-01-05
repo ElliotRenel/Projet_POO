@@ -5,6 +5,11 @@ import SampleGame.Sprite;
 import SampleGame.army.*;
 import SampleGame.army.Soldier.SoldierType;
 import SampleGame.player.*;
+import SampleGame.player.Player.PlayerType;
+import javafx.event.EventHandler;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.input.ContextMenuEvent;
 
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -248,6 +253,15 @@ public class Castle extends Sprite{
 	}
 	
 	/**
+	 * Getter for treasure content
+	 * @return The castle current treasure
+	 */
+	public int getTreasure() {
+		return treasure;
+	}
+
+
+	/**
 	 * Add a training order to the factory
 	 * @param type The soldier you want to train
 	 * @param quantity The quantity of this specific soldiers you want to train
@@ -260,14 +274,20 @@ public class Castle extends Sprite{
 	 * Show castle menu when the castle owner is the player, only show information if the castle
 	 * is owned by an opponent.
 	 */
-	public void showMenu() {
+	public void showMenu(ContextMenuEvent event) {
 		this.printStatus();
+		(owner.giveMenu(this)).show(this.layer,event.getScreenX(),event.getScreenY());
 	}	
 	
 	@Override
 	public void updateUI() {
 		super.updateUI();
-		this.getView().setOnContextMenuRequested(e ->  {this.showMenu();});
+		this.getView().setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+            @Override
+            public void handle(ContextMenuEvent event) {
+            	showMenu(event);
+            }
+        });
 	}
 
 
