@@ -26,8 +26,10 @@ public class Kingdom {
 			Settings.CastleImages[i] = new Image(getClass().getResource("/images/Castle"+ i + ".png").toExternalForm() , 60, 60, true, true);
 		}
 		
-		Settings.PiquierImage = new Image(getClass().getResource("/images/Piquier.png").toExternalForm(), 25 , 25, false, true);
-		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), 25 , 25, false, true);
+		Settings.PiquierImage = new Image(getClass().getResource("/images/Piquier.png").toExternalForm(), 10 , 10, false, true);
+		Settings.ChevalierImage = new Image(getClass().getResource("/images/Chevalier.png").toExternalForm(), 10 , 10, false, true);
+		Settings.OnagreImage = new Image(getClass().getResource("/images/Onagre.png").toExternalForm(), 10 , 10, false, true);
+		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), 60 , 25, false, true);
 		Settings.field = field;	
 		
 		generateCastles();

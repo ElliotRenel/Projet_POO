@@ -66,6 +66,9 @@ public class Castle extends Sprite{
 		for(Soldier s : initial_army)
 			addToArmy(s);
 		this.door = door;
+		
+		
+		
 		this.fact = fact;
 		this.orders = new LinkedList<Order>();
 		this.current_order = null;
