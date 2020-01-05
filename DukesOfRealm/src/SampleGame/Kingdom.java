@@ -46,7 +46,7 @@ public class Kingdom {
 			c = new Castle(pos_x , pos_y , 
 					duke, 1000, init_army, Orientation.E, new Factory());
 			
-			c.getView().setOnContextMenuRequested(e -> {c.showMenu();});
+			//c.getView().setOnContextMenuRequested(e -> {c.showMenu();});
 			
 			castles[i] = c;		
 		}		

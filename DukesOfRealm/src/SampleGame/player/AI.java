@@ -10,7 +10,6 @@ import SampleGame.army.Soldier;
 import SampleGame.army.Soldier.SoldierType;
 import SampleGame.army.soldiers.Piquier;
 import SampleGame.tiles.Castle;
-import javafx.scene.paint.Color;
 
 /**
  * Subclass of Player creating computer type actions.

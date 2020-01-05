@@ -184,7 +184,7 @@ public class Castle extends Sprite{
 		}
 		if(current_order!=null){
 			if (current_order.getTroops()!=0) {
-				for(int i=0; i<3 && current_order.getTroops()>0;i++, current_order.sendTroops()) {
+				for(int i=0; i<3 && current_order.getTroops()>0 && !army.get(current_order.getType()).isEmpty();i++, current_order.sendTroops()) {
 					Soldier s = removeFromArmy(current_order.getType());
 					owner.addToMovingArmy(s);
 					s.executeOrder66(current_order.getTarget());
@@ -258,9 +258,15 @@ public class Castle extends Sprite{
 	 */
 	public void showMenu() {
 		this.printStatus();
+	}	
+	
+	@Override
+	public void updateUI() {
+		super.updateUI();
+		this.getView().setOnContextMenuRequested(e ->  {this.showMenu();});
 	}
-	
-	
+
+
 	/**
 	 * Called at each turn to update the different mechanics
 	 */
