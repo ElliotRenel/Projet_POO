@@ -23,12 +23,7 @@ public class Kingdom {
 	public Kingdom(Pane field) {
 		
 		
-		ColorAdjust colorAdjust = new ColorAdjust();
-		colorAdjust.setHue(-0.5);
-		colorAdjust.setBrightness(0.3);
-		Settings.CastleImage = new Image(getClass().getResource("/images/Castle.jpg").toExternalForm(), 50, 50, true, true);
-		
-		
+		Settings.CastleImage = new Image(getClass().getResource("/images/CastleBis.jpg").toExternalForm(), 75, 75, true, true);
 		Settings.PiquierImage = new Image(getClass().getResource("/images/Soldier.jpg").toExternalForm(), 25 , 25, false, true);
 		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), 25 , 25, false, true);
 		Settings.field = field;

@@ -49,11 +49,17 @@ public class Player {
 		
 		PixelReader pixRead = Settings.CastleImage.getPixelReader();
 		PixelWriter pixWrite = Castle_Image.getPixelWriter();
+		Color tokeep = pixRead.getColor(0, 0);
 		
 		for(int y=0; y<height; y++) {
 			for(int x=0; x<width; x++) {
-				if(true)
-					pixWrite.setColor(x,y,pixRead.getColor(x, y));
+				if(!tokeep.equals(pixRead.getColor(x, y))){
+					if(pixRead.getColor(x, y).equals(Color.BLACK)) {
+						pixWrite.setColor(x,y, Color.BLACK);
+					}else {
+						pixWrite.setColor(x,y,Player_Color);
+					}
+				}
 			}
 		}
 		
@@ -77,11 +83,17 @@ public class Player {
 		
 		PixelReader pixRead = Settings.CastleImage.getPixelReader();
 		PixelWriter pixWrite = Castle_Image.getPixelWriter();
+		Color tokeep = pixRead.getColor(0, 0);
 		
 		for(int y=0; y<height; y++) {
 			for(int x=0; x<width; x++) {
-				if(true)
-					pixWrite.setColor(x,y,pixRead.getColor(x, y));
+				if(!tokeep.equals(pixRead.getColor(x, y))){
+					if(pixRead.getColor(x, y).equals(Color.BLACK)) {
+						pixWrite.setColor(x,y, Color.BLACK);
+					}else {
+						pixWrite.setColor(x,y,Player_Color);
+					}
+				}
 			}
 		}
 		
@@ -102,11 +114,17 @@ public class Player {
 		
 		PixelReader pixRead = Settings.CastleImage.getPixelReader();
 		PixelWriter pixWrite = Castle_Image.getPixelWriter();
+		Color tokeep = pixRead.getColor(0, 0);
 		
 		for(int y=0; y<height; y++) {
 			for(int x=0; x<width; x++) {
-				if(true)
-					pixWrite.setColor(x,y,pixRead.getColor(x, y));
+				if(!tokeep.equals(pixRead.getColor(x, y))) {
+					if(pixRead.getColor(x, y).equals(Color.BLACK)) {
+						pixWrite.setColor(x,y, Color.BLACK);
+					}else {
+						pixWrite.setColor(x,y,Player_Color);
+					}
+				}
 			}
 		}
 	}
