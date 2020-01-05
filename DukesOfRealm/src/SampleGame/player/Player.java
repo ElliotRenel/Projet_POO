@@ -2,6 +2,7 @@ package SampleGame.player;
 
 
 import SampleGame.Settings;
+import SampleGame.army.*;
 import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -24,6 +25,7 @@ public class Player {
 	
 	protected String name;
 	protected Queue<Castle> owned_castle;
+	protected Queue<Soldier> moving_soldiers;
 	protected Player_Type type;
 	protected Color Player_Color;
 	protected WritableImage Castle_Image;
@@ -38,6 +40,8 @@ public class Player {
 	protected Player(String name,Castle[] initial_castles, Color color) {
 		this.name = name;
 		this.owned_castle = new LinkedList<Castle>();
+		this.moving_soldiers = new LinkedList<Soldier>();
+		
 		for(Castle c : initial_castles)
 			this.owned_castle.add(c);
 		
@@ -63,6 +67,7 @@ public class Player {
 			}
 		}
 		
+		
 	}
 	
 	/**
@@ -74,6 +79,7 @@ public class Player {
 	protected Player(String name) {
 		this.name = name;
 		this.owned_castle = new LinkedList<Castle>();
+		this.moving_soldiers = new LinkedList<Soldier>();
 		
 		this.Player_Color = Color.PURPLE;
 		int width = (int)Settings.CastleImage.getWidth();
@@ -105,6 +111,7 @@ public class Player {
 	protected Player() {
 		this.name = "Neutral";
 		this.owned_castle = new LinkedList<Castle>();
+		this.moving_soldiers = new LinkedList<Soldier>();
 		
 		this.Player_Color = Color.RED;
 		int width = (int)Settings.CastleImage.getWidth();
@@ -181,15 +188,19 @@ public class Player {
 		return owned_castle.contains(c);
 	}
 	
+	public void addToMovingArmy(Soldier s) {
+		moving_soldiers.add(s);
+	}
+	
+	public void removeFromMovingArmy(Soldier s) {
+		moving_soldiers.remove(s);
+	}
+	
 	/**
 	 * Update function called at each turn
 	 */
 	public boolean update() {
-		if(!owned_castle.isEmpty())
-			for(Castle c : owned_castle)
-				c.updateRound();
-		else
-			return false;
+		
 		return true;
 	}
 

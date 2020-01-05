@@ -18,7 +18,6 @@ public class Kingdom {
 	public static Castle[] castles = new Castle[Settings.NB_CASTLE];
 	public static Queue<Player> players = new LinkedList<Player>();
 	Random rand = new Random();
-	public static Queue<Soldier> moving_soldier;
 	
 	public Kingdom(Pane field) {
 		
@@ -47,30 +46,19 @@ public class Kingdom {
 			c.getView().setOnContextMenuRequested(e -> {c.showMenu();});
 			
 			castles[i] = c;		
-		}
-		moving_soldier = new LinkedList<Soldier>();
-		
-		
+		}		
 	}
 	
 	public Player update() {
 		if(players.size()==1)
 			return players.remove();
 		
-		for(Player p : players) {
+		for(Player p : players)
 			if(!p.update()) {
 				players.remove(p);
 				System.out.println(p.getName()+" is no more.");
 			}
-				
-		}
-			
-		for(Soldier s:moving_soldier) {
-			if(s.isMoving())
-				s.updateRound();
-			else
-				moving_soldier.remove(s);
-		}
+
 		
 		return null;
 	}

@@ -93,7 +93,6 @@ public class Soldier extends Sprite{
 	public void arrivedCastle(Castle target) {
 		removeFromLayer();
 		moving = false;
-		//Kingdom.moving_soldier.remove(this);
 		if(target.getOwnerName()==this.owner.getName() || !Kingdom.players.contains(owner)) {
 			target.addToArmy(this);
 			this.owner = target.getOwner();
