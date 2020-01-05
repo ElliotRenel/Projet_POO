@@ -44,7 +44,7 @@ public class Kingdom {
 			Soldier[] init_army = new Soldier[Settings.NB_TROUPE];
 			if(i<Settings.NB_DUKES) {
 				duke = new AI(Settings.DUKES[i]);
-				duke.setCastleImage(Settings.CastleImages[i+1]);
+				duke.setCastleImageAndColor(Settings.CastleImages[i+1]);
 				players.add(duke);
 			}
 			Point p = generatePosition(not_available);
