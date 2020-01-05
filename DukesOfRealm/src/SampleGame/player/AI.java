@@ -32,25 +32,31 @@ public class AI extends Player {
 		this.type = Player_Type.C;
 	}
 	
+	private void doStuff() {
+		if(!owned_castle.isEmpty())
+			for(Castle c : owned_castle) {
+				c.updateRound();
+				if(Settings.NB_CURRENT_ROUND%100 == 1)
+					c.produceArmy(new Piquier(c), 100);
+				if(Settings.NB_CURRENT_ROUND!=0 && Settings.NB_CURRENT_ROUND%100==0) {
+					Castle cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
+						while(isMine(cible))
+							cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
+						c.giveOrder(new Order(cible,c.getNbTroupe(SoldierType.P)-1,SoldierType.P));
+				}
+			}
+	}
 	
 	@Override
 	public boolean update() {
 		LinkedList<Soldier> toDelete = new LinkedList<Soldier>();
-		if(owned_castle.isEmpty() && moving_soldiers.isEmpty())
+		if(owned_castle.isEmpty() && moving_soldiers.isEmpty()) {
+			System.out.println(name + " is no more");
 			return false;
-
-		if(!owned_castle.isEmpty())
-		for(Castle c : owned_castle) {
-			c.updateRound();
-			if(Settings.NB_CURRENT_ROUND%100 == 1)
-				c.produceArmy(new Piquier(c), 100);
-			if(Settings.NB_CURRENT_ROUND!=0 && Settings.NB_CURRENT_ROUND%100==0) {
-				Castle cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
-					while(isMine(cible))
-						cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
-					c.giveOrder(new Order(cible,c.getNbTroupe(SoldierType.P)-1,SoldierType.P));
-			}
 		}
+		
+		doStuff();
+		
 		if(!moving_soldiers.isEmpty())
 			for(Soldier s : moving_soldiers) {
 				if(s.isMoving())
