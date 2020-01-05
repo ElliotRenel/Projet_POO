@@ -4,7 +4,6 @@ import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
 import SampleGame.army.Soldier.SoldierType;
-import SampleGame.army.soldiers.*;
 import SampleGame.player.*;
 
 import java.util.Hashtable;
@@ -122,6 +121,7 @@ public class Castle extends Sprite{
 			this.owner = s.getOwner();
 			addToArmy(s);
 			this.owner.addCastle(this);
+			this.changeImage(owner.getCastleImage());
 		}else {
 			Soldier challenger = this.chooseChallenger();
 			while(s.attackSoldier(challenger) && !this.noMoreArmy()) {
