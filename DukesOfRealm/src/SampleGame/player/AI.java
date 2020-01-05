@@ -23,8 +23,8 @@ import javafx.scene.paint.Color;
 public class AI extends Player {
 	Random rand = new Random();
 	
-	public AI(String name, Castle[] initial_castles, Color color) {
-		super(name,initial_castles, color);
+	public AI(String name, Castle[] initial_castles) {
+		super(name,initial_castles);
 		this.type = Player_Type.C;
 	}
 	

@@ -19,11 +19,21 @@ public class Settings {
 	public static final int NB_TROUPE = 10;
 	public static final String[] DUKES = {"De Valois","De Bougogne","Du Chatelait"};
 	
-	public static Image CastleImage;
+	public static final int DIST_CASTLE = 150;
+	
+	public static Image CastleImages[] = new Image[6];
+	
+	//public static Image CastleImage;
+	
 	public static Image PiquierImage;
+	public static Image ChevalierImage;
+	public static Image OnagreImage;
+	
 	public static Image DoorImage;
 	public static Pane field;
 	
 	public static int NB_CURRENT_ROUND = 0;
+	
+	
 
 }

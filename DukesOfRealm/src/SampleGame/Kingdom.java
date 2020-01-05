@@ -5,7 +5,6 @@ import SampleGame.army.soldiers.Piquier;
 import SampleGame.player.*;
 import SampleGame.tiles.Castle;
 import SampleGame.tiles.Castle.Orientation;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -22,8 +21,11 @@ public class Kingdom {
 	public Kingdom(Pane field) {
 		
 		
-		Settings.CastleImage = new Image(getClass().getResource("/images/CastleBis.jpg").toExternalForm(), 75, 75, true, true);
-		Settings.PiquierImage = new Image(getClass().getResource("/images/Soldier.jpg").toExternalForm(), 25 , 25, false, true);
+		for(int i=0; i<Settings.CastleImages.length; i++) {
+			Settings.CastleImages[i] = new Image(getClass().getResource("/images/Castle"+ i + ".png").toExternalForm() , 60, 60, true, true);
+		}
+		
+		Settings.PiquierImage = new Image(getClass().getResource("/images/Piquier.png").toExternalForm(), 25 , 25, false, true);
 		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), 25 , 25, false, true);
 		Settings.field = field;
 		
@@ -33,6 +35,7 @@ public class Kingdom {
 			Soldier[] init_army = new Soldier[Settings.NB_TROUPE];
 			if(i<Settings.NB_DUKES) {
 				duke = new AI(Settings.DUKES[i]);
+				duke.setCastleImage(Settings.CastleImages[i+1]);
 				players.add(duke);
 			}
 			int pos_x = rand.nextInt((int) Settings.SCENE_WIDTH-100) + 50;

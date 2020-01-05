@@ -5,9 +5,6 @@ import SampleGame.Settings;
 import SampleGame.army.*;
 import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
@@ -27,8 +24,7 @@ public class Player {
 	protected Queue<Castle> owned_castle;
 	protected Queue<Soldier> moving_soldiers;
 	protected Player_Type type;
-	protected Color Player_Color;
-	protected WritableImage Castle_Image;
+	protected Image castleImage;
 	
 	/**
 	 * Class constructor.
@@ -37,37 +33,14 @@ public class Player {
 	 * @param name A String containing the name of the player (Human or AI)
 	 * @param initial_castles Array of initial castles
 	 */
-	protected Player(String name,Castle[] initial_castles, Color color) {
+	protected Player(String name,Castle[] initial_castles) {
 		this.name = name;
 		this.owned_castle = new LinkedList<Castle>();
 		this.moving_soldiers = new LinkedList<Soldier>();
 		
 		for(Castle c : initial_castles)
 			this.owned_castle.add(c);
-		
-		this.Player_Color = color;
-		int width = (int)Settings.CastleImage.getWidth();
-		int height = (int)Settings.CastleImage.getHeight();
-		
-		Castle_Image =  new WritableImage(width , height );
-		
-		PixelReader pixRead = Settings.CastleImage.getPixelReader();
-		PixelWriter pixWrite = Castle_Image.getPixelWriter();
-		Color tokeep = pixRead.getColor(0, 0);
-		
-		for(int y=0; y<height; y++) {
-			for(int x=0; x<width; x++) {
-				if(!tokeep.equals(pixRead.getColor(x, y))){
-					if(pixRead.getColor(x, y).equals(Color.BLACK)) {
-						pixWrite.setColor(x,y, Color.BLACK);
-					}else {
-						pixWrite.setColor(x,y,Player_Color);
-					}
-				}
-			}
-		}
-		
-		
+			
 	}
 	
 	/**
@@ -81,27 +54,6 @@ public class Player {
 		this.owned_castle = new LinkedList<Castle>();
 		this.moving_soldiers = new LinkedList<Soldier>();
 		
-		this.Player_Color = Color.PURPLE;
-		int width = (int)Settings.CastleImage.getWidth();
-		int height = (int)Settings.CastleImage.getHeight();
-		
-		Castle_Image =  new WritableImage(width , height );
-		
-		PixelReader pixRead = Settings.CastleImage.getPixelReader();
-		PixelWriter pixWrite = Castle_Image.getPixelWriter();
-		Color tokeep = pixRead.getColor(0, 0);
-		
-		for(int y=0; y<height; y++) {
-			for(int x=0; x<width; x++) {
-				if(!tokeep.equals(pixRead.getColor(x, y))){
-					if(pixRead.getColor(x, y).equals(Color.BLACK)) {
-						pixWrite.setColor(x,y, Color.BLACK);
-					}else {
-						pixWrite.setColor(x,y,Player_Color);
-					}
-				}
-			}
-		}
 		
 	}
 	
@@ -112,28 +64,8 @@ public class Player {
 		this.name = "Neutral";
 		this.owned_castle = new LinkedList<Castle>();
 		this.moving_soldiers = new LinkedList<Soldier>();
+		this.castleImage = Settings.CastleImages[0];
 		
-		this.Player_Color = Color.RED;
-		int width = (int)Settings.CastleImage.getWidth();
-		int height = (int)Settings.CastleImage.getHeight();
-		
-		Castle_Image =  new WritableImage(width , height );
-		
-		PixelReader pixRead = Settings.CastleImage.getPixelReader();
-		PixelWriter pixWrite = Castle_Image.getPixelWriter();
-		Color tokeep = pixRead.getColor(0, 0);
-		
-		for(int y=0; y<height; y++) {
-			for(int x=0; x<width; x++) {
-				if(!tokeep.equals(pixRead.getColor(x, y))) {
-					if(pixRead.getColor(x, y).equals(Color.BLACK)) {
-						pixWrite.setColor(x,y, Color.BLACK);
-					}else {
-						pixWrite.setColor(x,y,Player_Color);
-					}
-				}
-			}
-		}
 	}
 	
 	/**
@@ -146,7 +78,11 @@ public class Player {
 	}
 	
 	public Image getCastleImage() {
-		return Castle_Image;
+		return castleImage;
+	}
+	
+	public void setCastleImage(Image castleImage) {
+		this.castleImage = castleImage;
 	}
 	
 	/**

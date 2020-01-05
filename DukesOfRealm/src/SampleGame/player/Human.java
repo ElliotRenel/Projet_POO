@@ -13,8 +13,8 @@ import javafx.scene.paint.Color;
 
 public class Human extends Player {
 
-	public Human(String name, Castle[] initial_castles, Color color) {
-		super(name,initial_castles, color);
+	public Human(String name, Castle[] initial_castles) {
+		super(name,initial_castles);
 		this.type = Player_Type.H;
 	}
 	
