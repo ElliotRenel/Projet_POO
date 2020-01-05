@@ -30,7 +30,7 @@ public class Main extends Application {
 	//Things
 	private Scene scene;
 	//private Input input;
-	private AnimationTimer gameLoop;
+	private static AnimationTimer gameLoop;
 	
 	private boolean pause = false;	
 	private boolean released = false;
@@ -94,11 +94,11 @@ public class Main extends Application {
 				if(event.getCode().toString()=="P") {
 					if(!pause) {
 						pause = true;
-						gameLoop.stop();
+						pause();
 					}else if(released) {
 						pause = false;
 						released = false;
-						gameLoop.start();
+						unpause();
 					}
 				}
 			}
@@ -155,6 +155,14 @@ public class Main extends Application {
 		hbox.getChildren().add(message);
 		root.getChildren().add(hbox);
 		gameLoop.stop();
+	}
+	
+	public static void pause() {
+		gameLoop.stop();
+	}
+	
+	public static void unpause() {
+		gameLoop.start();
 	}
 
 	/**

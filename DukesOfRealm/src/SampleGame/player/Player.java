@@ -173,19 +173,19 @@ public class Player {
 			return true;
 		LinkedList<Soldier> toDelete = new LinkedList<Soldier>();
 		if(owned_castle.isEmpty() && moving_soldiers.isEmpty()) {
-			System.out.println(name + " is no more");
 			return false;
 		}
 		
 		doStuff();
 		
-		if(!moving_soldiers.isEmpty())
+		if(!moving_soldiers.isEmpty()) {
 			for(Soldier s : moving_soldiers) {
 				if(s.isMoving())
 					s.updateRound();
 				else
 					toDelete.add(s);
 			}
+		}
 		for(Soldier s : toDelete)
 			moving_soldiers.remove(s);
 		return true;

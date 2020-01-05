@@ -1,5 +1,6 @@
 package SampleGame.tiles;
 
+import SampleGame.Main;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
@@ -273,6 +274,8 @@ public class Castle extends Sprite{
 	 * is owned by an opponent.
 	 */
 	public void showMenu(ContextMenuEvent event) {
+		if(owner.getType()==PlayerType.H)
+			Main.pause();
 		(owner.giveMenu(this)).show(this.layer,event.getScreenX(),event.getScreenY());
 	}	
 	
