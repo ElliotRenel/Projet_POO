@@ -1,10 +1,10 @@
 package SampleGame.tiles;
 
-import SampleGame.Kingdom;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
 import SampleGame.army.Soldier.SoldierType;
+import SampleGame.army.soldiers.*;
 import SampleGame.player.*;
 
 import java.util.Hashtable;
@@ -186,7 +186,7 @@ public class Castle extends Sprite{
 			if (current_order.getTroops()!=0) {
 				for(int i=0; i<3 && current_order.getTroops()>0;i++, current_order.sendTroops()) {
 					Soldier s = removeFromArmy(current_order.getType());
-					Kingdom.moving_soldier.add(s);
+					owner.addToMovingArmy(s);
 					s.executeOrder66(current_order.getTarget());
 				}
 			}else {

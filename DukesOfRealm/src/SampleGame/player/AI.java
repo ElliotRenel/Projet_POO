@@ -1,10 +1,12 @@
 package SampleGame.player;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 import SampleGame.Kingdom;
 import SampleGame.Settings;
 import SampleGame.army.Order;
+import SampleGame.army.Soldier;
 import SampleGame.army.Soldier.SoldierType;
 import SampleGame.army.soldiers.Piquier;
 import SampleGame.tiles.Castle;
@@ -34,9 +36,11 @@ public class AI extends Player {
 	
 	@Override
 	public boolean update() {
-		if(owned_castle.isEmpty())
+		LinkedList<Soldier> toDelete = new LinkedList<Soldier>();
+		if(owned_castle.isEmpty() && moving_soldiers.isEmpty())
 			return false;
-		
+
+		if(!owned_castle.isEmpty())
 		for(Castle c : owned_castle) {
 			c.updateRound();
 			if(Settings.NB_CURRENT_ROUND%100 == 1)
@@ -48,6 +52,15 @@ public class AI extends Player {
 					c.giveOrder(new Order(cible,c.getNbTroupe(SoldierType.P)-1,SoldierType.P));
 			}
 		}
+		if(!moving_soldiers.isEmpty())
+			for(Soldier s : moving_soldiers) {
+				if(s.isMoving())
+					s.updateRound();
+				else
+					toDelete.add(s);
+			}
+		for(Soldier s : toDelete)
+			moving_soldiers.remove(s);
 		return true;
 	}
 }
