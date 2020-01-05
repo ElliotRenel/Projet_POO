@@ -121,6 +121,7 @@ public class Castle extends Sprite{
 			this.owner = s.getOwner();
 			addToArmy(s);
 			this.owner.addCastle(this);
+			this.fact.resetFactory();
 			this.changeImage(owner.getCastleImage());
 		}else {
 			Soldier challenger = this.chooseChallenger();

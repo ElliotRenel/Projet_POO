@@ -52,6 +52,17 @@ public class Factory {
 	}
 	
 	/**
+	 * Reset the whole factory production
+	 */
+	public void resetFactory() {
+		current = null;
+		nb_rounds = 0;
+		nb_to_train = 0;
+		while(!training_queue.isEmpty())
+			training_queue.remove();
+	}
+	
+	/**
 	 * Verifies if production of the soldier has finished.
 	 * @return The produced soldier, null if nothing was trained.
 	 */
