@@ -8,6 +8,7 @@ import SampleGame.tiles.Castle.Orientation;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+import java.awt.Point;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
@@ -27,8 +28,16 @@ public class Kingdom {
 		
 		Settings.PiquierImage = new Image(getClass().getResource("/images/Piquier.png").toExternalForm(), 25 , 25, false, true);
 		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), 25 , 25, false, true);
-		Settings.field = field;
+		Settings.field = field;	
 		
+		generateCastles();
+	}
+	
+	/**
+	 * Generate all castles in the Kingdom.
+	 */
+	private void generateCastles() {
+		boolean[][] not_available = new boolean[(int) (Settings.SCENE_WIDTH-100)][(int) (Settings.SCENE_HEIGHT-100)];
 		for(int i=0; i<Settings.NB_CASTLE; i++) {
 			Castle c;
 			Player duke = new VoidPlayer();
@@ -38,18 +47,40 @@ public class Kingdom {
 				duke.setCastleImage(Settings.CastleImages[i+1]);
 				players.add(duke);
 			}
-			int pos_x = rand.nextInt((int) Settings.SCENE_WIDTH-100) + 50;
-			int pos_y = rand.nextInt((int) Settings.SCENE_HEIGHT-100) + 50;
+			Point p = generatePosition(not_available);
 			for(int j=0; j<Settings.NB_TROUPE;j++) {
-				init_army[j] = new Piquier(pos_x, pos_y , duke);
+				init_army[j] = new Piquier(p.x, p.y , duke);
 			}
-			c = new Castle(pos_x , pos_y , 
-					duke, 1000, init_army, Orientation.E, new Factory());
-			
-			//c.getView().setOnContextMenuRequested(e -> {c.showMenu();});
-			
+			c = new Castle(p.x , p.y , 
+					duke, 1000, init_army, Orientation.E, new Factory());			
 			castles[i] = c;		
-		}		
+		}
+	}
+	
+	/**
+	 * Generate a point to be used for the position of a castle.
+	 * The point is chosen from the available positions in the Kingdom and then update the
+	 * table given in argument to tell which positions are unavailable.
+	 * @param not_available A table of size Width x Height describing which points are not available (true when unavailable, false when it is)
+	 * @return The generated points.
+	 */
+	private Point generatePosition(boolean[][] not_available) {
+		int w = (int) Settings.SCENE_WIDTH-100;
+		int h = (int) Settings.SCENE_HEIGHT-100;
+		int x = rand.nextInt(w), y = rand.nextInt(h);
+		int maj = Settings.DIST_CASTLE;
+
+		while(not_available[x][y]) {
+			x = rand.nextInt(w);
+			y = rand.nextInt(h);
+		}
+		for(int i=x-maj>0?(x-maj):0; i<(x+maj<w?x+maj:w); i++) {
+			for(int j=y-maj>0?(y-maj):0; j<(y+maj<h?y+maj:h); j++) {
+				not_available[i][j] = true;
+			}
+		}				
+		
+		return new Point(x,y);
 	}
 	
 	public Player update() {
@@ -61,8 +92,6 @@ public class Kingdom {
 				players.remove(p);
 				System.out.println(p.getName()+" is no more.");
 			}
-
-		
 		return null;
 	}
 	
