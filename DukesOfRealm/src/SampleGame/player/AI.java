@@ -50,6 +50,7 @@ public class AI extends Player {
 			}
 	}
 	
+	@Override
 	public ContextMenu giveMenu(Castle castle) {
 		ContextMenu menu = new ContextMenu();
 		MenuItem info = new MenuItem();

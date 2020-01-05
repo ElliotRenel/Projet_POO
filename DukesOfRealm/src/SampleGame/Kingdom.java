@@ -26,35 +26,39 @@ public class Kingdom {
 			Settings.CastleImages[i] = new Image(getClass().getResource("/images/Castle"+ i + ".png").toExternalForm() , 60, 60, true, true);
 		}
 		
+		Settings.CastlePlayer = new Image(getClass().getResource("/images/CastlePlayer.png").toExternalForm() , 60, 60, true, true);
 		Settings.PiquierImage = new Image(getClass().getResource("/images/Piquier.png").toExternalForm(), 10 , 10, false, true);
 		Settings.ChevalierImage = new Image(getClass().getResource("/images/Chevalier.png").toExternalForm(), 10 , 10, false, true);
 		Settings.OnagreImage = new Image(getClass().getResource("/images/Onagre.png").toExternalForm(), 10 , 10, false, true);
 		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), 60 , 25, false, true);
 		Settings.field = field;	
 		
-		generateCastles();
+		Queue<Player> tmp = new LinkedList<Player>();
+		
+		Player human = new Human("Gaspare");
+		human.setCastleImageAndColor(Settings.CastlePlayer);
+		players.add(human); tmp.add(human);
+		for(int i=0; i<Settings.NB_AI; i++) {
+			Player duke = new AI(Settings.DUKES[i]);
+			duke.setCastleImageAndColor(Settings.CastleImages[i+1]);
+			players.add(duke); tmp.add(duke);
+		}
+		generateCastles(tmp);
 	}
 	
 	/**
 	 * Generate all castles in the Kingdom.
 	 */
-	private void generateCastles() {
+	private void generateCastles(Queue<Player> players) {
 		boolean[][] not_available = new boolean[(int) (Settings.SCENE_WIDTH-100)][(int) (Settings.SCENE_HEIGHT-100)];
 		for(int i=0; i<Settings.NB_CASTLE; i++) {
 			Castle c;
 			Player duke = new VoidPlayer();
-			Soldier[] init_army = new Soldier[Settings.NB_TROUPE];
-			if(i<Settings.NB_DUKES) {
-				duke = new AI(Settings.DUKES[i]);
-				duke.setCastleImageAndColor(Settings.CastleImages[i+1]);
-				players.add(duke);
-			}
+			if(!players.isEmpty())
+				duke = players.remove();
 			Point p = generatePosition(not_available);
-			for(int j=0; j<Settings.NB_TROUPE;j++) {
-				init_army[j] = new Piquier(p.x, p.y , duke);
-			}
 			c = new Castle(p.x , p.y , 
-					duke, 1000, init_army, Orientation.E, new Factory());			
+					duke, 1000,  Orientation.E, new Factory());			
 			castles[i] = c;		
 		}
 	}

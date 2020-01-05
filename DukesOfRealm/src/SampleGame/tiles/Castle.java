@@ -58,7 +58,7 @@ public class Castle extends Sprite{
 	 * 
 	 **/
 	
-	public Castle(int x, int y, Player owner, int treasure, Soldier[] initial_army, Orientation door, Factory fact) {		
+	public Castle(int x, int y, Player owner, int treasure, Orientation door, Factory fact) {		
 		super(Settings.field, owner.getCastleImage(), x, y );
 		this.owner = owner;
 		owner.addCastle(this);
@@ -68,8 +68,6 @@ public class Castle extends Sprite{
 		army.put(SoldierType.P, new LinkedList<Soldier>());
 		army.put(SoldierType.C, new LinkedList<Soldier>());
 		army.put(SoldierType.O, new LinkedList<Soldier>());
-		for(Soldier s : initial_army)
-			addToArmy(s);
 		this.door = door;
 		
 		
@@ -275,7 +273,6 @@ public class Castle extends Sprite{
 	 * is owned by an opponent.
 	 */
 	public void showMenu(ContextMenuEvent event) {
-		this.printStatus();
 		(owner.giveMenu(this)).show(this.layer,event.getScreenX(),event.getScreenY());
 	}	
 	

@@ -15,17 +15,14 @@ public class Settings {
 	public static final double STATUS_BAR_HEIGHT = 50;
 	public static final int ROUND_TIME = 50;
 	
-	public static final int NB_CASTLE = 6;
-	public static final int NB_DUKES = 3;
-	public static final int NB_TROUPE = 10;
+	public static final int NB_CASTLE = 10;
+	public static final int NB_AI = 3;
 	public static final String[] DUKES = {"De Valois","De Bougogne","Du Chatelait"};
 	
 	public static final int DIST_CASTLE = 150;
 	
-	public static Image CastleImages[] = new Image[6];
-	
-	//public static Image CastleImage;
-	
+	public static Image CastleImages[] = new Image[5];
+	public static Image CastlePlayer;
 	public static Image PiquierImage;
 	public static Image ChevalierImage;
 	public static Image OnagreImage;
