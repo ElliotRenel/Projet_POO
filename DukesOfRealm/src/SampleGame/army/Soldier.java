@@ -1,11 +1,16 @@
 package SampleGame.army;
 
+import javafx.scene.paint.Color;
+
 import SampleGame.Kingdom;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.player.Player;
 import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 
 /**
  * Class used to represent different type of soldiers into one class.
@@ -41,8 +46,26 @@ public class Soldier extends Sprite{
 	 * @param damage Damage dealt upon attack
 	 * 
 	 */
-	public Soldier(Image image, int x, int y) {
+	public Soldier(Image image, int x, int y, Player owner) {
 		super(Settings.field, image, x, y);
+		
+		int height = (int)image.getHeight();
+		int width = (int)image.getWidth();
+		
+		WritableImage personalized_soldier = new WritableImage(width, height);
+		
+		PixelReader pixRd = image.getPixelReader();
+		PixelWriter pixWr = personalized_soldier.getPixelWriter();
+		for(int j=0; j<height; j++) {
+			for(int i=0; i<width; i++) {
+				if((pixRd.getColor(i, j).equals(Color.BLACK))) {
+					pixWr.setColor(i, j, owner.getColor());
+				}
+			}
+		}
+		
+		this.changeImage(personalized_soldier);
+		
 		
 		removeFromLayer();
 		dx = 0; dy = 0;		

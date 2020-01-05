@@ -21,7 +21,7 @@ public class Piquier extends Soldier {
 	 * @param duke The Piquier's owner name
 	 */
 	public Piquier(int x, int y, Player owner) {
-		super(Settings.PiquierImage, x, y);
+		super(Settings.PiquierImage, x, y, owner);
 		
 		this.owner = owner;
 		this.speed = 2;
@@ -40,7 +40,7 @@ public class Piquier extends Soldier {
 	 * @param home The soldier's home
 	 */
 	public Piquier(Castle home) {
-		super(Settings.PiquierImage, home.getX(),home.getY());
+		super(Settings.PiquierImage, home.getX(),home.getY(), home.getOwner());
 		
 		this.owner = home.getOwner();
 		this.speed = 2;

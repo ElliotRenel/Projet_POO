@@ -5,6 +5,7 @@ import SampleGame.Settings;
 import SampleGame.army.*;
 import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
@@ -25,6 +26,7 @@ public class Player {
 	protected Queue<Soldier> moving_soldiers;
 	protected Player_Type type;
 	protected Image castleImage;
+	protected Color playerColor;
 	
 	/**
 	 * Class constructor.
@@ -65,6 +67,7 @@ public class Player {
 		this.owned_castle = new LinkedList<Castle>();
 		this.moving_soldiers = new LinkedList<Soldier>();
 		this.castleImage = Settings.CastleImages[0];
+		this.playerColor = Color.BLACK;
 		
 	}
 	
@@ -81,8 +84,15 @@ public class Player {
 		return castleImage;
 	}
 	
-	public void setCastleImage(Image castleImage) {
+	public void setCastleImageAndColor(Image castleImage) {
 		this.castleImage = castleImage;
+		PixelReader pixRd = castleImage.getPixelReader();
+		playerColor = pixRd.getColor(30, 25);
+			
+	}
+	
+	public Color getColor() {
+		return playerColor;
 	}
 	
 	/**
