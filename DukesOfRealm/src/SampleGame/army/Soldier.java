@@ -58,7 +58,7 @@ public class Soldier extends Sprite{
 		PixelWriter pixWr = personalized_soldier.getPixelWriter();
 		for(int j=0; j<height; j++) {
 			for(int i=0; i<width; i++) {
-				if((pixRd.getColor(i, j).equals(Color.BLACK))) {
+				if(!(pixRd.getColor(i, j).equals(Color.web("0x00000000")))) {
 					pixWr.setColor(i, j, owner.getColor());
 				}
 			}
