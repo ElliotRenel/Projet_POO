@@ -1,9 +1,6 @@
 package SampleGame;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 import SampleGame.player.Human;
 import SampleGame.player.Player;
@@ -87,7 +84,8 @@ public class Main extends Application {
 	 * Allows to load game parameters and initialize the game
 	 */
 	private void loadGame() {
-		createKingdom();
+		if(kingdom==null)
+			createKingdom();
 		createStatusBar();
 
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -112,6 +110,16 @@ public class Main extends Application {
 						e.printStackTrace();
 					}
 					break;
+				case "L":
+					try {
+						loadKingdom();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch(ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					
+					break;
 				default:
 					System.out.println(key);
 					break;
@@ -134,6 +142,16 @@ public class Main extends Application {
 	    ObjectOutputStream oos = new ObjectOutputStream(fos);
 	    oos.writeObject(kingdom);
 	    oos.close();
+	}
+	
+	private static void loadKingdom() throws IOException, ClassNotFoundException {
+		FileInputStream fis = new FileInputStream("t.tmp");
+	    ObjectInputStream ois = new ObjectInputStream(fis);
+	    
+	    kingdom = (Kingdom)ois.readObject();
+	    
+	    ois.close();
+	 
 	}
 
 	/**
