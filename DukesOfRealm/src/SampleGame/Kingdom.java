@@ -1,7 +1,6 @@
 package SampleGame;
 
 import SampleGame.army.*;
-import SampleGame.army.soldiers.Piquier;
 import SampleGame.player.*;
 import SampleGame.player.Player.PlayerType;
 import SampleGame.tiles.Castle;

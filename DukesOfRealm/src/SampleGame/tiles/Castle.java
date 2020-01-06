@@ -198,7 +198,6 @@ public class Castle extends Sprite{
 	 */
 	public void getAttacked(Soldier s) {
 		if(this.noMoreArmy()) {
-			System.out.println("Changement commence");
 			this.owner.removeCastle(this);
 			this.owner = s.getOwner();
 			addToArmy(s);
@@ -209,7 +208,6 @@ public class Castle extends Sprite{
 			this.owner.addCastle(this);
 			this.fact.resetFactory();
 			this.changeImage(owner.getCastleImage());
-			System.out.println("Changement fini");
 		}else {
 			Soldier challenger = this.chooseChallenger();
 			while(s.attackSoldier(challenger) && !this.noMoreArmy()) {
@@ -274,6 +272,7 @@ public class Castle extends Sprite{
 		if(current_order!=null){
 			if (current_order.getTroops()!=0) {
 				for(int i=0; i<3 && current_order.getTroops()>0 && !army.get(current_order.getType()).isEmpty();i++, current_order.sendTroops()) {
+					//System.out.println("Sending Troops "+this.getNbTroupe(current_order.getType()));
 					Soldier s = removeFromArmy(current_order.getType());
 					owner.addToMovingArmy(s);
 					s.executeOrder66(current_order.getTarget());
@@ -322,21 +321,6 @@ public class Castle extends Sprite{
 	 */
 	public void setLevel(int level) {
 		this.level = level;
-	}
-
-
-	/**
-	 * Prints the status of a castle in the console
-	 */
-	public void printStatus() {
-		System.out.println("Owner : "+owner.getName()+"\n"
-				+ "Treasure : "+treasure+"\n"
-				+ "Army count : \n"
-				+ "\t> Stinger : "+getNbTroupe(SoldierType.P)+"\n"
-				+ "\t> Knights : "+getNbTroupe(SoldierType.C)+"\n"
-				+ "\t> Onagra : "+getNbTroupe(SoldierType.O)+"\n"
-				+ "Current round : "+Settings.NB_CURRENT_ROUND+"\n");
-		
 	}
 	
 	/**
