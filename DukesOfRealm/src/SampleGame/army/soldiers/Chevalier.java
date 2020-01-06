@@ -7,16 +7,19 @@ import SampleGame.tiles.Castle;
 import javafx.scene.layout.Pane;
 
 public class Chevalier extends Soldier {
-	public static int COST = 500;
+	public static final int COST = 500;
+	public static final int HEALTH = 3;
+	public static final int DAMAGE = 5;
+	
 	
 	public Chevalier(Pane layer, int x, int y, Player owner) {
 		super(Settings.ChevalierImage, x, y, owner);
 		
 		this.owner = owner;
 		this.speed = 4;
-		this.health = 3;
-		this.damage = 5;
-		this.cost = 500;
+		this.health = HEALTH;
+		this.damage = DAMAGE;
+		this.cost = COST;
 		this.time_prod = 20;
 		this.type = SoldierType.C;
 	}
@@ -28,7 +31,7 @@ public class Chevalier extends Soldier {
 		this.speed = 6;
 		this.health = 3;
 		this.damage = 5;
-		this.cost = 500;
+		this.cost = COST;
 		this.time_prod = 20;
 		this.type = SoldierType.C;
 	}

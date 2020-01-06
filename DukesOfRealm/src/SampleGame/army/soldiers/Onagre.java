@@ -8,15 +8,17 @@ import javafx.scene.layout.Pane;
 
 public class Onagre extends Soldier {
 
-	public static int COST = 1000;
+	public static final int COST = 1000;
+	public static final int HEALTH = 5;
+	public static final int DAMAGE = 10;
 	
 	public Onagre(Pane layer, int x, int y, Player owner) {
 		super(Settings.OnagreImage, x, y, owner);
 		
 		this.owner = owner;
-		this.speed = 1;
-		this.health = 5;
-		this.damage = 10;
+		this.speed = COST;
+		this.health = HEALTH;
+		this.damage = DAMAGE;
 		this.cost = 1000;
 		this.time_prod = 50;
 		this.type = SoldierType.O;

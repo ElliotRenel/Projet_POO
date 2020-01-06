@@ -53,7 +53,7 @@ public class AI extends Player {
 			if(n>0)
 				castle.produceArmy(t, rand.nextInt(n));
 		}
-		if(randomizer<0.2) {
+		if(randomizer<-0.99) {
 			SoldierType t = SoldierType.values()[rand.nextInt(3)];
 			if(!castle.noMoreArmy() && rand.nextBoolean()) {
 				while(castle.getNbTroupe(t)==0)

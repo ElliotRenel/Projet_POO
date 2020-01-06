@@ -6,6 +6,9 @@ import SampleGame.Kingdom;
 import SampleGame.Main;
 import SampleGame.Settings;
 import SampleGame.Sprite;
+import SampleGame.army.soldiers.Chevalier;
+import SampleGame.army.soldiers.Onagre;
+import SampleGame.army.soldiers.Piquier;
 import SampleGame.player.Player;
 import SampleGame.tiles.Castle;
 import javafx.scene.image.Image;
@@ -144,10 +147,8 @@ public class Soldier extends Sprite{
 			damage_left--;
 		}
 		this.damage = damage_left;
-		return this.health==0?false:true;
+		return this.damage==0?false:true;
 	}
-	
-
 
 	/**
 	 * Loose health according to the amount of damage dealt

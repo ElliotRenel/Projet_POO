@@ -12,7 +12,9 @@ import SampleGame.tiles.Castle;
  */
 public class Piquier extends Soldier {
 	
-	public static int COST = 100;
+	public static final int COST = 100;
+	public static final int HEALTH = 1;
+	public static final int DAMAGE = 1;
 	
 	/**
 	 * Piquier constructor with the corresponding speeds/health/...
@@ -27,9 +29,9 @@ public class Piquier extends Soldier {
 		
 		this.owner = owner;
 		this.speed = 2;
-		this.health = 1;
-		this.damage = 1;
-		this.cost = 100;
+		this.health = HEALTH;
+		this.damage = DAMAGE;
+		this.cost = COST;
 		this.time_prod = 5;
 		this.type = SoldierType.P;
 		
