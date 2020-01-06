@@ -182,6 +182,10 @@ public class Castle extends Sprite{
 			this.owner.removeCastle(this);
 			this.owner = s.getOwner();
 			addToArmy(s);
+
+			s.setX(this.getDoorImg().getX_out());
+			s.setY(this.getDoorImg().getY_out());
+			
 			this.owner.addCastle(this);
 			this.fact.resetFactory();
 			this.changeImage(owner.getCastleImage());
