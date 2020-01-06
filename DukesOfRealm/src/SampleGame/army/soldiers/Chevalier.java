@@ -20,7 +20,7 @@ public class Chevalier extends Soldier {
 		this.type = SoldierType.C;
 	}
 	
-	public Chevalier(Pane layer, Castle home) {
+	public Chevalier(Castle home) {
 		super(Settings.PiquierImage, home.getX(), home.getY(), home.getOwner());
 		
 		this.owner = home.getOwner();

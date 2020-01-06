@@ -5,6 +5,7 @@ import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
 import SampleGame.army.Soldier.SoldierType;
+import SampleGame.army.soldiers.*;
 import SampleGame.player.*;
 import SampleGame.player.Player.PlayerType;
 import javafx.event.EventHandler;
@@ -71,11 +72,16 @@ public class Castle extends Sprite{
 		army.put(SoldierType.O, new LinkedList<Soldier>());
 		this.door = door;
 		
-		
-		
 		this.fact = fact;
 		this.orders = new LinkedList<Order>();
 		this.current_order = null;
+		
+		this.getView().setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+            @Override
+            public void handle(ContextMenuEvent event) {
+            	showMenu(event);
+            }
+        });
 	}
 	
 		
@@ -265,8 +271,24 @@ public class Castle extends Sprite{
 	 * @param type The soldier you want to train
 	 * @param quantity The quantity of this specific soldiers you want to train
 	 */
-	public void produceArmy(Soldier type, int quantity) {
-		fact.addTraining(type, quantity);
+	public void produceArmy(SoldierType type, int quantity) {
+		Soldier soldier;
+		switch (type) {
+		case P:
+			soldier = new Piquier(this);
+			break;
+		case C:
+			soldier = new Chevalier(this);
+			break;
+		case O:
+			soldier = new Onagre(this);
+			break;
+		default:
+			soldier = null;
+			break;
+		}
+		if(soldier!=null)
+			fact.addTraining(soldier, quantity);
 	}
 	
 	/**
@@ -274,8 +296,6 @@ public class Castle extends Sprite{
 	 * is owned by an opponent.
 	 */
 	public void showMenu(ContextMenuEvent event) {
-		if(owner.getType()==PlayerType.H)
-			Main.pause();
 		(owner.giveMenu(this)).show(this.layer,event.getScreenX(),event.getScreenY());
 	}	
 	
@@ -299,8 +319,6 @@ public class Castle extends Sprite{
 		addToArmy();
 		
 		executeOrder();
-		
-		updateUI();
 		
 		treasure += 10;
 		

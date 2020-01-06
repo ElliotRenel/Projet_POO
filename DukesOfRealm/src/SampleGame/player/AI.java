@@ -39,14 +39,16 @@ public class AI extends Player {
 		if(!owned_castle.isEmpty())
 			for(Castle c : owned_castle) {
 				c.updateRound();
+				/*
 				if(Settings.NB_CURRENT_ROUND%100 == 1)
-					c.produceArmy(new Piquier(c), 100);
+					c.produceArmy(SoldierType.values()[rand.nextInt(3)], 100);
 				if(Settings.NB_CURRENT_ROUND!=0 && Settings.NB_CURRENT_ROUND%100==0) {
 					Castle cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
 						while(isMine(cible))
 							cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
 						c.giveOrder(new Order(cible,c.getNbTroupe(SoldierType.P)-1,SoldierType.P));
 				}
+				*/
 			}
 	}
 	

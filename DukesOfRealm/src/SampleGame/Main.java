@@ -25,7 +25,7 @@ public class Main extends Application {
 	private Pane playfieldLayer;
 
 	//HUD
-	private Text scoreMessage = new Text();
+	private Text round = new Text();
 
 	//Things
 	private Scene scene;
@@ -34,8 +34,6 @@ public class Main extends Application {
 	
 	private boolean pause = false;	
 	private boolean released = false;
-	
-	Label round;
 	
 	Group root;
 	
@@ -112,9 +110,6 @@ public class Main extends Application {
 				}				
 			}
 		});
-		
-		round = new Label();
-		playfieldLayer.getChildren().add(round);
 	}
 
 	/**
@@ -125,7 +120,7 @@ public class Main extends Application {
 	public void createStatusBar() {
 		HBox statusBar = new HBox();
 		//scoreMessage.setText("Score : 0          Life : " + player.getHealth());
-		statusBar.getChildren().addAll(scoreMessage);
+		statusBar.getChildren().addAll(round);
 		statusBar.getStyleClass().add("statusBar");
 		//statusBar.relocate(0, Settings.SCENE_HEIGHT);
 		//statusBar.setPrefSize(Settings.SCENE_WIDTH, Settings.STATUS_BAR_HEIGHT);

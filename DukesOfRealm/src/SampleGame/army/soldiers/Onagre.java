@@ -20,7 +20,7 @@ public class Onagre extends Soldier {
 		this.type = SoldierType.O;
 	}
 	
-	public Onagre(Pane layer, Castle home) {
+	public Onagre(Castle home) {
 		super(Settings.PiquierImage, home.getX(), home.getY(),home.getOwner());
 		
 		this.owner = home.getOwner();
