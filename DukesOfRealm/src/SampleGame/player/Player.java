@@ -3,8 +3,10 @@ package SampleGame.player;
 
 import SampleGame.Settings;
 import SampleGame.army.*;
+import SampleGame.army.Soldier.SoldierType;
 import SampleGame.tiles.Castle;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
@@ -163,6 +165,22 @@ public class Player {
 	 */
 	public ContextMenu giveMenu(Castle castle) {
 		return null;
+	}
+	
+
+	public ContextMenu giveMenuInfo(Castle castle) {
+		ContextMenu menu = new ContextMenu();
+		MenuItem infos = new MenuItem();		
+		infos.setText("Owner : "+name+"\n"
+        	+ "Treasure : "+castle.getTreasure()+"\n"
+        	+ "Castle Level :"+castle.getLevel()+" ("+castle.getLevel()*10+" coins per round)\n"
+        	+ "Army count : \n"
+        	+ "\t> Stinger : "+castle.getNbTroupe(SoldierType.P)+"\n"
+        	+ "\t> Knights : "+castle.getNbTroupe(SoldierType.C)+"\n"
+        	+ "\t> Onagra : "+castle.getNbTroupe(SoldierType.O)+"\n"
+        );
+		menu.getItems().add(infos);
+		return menu;
 	}
 	
 	/**

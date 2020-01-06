@@ -86,7 +86,7 @@ public abstract class Sprite {
         y += dy;
     }
 
-    protected ImageView getView() {
+    public ImageView getView() {
         return imageView;
     }
     

@@ -1,5 +1,6 @@
 package SampleGame;
 
+import SampleGame.player.Human;
 import SampleGame.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -63,8 +64,7 @@ public class Main extends Application {
 		gameLoop = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				
-				
+
 				if(!pause){
 					try {
 						update();
@@ -173,7 +173,6 @@ public class Main extends Application {
 			gameOver(p);
 		Thread.sleep(Settings.ROUND_TIME);
 	}
-
 	
 	/**
 	 * Allows to launch an applications with arguments 

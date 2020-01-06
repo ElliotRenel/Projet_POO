@@ -328,9 +328,38 @@ public class Castle extends Sprite{
 		(owner.giveMenu(this)).show(this.layer,event.getScreenX(),event.getScreenY());
 	}	
 	
+
+	public void showInfo(MouseEvent event) {
+		(owner.giveMenuInfo(this)).show(this.layer,event.getScreenX(),event.getScreenY());
+	}
+	
 	public void sendArmy() {
+		((Human)owner).sendArmy(this);
+	}
+	
+	public void setYourselfAsTarget(Human player) {
+		Castle me = this;
+		this.getView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				switch (event.getButton().toString()) {
+				case "SECONDARY":
+					showInfo(event);
+					break;
+				case "PRIMARY":
+					player.targetAcquired(me,event);
+					break;
+				default:
+					break;
+				}
+				
+			}
+			
+		});
 		
 	}
+	
 	@Override
 	public void updateUI() {
 		super.updateUI();
