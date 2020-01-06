@@ -34,7 +34,7 @@ public class Castle extends Sprite{
 	}
 	
 	private Player owner;
-	private int treasure;
+	private int treasure, level;
 	private Hashtable<SoldierType, Queue<Soldier>> army;
 	private Queue<Order> orders;
 	private Order current_order;
@@ -47,13 +47,10 @@ public class Castle extends Sprite{
 	 * 
 	 * Creates a new castle in the layer.
 	 * 
-	 * @param layer The global visual window
-	 * @param image	The image of the Castle
 	 * @param x	The x coordinate of the castle in the window
 	 * @param y The y coordinate of the castle in the window
-	 * @param duke_owner The player who owns the castle
+	 * @param owner The player who owns the castle
 	 * @param treasure The base money for the castle
-	 * @param initial_army The army wanted in the castle
 	 * @param door	The orientation of the exit
 	 * @param fact The class who allows production @see Factory.java
 	 * @return A new castle printed on the window
@@ -75,6 +72,7 @@ public class Castle extends Sprite{
 		this.fact = fact;
 		this.orders = new LinkedList<Order>();
 		this.current_order = null;
+		this.level = 1;
 		
 		this.getView().setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
@@ -233,6 +231,22 @@ public class Castle extends Sprite{
 		return this.owner;
 	}
 
+	/**
+	 * Getter for Castle level
+	 * @return The current castle level
+	 */
+	public int getLevel() {
+		return level;
+	}
+
+	/**
+	 * Setter for Castle level
+	 * @param level The level to set the castle
+	 */
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 
 	/**
 	 * Prints the status of a castle in the console
@@ -320,7 +334,7 @@ public class Castle extends Sprite{
 		
 		executeOrder();
 		
-		treasure += 10;
+		treasure += level*10;
 		
 	}
 	

@@ -17,16 +17,16 @@ public class PlayerMenu extends ContextMenu {
 	public PlayerMenu(Castle castle) {
 		this.castle = castle;
 		this.owner = (Human)castle.getOwner();
-		Menu infos = new Menu("Show my infos");
-		MenuItem inf_item = new MenuItem();
+		MenuItem infos = new MenuItem();
         		
-        inf_item.setText("Treasure : "+castle.getTreasure()+"\n"
+		infos.setText("Owner : You\n"
+        	+ "Treasure : "+castle.getTreasure()+"\n"
+        	+ "Castle Level :"+castle.getLevel()+" ("+castle.getLevel()*10+" coins per round)\n"
         	+ "Army count : \n"
         	+ "\t> Stinger : "+castle.getNbTroupe(SoldierType.P)+"\n"
         	+ "\t> Knights : "+castle.getNbTroupe(SoldierType.C)+"\n"
-        	+ "\t> Onagra : "+castle.getNbTroupe(SoldierType.O)+"\n");
-            	
-        infos.getItems().add(inf_item);
+        	+ "\t> Onagra : "+castle.getNbTroupe(SoldierType.O)+"\n"
+        );
 
 		Menu army = new Menu("Produce Army");
 		
