@@ -57,6 +57,8 @@ public class Main extends Application {
 		primaryStage.setResizable(false);
 		primaryStage.show();
 
+		
+		
 		// create layers
 		playfieldLayer = new Pane();
 		root.getChildren().add(playfieldLayer);
@@ -87,6 +89,7 @@ public class Main extends Application {
 		if(kingdom==null)
 			createKingdom();
 		createStatusBar();
+		createMenuBar();
 
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -161,12 +164,16 @@ public class Main extends Application {
 	
 	public void createStatusBar() {
 		HBox statusBar = new HBox();
-		//scoreMessage.setText("Score : 0          Life : " + player.getHealth());
 		statusBar.getChildren().addAll(round);
 		statusBar.getStyleClass().add("statusBar");
-		//statusBar.relocate(0, Settings.SCENE_HEIGHT);
+		statusBar.relocate(0, 25);
 		//statusBar.setPrefSize(Settings.SCENE_WIDTH, Settings.STATUS_BAR_HEIGHT);
 		root.getChildren().add(statusBar);
+	}
+	
+	public void createMenuBar() {
+		MenuB menuBar = new MenuB();
+		root.getChildren().add(menuBar);
 	}
 
 	/**
@@ -178,8 +185,7 @@ public class Main extends Application {
 
 	
 	/**
-	 * TO BE IMPLEMENTED
-	 * Quits the game when the player has won or lose
+	 * Quits the game when only one player is alive and holds at least one castle
 	 */
 	private void gameOver(Player p) {
 		p.won();
@@ -189,6 +195,7 @@ public class Main extends Application {
 		Text message = new Text();
 		message.getStyleClass().add("message");
 		message.setText(p.getName()+" has won !\nGame Over !");
+		hbox.relocate(0,40);
 		hbox.getChildren().add(message);
 		root.getChildren().add(hbox);
 		gameLoop.stop();
