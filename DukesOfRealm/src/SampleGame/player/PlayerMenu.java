@@ -1,6 +1,7 @@
 package SampleGame.player;
 
 import SampleGame.Main;
+import SampleGame.Settings;
 import SampleGame.army.Soldier.SoldierType;
 import SampleGame.tiles.Castle;
 import javafx.event.ActionEvent;
@@ -22,7 +23,7 @@ public class PlayerMenu extends ContextMenu {
 		MenuItem infos = new MenuItem();		
 		infos.setText("Owner : You\n"
         	+ "Treasure : "+castle.getTreasure()+"\n"
-        	+ "Castle Level :"+castle.getLevel()+" ("+castle.getLevel()*10+" coins per round)\n"
+        	+ "Castle Level :"+castle.getLevel()+" ("+castle.getLevel()*Settings.CASTLE_REVENUE+" coins per round)\n"
         	+ "Army count : \n"
         	+ "\t> Stinger : "+castle.getNbTroupe(SoldierType.P)+"\n"
         	+ "\t> Knights : "+castle.getNbTroupe(SoldierType.C)+"\n"

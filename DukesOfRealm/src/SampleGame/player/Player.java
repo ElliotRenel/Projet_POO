@@ -173,7 +173,7 @@ public class Player {
 		MenuItem infos = new MenuItem();		
 		infos.setText("Owner : "+name+"\n"
         	+ "Treasure : "+castle.getTreasure()+"\n"
-        	+ "Castle Level :"+castle.getLevel()+" ("+castle.getLevel()*10+" coins per round)\n"
+        	+ "Castle Level :"+castle.getLevel()+" ("+castle.getLevel()*Settings.CASTLE_REVENUE+" coins per round)\n"
         	+ "Army count : \n"
         	+ "\t> Stinger : "+castle.getNbTroupe(SoldierType.P)+"\n"
         	+ "\t> Knights : "+castle.getNbTroupe(SoldierType.C)+"\n"

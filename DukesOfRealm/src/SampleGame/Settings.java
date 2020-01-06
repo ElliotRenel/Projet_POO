@@ -18,6 +18,7 @@ public class Settings {
 	public static final int NB_CASTLE = 10;
 	public static final int NB_AI = 3;
 	public static final String[] DUKES = {"De Valois","De Bougogne","Du Chatelait"};
+	public static final int CASTLE_REVENUE = 75;
 	
 	public static final int DIST_CASTLE = 150;
 	

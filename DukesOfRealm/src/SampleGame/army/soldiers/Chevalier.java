@@ -12,7 +12,7 @@ public class Chevalier extends Soldier {
 		super(Settings.ChevalierImage, x, y, owner);
 		
 		this.owner = owner;
-		this.speed = 6;
+		this.speed = 4;
 		this.health = 3;
 		this.damage = 5;
 		this.cost = 500;

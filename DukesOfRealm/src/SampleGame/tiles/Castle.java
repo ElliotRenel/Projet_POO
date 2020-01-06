@@ -473,7 +473,7 @@ public class Castle extends Sprite{
 		
 		executeOrder();
 		
-		treasure += level*10;
+		treasure += level*Settings.CASTLE_REVENUE;
 		
 	}
 

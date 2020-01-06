@@ -47,7 +47,7 @@ public class Factory {
 	 */
 	public void addTraining(Soldier type, int quantity) {
 		training_queue.add(new Pair<Soldier, Integer> (type,quantity));
-		if(current==null) {
+		if(current==null && !upgrade) {
 			this.nextTraining();
 		}
 	}
