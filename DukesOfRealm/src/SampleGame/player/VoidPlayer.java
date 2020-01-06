@@ -1,5 +1,7 @@
 package SampleGame.player;
 
+import java.util.Random;
+
 import SampleGame.tiles.Castle;
 
 /**
@@ -12,14 +14,14 @@ import SampleGame.tiles.Castle;
  *
  */
 public class VoidPlayer extends Player {
+	Random rand = new Random();
 	
 	public VoidPlayer() {
 		super();
 	}
 
 	public void generateRandomDifficulty(Castle c) {
-		// TODO Auto-generated method stub
-		
+		c.setLevel(rand.nextInt(3)+1);		
 	}
 
 }

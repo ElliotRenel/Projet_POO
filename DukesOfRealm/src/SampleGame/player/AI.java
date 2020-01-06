@@ -49,10 +49,13 @@ public class AI extends Player {
 		Double randomizer = rand.nextGaussian();
 		if(randomizer<0.3) {
 			SoldierType t = SoldierType.values()[rand.nextInt(3)];
-			if(!castle.noMoreArmy())
+			if(!castle.noMoreArmy() && rand.nextBoolean()) {
+				while(castle.getNbTroupe(t)==0)
+					t = SoldierType.values()[rand.nextInt(3)];
 				castle.giveOrder(new Order(Main.kingdom.castles[rand.nextInt(Settings.NB_CASTLE)],rand.nextInt(castle.getNbTroupe(t)),t));
-			else
-				castle.produceArmy(t, rand.nextInt(30));
+			}else {
+				castle.produceArmy(t, rand.nextInt(castle.howMuchICanMake(t)));
+			}
 		}
 	}
 }
