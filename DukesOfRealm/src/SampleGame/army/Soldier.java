@@ -136,14 +136,17 @@ public class Soldier extends Sprite{
 	 * @return True if the object who called the method wins, false if it is defeated
 	 */
 	public boolean attackSoldier(Soldier s) {
-		int s_damage = s.getDamage();
-		while(this.health!=0 && s.health!=0) {
-			this.takeDamage(s_damage);
-			s.takeDamage(this.damage);
+		int damage_left = this.getDamage();
+		while(damage_left !=0 && s.health!=0) {
+			s.takeDamage(1);
+			damage_left--;
 		}
+		this.damage = damage_left;
 		return this.health==0?false:true;
 	}
 	
+
+
 	/**
 	 * Loose health according to the amount of damage dealt
 	 * @param hitPoints The opponent's damage

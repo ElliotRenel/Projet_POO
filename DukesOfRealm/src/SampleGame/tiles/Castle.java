@@ -9,8 +9,10 @@ import SampleGame.army.soldiers.*;
 import SampleGame.player.*;
 import SampleGame.player.Player.PlayerType;
 import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
+import javafx.scene.transform.Rotate;
 
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -44,7 +46,8 @@ public class Castle extends Sprite{
 	private Queue<Order> orders;
 	private Order current_order;
 	@SuppressWarnings("unused")
-	private final Orientation door;						/* Not used*/
+	private final Orientation OrientationDoor;						/* Not used*/
+	private Door doorImg;
 	private Factory fact;
 	private Random rand = new Random();
 	
@@ -62,7 +65,7 @@ public class Castle extends Sprite{
 	 * 
 	 **/
 	
-	public Castle(int x, int y, Player owner, int treasure, Orientation door, Factory fact) {		
+	public Castle(int x, int y, Player owner, int treasure, Orientation OrientationDoor, Factory fact) {		
 		super(Settings.field, owner.getCastleImage(), x, y );
 		this.owner = owner;
 		owner.addCastle(this);
@@ -72,7 +75,37 @@ public class Castle extends Sprite{
 		army.put(SoldierType.P, new LinkedList<Soldier>());
 		army.put(SoldierType.C, new LinkedList<Soldier>());
 		army.put(SoldierType.O, new LinkedList<Soldier>());
-		this.door = door;
+		this.OrientationDoor = OrientationDoor;
+		
+		ImageView view_door;
+		
+		
+		switch(OrientationDoor) {
+		
+		case N:
+			this.setDoorImg(new Door(this.getX()+1, this.getY()-(2*Settings.height_DoorImage)-2));
+			break;
+			
+		case E:
+			this.setDoorImg(new Door(this.getX()+((int)this.getWidth()/2), this.getY()));
+			view_door = this.doorImg.getView();
+			view_door.setRotate(90);
+			break;
+			
+		case S:
+			this.setDoorImg(new Door(this.getX()+2, this.getY()+(2*Settings.height_DoorImage)+2));
+			view_door = this.doorImg.getView();
+			view_door.setRotate(180);
+			break;
+			
+		case W:
+			this.setDoorImg(new Door(this.getX()-((int)this.getWidth()/2), this.getY()));
+			view_door = this.doorImg.getView();
+			view_door.setRotate(270);
+			break;
+			
+		}
+		
 		
 		this.fact = fact;
 		fact.setCastle(this);
@@ -443,6 +476,16 @@ public class Castle extends Sprite{
 		
 		treasure += level*10;
 		
+	}
+
+
+	public Door getDoorImg() {
+		return doorImg;
+	}
+
+
+	public void setDoorImg(Door doorImg) {
+		this.doorImg = doorImg;
 	}
 	
 }

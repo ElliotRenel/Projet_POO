@@ -27,7 +27,13 @@ public class Settings {
 	public static Image ChevalierImage;
 	public static Image OnagreImage;
 	
+	
+	
 	public static Image DoorImage;
+	
+	public static int width_DoorImage = 20;
+	public static int height_DoorImage = 10;
+	
 	public static Pane field;
 	
 	public static int NB_CURRENT_ROUND = 0;
