@@ -8,10 +8,12 @@ import SampleGame.army.Soldier.SoldierType;
 import SampleGame.army.soldiers.*;
 import SampleGame.player.*;
 import SampleGame.player.Player.PlayerType;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -74,12 +76,7 @@ public class Castle extends Sprite{
 		this.current_order = null;
 		this.level = 1;
 		
-		this.getView().setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
-            @Override
-            public void handle(ContextMenuEvent event) {
-            	showMenu(event);
-            }
-        });
+		updateUI();
 	}
 	
 		
@@ -327,19 +324,40 @@ public class Castle extends Sprite{
 	 * Show castle menu when the castle owner is the player, only show information if the castle
 	 * is owned by an opponent.
 	 */
-	public void showMenu(ContextMenuEvent event) {
+	public void showMenu(MouseEvent event) {
 		(owner.giveMenu(this)).show(this.layer,event.getScreenX(),event.getScreenY());
 	}	
 	
+	public void sendArmy() {
+		
+	}
 	@Override
 	public void updateUI() {
 		super.updateUI();
-		this.getView().setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
-            @Override
-            public void handle(ContextMenuEvent event) {
-            	showMenu(event);
-            }
-        });
+		
+		this.getView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				switch (event.getButton().toString()) {
+				case "SECONDARY":
+					showMenu(event);
+					break;
+				case "PRIMARY":
+					if(owner.getType()==PlayerType.H) {
+						sendArmy();
+					};
+					break;
+				case "MIDDLE":
+					System.out.println("MIDDLE");
+					break;
+				default:
+					break;
+				}
+				
+			}
+			
+		});
 	}
 
 

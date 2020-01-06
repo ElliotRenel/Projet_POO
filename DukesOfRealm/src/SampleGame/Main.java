@@ -37,7 +37,7 @@ public class Main extends Application {
 	
 	Group root;
 	
-	Kingdom kingdom;
+	public static Kingdom kingdom;
 
 	@Override
 	/**

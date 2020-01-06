@@ -17,8 +17,9 @@ public class PlayerMenu extends ContextMenu {
 	public PlayerMenu(Castle castle) {
 		this.castle = castle;
 		this.owner = (Human)castle.getOwner();
-		MenuItem infos = new MenuItem();
-        		
+		
+		// Castle Infos
+		MenuItem infos = new MenuItem();		
 		infos.setText("Owner : You\n"
         	+ "Treasure : "+castle.getTreasure()+"\n"
         	+ "Castle Level :"+castle.getLevel()+" ("+castle.getLevel()*10+" coins per round)\n"
@@ -28,6 +29,8 @@ public class PlayerMenu extends ContextMenu {
         	+ "\t> Onagra : "+castle.getNbTroupe(SoldierType.O)+"\n"
         );
 
+		
+		// Produce Army
 		Menu army = new Menu("Produce Army");
 		
 		Menu piquier = new Menu("Piquier");
@@ -39,6 +42,7 @@ public class PlayerMenu extends ContextMenu {
 		assignProducer(onagre, SoldierType.O);
 		
 		army.getItems().addAll(piquier,chevalier,onagre);
+		
 		
 		this.getItems().addAll(infos,army);
 	}

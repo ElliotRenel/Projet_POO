@@ -3,6 +3,7 @@ package SampleGame.army;
 import javafx.scene.paint.Color;
 
 import SampleGame.Kingdom;
+import SampleGame.Main;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.player.Player;
@@ -116,7 +117,7 @@ public class Soldier extends Sprite{
 	public void arrivedCastle(Castle target) {
 		removeFromLayer();
 		moving = false;
-		if(target.getOwnerName()==this.owner.getName() || !Kingdom.players.contains(owner)) {
+		if(target.getOwnerName()==this.owner.getName() || !Main.kingdom.players.contains(owner)) {
 			target.addToArmy(this);
 			this.owner = target.getOwner();
 		}else {

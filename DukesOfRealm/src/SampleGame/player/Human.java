@@ -44,4 +44,8 @@ public class Human extends Player {
 		return menu;
 	}	
 	
+	public void sendArmy() {
+		
+	}
+	
 }

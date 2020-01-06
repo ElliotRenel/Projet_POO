@@ -15,8 +15,8 @@ import java.util.Random;
 
 
 public class Kingdom {
-	public static Castle[] castles = new Castle[Settings.NB_CASTLE];
-	public static Queue<Player> players = new LinkedList<Player>();
+	public Castle[] castles = new Castle[Settings.NB_CASTLE];
+	public Queue<Player> players = new LinkedList<Player>();
 	Random rand = new Random();
 	
 	public Kingdom(Pane field) {
