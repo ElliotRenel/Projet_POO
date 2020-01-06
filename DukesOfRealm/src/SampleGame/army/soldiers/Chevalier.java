@@ -7,6 +7,7 @@ import SampleGame.tiles.Castle;
 import javafx.scene.layout.Pane;
 
 public class Chevalier extends Soldier {
+	public static int COST = 500;
 	
 	public Chevalier(Pane layer, int x, int y, Player owner) {
 		super(Settings.ChevalierImage, x, y, owner);

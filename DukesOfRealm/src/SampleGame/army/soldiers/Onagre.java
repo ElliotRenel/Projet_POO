@@ -8,6 +8,8 @@ import javafx.scene.layout.Pane;
 
 public class Onagre extends Soldier {
 
+	public static int COST = 1000;
+	
 	public Onagre(Pane layer, int x, int y, Player owner) {
 		super(Settings.OnagreImage, x, y, owner);
 		

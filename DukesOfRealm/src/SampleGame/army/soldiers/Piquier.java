@@ -12,6 +12,8 @@ import SampleGame.tiles.Castle;
  */
 public class Piquier extends Soldier {
 	
+	public static int COST = 100;
+	
 	/**
 	 * Piquier constructor with the corresponding speeds/health/...
 	 * 

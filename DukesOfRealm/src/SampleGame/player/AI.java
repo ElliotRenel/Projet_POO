@@ -40,21 +40,29 @@ public class AI extends Player {
 		if(!owned_castle.isEmpty())
 			for(Castle c : owned_castle) {
 				c.updateRound();
-				if(rand.nextGaussian()>0.9)
+				if(rand.nextGaussian()>0.99)
 					decideWhatToDo(c);
 			}
 	}
 	
 	private void decideWhatToDo(Castle castle) {
 		Double randomizer = rand.nextGaussian();
-		if(randomizer<0.3) {
+		if(randomizer>0.65) {
+			SoldierType t = SoldierType.values()[rand.nextInt(3)];
+			int n = castle.howMuchICanMake(t);
+			if(n>0)
+				castle.produceArmy(t, rand.nextInt(n));
+		}
+		if(randomizer<0.2) {
 			SoldierType t = SoldierType.values()[rand.nextInt(3)];
 			if(!castle.noMoreArmy() && rand.nextBoolean()) {
 				while(castle.getNbTroupe(t)==0)
 					t = SoldierType.values()[rand.nextInt(3)];
 				castle.giveOrder(new Order(Main.kingdom.castles[rand.nextInt(Settings.NB_CASTLE)],rand.nextInt(castle.getNbTroupe(t)),t));
 			}else {
-				castle.produceArmy(t, rand.nextInt(castle.howMuchICanMake(t)));
+				int n = castle.howMuchICanMake(t);
+				if(n>0)
+					castle.produceArmy(t, rand.nextInt(n));
 			}
 		}
 	}

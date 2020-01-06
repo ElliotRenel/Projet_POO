@@ -231,6 +231,7 @@ public class Castle extends Sprite{
 	 * @param order The new order to assign
 	 */
 	public void giveOrder(Order order) {
+		if(order.getTarget()==this) return;
 		if(order.getTroops()<=getNbTroupe(order.getType())) {
 			this.orders.add(order);
 		}else {
@@ -489,6 +490,26 @@ public class Castle extends Sprite{
 
 	public void setDoorImg(Door doorImg) {
 		this.doorImg = doorImg;
+	}
+
+
+	public int howMuchICanMake(SoldierType t) {
+		int cost;
+		switch (t) {
+		case P:
+			cost = Piquier.COST;
+			break;
+		case C:
+			cost = Chevalier.COST;
+			break;
+		case O:
+			cost = Onagre.COST;
+			break;
+		default:
+			cost = 2147483647;
+			break;
+		}
+		return (int)(treasure/cost);
 	}
 	
 }
