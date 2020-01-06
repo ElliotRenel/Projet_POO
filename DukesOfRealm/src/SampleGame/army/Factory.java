@@ -27,7 +27,7 @@ public class Factory {
 	
 	
 	/**
-	 * Creates a new Factory to produce a new soldiers
+	 * Creates a new Factory to produce new soldier
 	 */
 	public Factory() {
 		nb_rounds = 0; 
@@ -52,6 +52,9 @@ public class Factory {
 		}
 	}
 	
+	/**
+	 * Adds an upgrade order to the factory
+	 */
 	public void upgradeCastle() {
 		training_queue.add(null);
 		if(current==null && !upgrade) {

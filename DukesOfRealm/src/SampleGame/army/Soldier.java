@@ -28,6 +28,11 @@ public class Soldier extends Sprite{
 	 */
 	private static final long serialVersionUID = -7254957642866153276L;
 
+	/**
+	 * Used to distinguish different soldiers
+	 * @author theod
+	 *
+	 */
 	public enum SoldierType{
 		P,
 		C,
@@ -45,14 +50,10 @@ public class Soldier extends Sprite{
 	 * 
 	 * Soldier constructor
 	 * 
-	 * @param layer The global visual window
 	 * @param image	The image of the Soldier
 	 * @param x	The x coordinate of the Soldier's castle in the window
 	 * @param y The y coordinate of the Soldier's castle in the window
-	 * @param duke_owner Owner of the Soldier's castle
-	 * @param speed Number of coordinates movement in one turn
-	 * @param health Number of hitpoints of the soldier
-	 * @param damage Damage dealt upon attack
+	 * @param owner Owner of the Soldier's castle
 	 * 
 	 */
 	public Soldier(Image image, int x, int y, Player owner) {
