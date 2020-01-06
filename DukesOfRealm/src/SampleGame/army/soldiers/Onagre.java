@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 public class Onagre extends Soldier {
 
 	public Onagre(Pane layer, int x, int y, Player owner) {
-		super(Settings.PiquierImage, x, y, owner);
+		super(Settings.OnagreImage, x, y, owner);
 		
 		this.owner = owner;
 		this.speed = 1;
@@ -21,7 +21,7 @@ public class Onagre extends Soldier {
 	}
 	
 	public Onagre(Castle home) {
-		super(Settings.PiquierImage, home.getX(), home.getY(),home.getOwner());
+		super(Settings.OnagreImage, home.getDoorImg().getX_out(), home.getDoorImg().getY_out(), home.getOwner());
 		
 		this.owner = home.getOwner();
 		this.speed = 1;

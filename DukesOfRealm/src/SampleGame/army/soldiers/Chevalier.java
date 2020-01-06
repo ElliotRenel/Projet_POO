@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 public class Chevalier extends Soldier {
 	
 	public Chevalier(Pane layer, int x, int y, Player owner) {
-		super(Settings.PiquierImage, x, y, owner);
+		super(Settings.ChevalierImage, x, y, owner);
 		
 		this.owner = owner;
 		this.speed = 6;
@@ -21,7 +21,7 @@ public class Chevalier extends Soldier {
 	}
 	
 	public Chevalier(Castle home) {
-		super(Settings.PiquierImage, home.getX(), home.getY(), home.getOwner());
+		super(Settings.ChevalierImage, home.getDoorImg().getX_out(), home.getDoorImg().getY_out(), home.getOwner());
 		
 		this.owner = home.getOwner();
 		this.speed = 6;

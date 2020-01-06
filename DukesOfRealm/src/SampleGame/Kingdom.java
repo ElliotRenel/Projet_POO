@@ -37,7 +37,7 @@ public class Kingdom implements Serializable{
 		Settings.PiquierImage = new Image(getClass().getResource("/images/Piquier.png").toExternalForm(), 10 , 10, false, true);
 		Settings.ChevalierImage = new Image(getClass().getResource("/images/Chevalier.png").toExternalForm(), 10 , 10, false, true);
 		Settings.OnagreImage = new Image(getClass().getResource("/images/Onagre.png").toExternalForm(), 10 , 10, false, true);
-		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), 60 , 25, false, true);
+		Settings.DoorImage = new Image(getClass().getResource("/images/Door_Castle.jpg").toExternalForm(), Settings.width_DoorImage , Settings.height_DoorImage, false, true);
 		Settings.field = field;	
 		
 		Queue<Player> tmp = new LinkedList<Player>();
@@ -64,8 +64,28 @@ public class Kingdom implements Serializable{
 			if(!players.isEmpty())
 				duke = players.remove();
 			Point p = generatePosition(not_available);
+			
+			Orientation oriCastle;
+			
+			switch(rand.nextInt(4)) {
+				case 0:
+					oriCastle = Orientation.N;
+					break;
+				case 1:
+					oriCastle = Orientation.W;
+					break;
+				case 2:
+					oriCastle = Orientation.S;
+					break;
+				case 3:
+					oriCastle = Orientation.E;
+					break;
+				default:
+					oriCastle = Orientation.N;
+			}
+			
 			c = new Castle(p.x , p.y , 
-					duke, 1000,  Orientation.E, new Factory());			
+					duke, 1000,  oriCastle, new Factory());			
 			castles[i] = c;		
 		}
 	}

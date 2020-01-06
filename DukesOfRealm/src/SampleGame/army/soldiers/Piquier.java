@@ -40,7 +40,7 @@ public class Piquier extends Soldier {
 	 * @param home The soldier's home
 	 */
 	public Piquier(Castle home) {
-		super(Settings.PiquierImage, home.getX(),home.getY(), home.getOwner());
+		super(Settings.PiquierImage, home.getDoorImg().getX_out(), home.getDoorImg().getY_out(), home.getOwner());
 		
 		this.owner = home.getOwner();
 		this.speed = 2;
