@@ -1,5 +1,10 @@
 package SampleGame;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 import SampleGame.player.Human;
 import SampleGame.player.Player;
 import javafx.animation.AnimationTimer;
@@ -82,14 +87,15 @@ public class Main extends Application {
 	 * Allows to load game parameters and initialize the game
 	 */
 	private void loadGame() {
-
 		createKingdom();
 		createStatusBar();
 
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				if(event.getCode().toString()=="P") {
+				String key =event.getCode().toString(); 
+				switch (key) {
+				case "SPACE":
 					if(!pause) {
 						pause = true;
 						pause();
@@ -98,6 +104,17 @@ public class Main extends Application {
 						released = false;
 						unpause();
 					}
+					break;
+				case "S":
+					try {
+						saveKingdom();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					break;
+				default:
+					System.out.println(key);
+					break;
 				}
 			}
 		});
@@ -105,11 +122,18 @@ public class Main extends Application {
 
 			@Override
 			public void handle(KeyEvent event) { 	
-				if(event.getCode().toString()=="P" && pause) {
+				if(event.getCode().toString()=="SPACE" && pause) {
 					released = true;
 				}				
 			}
 		});
+	}
+	
+	private static void saveKingdom() throws IOException {
+		FileOutputStream fos = new FileOutputStream("t.tmp");
+	    ObjectOutputStream oos = new ObjectOutputStream(fos);
+	    oos.writeObject(kingdom);
+	    oos.close();
 	}
 
 	/**

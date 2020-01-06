@@ -164,7 +164,7 @@ public class Player {
 	 * @return The ContextMenu object created to be used
 	 */
 	public ContextMenu giveMenu(Castle castle) {
-		return null;
+		return giveMenuInfo(castle);
 	}
 	
 

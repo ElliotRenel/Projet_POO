@@ -20,6 +20,11 @@ import javafx.scene.image.WritableImage;
  *
  */
 public class Soldier extends Sprite{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7254957642866153276L;
+
 	public enum SoldierType{
 		P,
 		C,

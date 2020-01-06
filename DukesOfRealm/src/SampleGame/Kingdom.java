@@ -9,12 +9,19 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
 
-public class Kingdom {
+public class Kingdom implements Serializable{
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1596994732184530591L;
 	public Castle[] castles = new Castle[Settings.NB_CASTLE];
 	public Queue<Player> players = new LinkedList<Player>();
 	Random rand = new Random();

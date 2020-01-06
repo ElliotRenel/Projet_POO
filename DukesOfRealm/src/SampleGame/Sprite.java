@@ -1,12 +1,19 @@
 package SampleGame;
 
+import java.io.Serializable;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public abstract class Sprite {
+public abstract class Sprite implements Serializable {
 
-    private ImageView imageView;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7177303647744304431L;
+
+	private ImageView imageView;
 
     protected Pane layer;
 

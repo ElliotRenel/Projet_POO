@@ -1,6 +1,5 @@
 package SampleGame.tiles;
 
-import SampleGame.Main;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
@@ -8,11 +7,7 @@ import SampleGame.army.Soldier.SoldierType;
 import SampleGame.army.soldiers.*;
 import SampleGame.player.*;
 import SampleGame.player.Player.PlayerType;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.util.Hashtable;
@@ -28,6 +23,12 @@ import java.util.Random;
  */
 public class Castle extends Sprite{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1081642180349182515L;
+
+
 	public enum Orientation{
 		N,
 		E,
