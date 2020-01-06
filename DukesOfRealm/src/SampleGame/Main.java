@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -28,7 +29,8 @@ public class Main extends Application {
 	private static Pane playfieldLayer;
 
 	//HUD
-	private Text round = new Text();
+	private String round = new String();
+	private MenuB menuBar;
 
 	//Things
 	private Scene scene;
@@ -89,7 +91,7 @@ public class Main extends Application {
 		if(kingdom==null)
 			createKingdom();
 		createStatusBar();
-		createMenuBar();
+		menuBar = createMenuBar();
 
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -164,16 +166,19 @@ public class Main extends Application {
 	
 	public void createStatusBar() {
 		HBox statusBar = new HBox();
-		statusBar.getChildren().addAll(round);
+		//statusBar.getChildren().addAll(round);
 		statusBar.getStyleClass().add("statusBar");
 		statusBar.relocate(0, 25);
 		//statusBar.setPrefSize(Settings.SCENE_WIDTH, Settings.STATUS_BAR_HEIGHT);
 		root.getChildren().add(statusBar);
 	}
 	
-	public void createMenuBar() {
+	public MenuB createMenuBar() {
 		MenuB menuBar = new MenuB();
+		Menu roundCount = new Menu("Round: " + round);
+		menuBar.getMenus().set(0, roundCount);
 		root.getChildren().add(menuBar);
+		return menuBar;
 	}
 
 	/**
@@ -216,7 +221,9 @@ public class Main extends Application {
 	 */
 	private void update() throws InterruptedException {
 		Settings.NB_CURRENT_ROUND++;
-		round.setText(""+Settings.NB_CURRENT_ROUND);
+		round= ""+Settings.NB_CURRENT_ROUND;
+		menuBar.updateMenuBar(round);
+		
 		Player p;
 		if((p = kingdom.update())!=null)
 			gameOver(p);
