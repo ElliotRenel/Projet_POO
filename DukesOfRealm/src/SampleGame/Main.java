@@ -40,7 +40,7 @@ public class Main extends Application {
 	private boolean pause = false;	
 	private boolean released = false;
 	
-	Group root;
+	static Group root;
 	
 	public static Kingdom kingdom;
 
@@ -200,6 +200,19 @@ public class Main extends Application {
 		Text message = new Text();
 		message.getStyleClass().add("message");
 		message.setText(p.getName()+" has won !\nGame Over !");
+		hbox.relocate(0,40);
+		hbox.getChildren().add(message);
+		root.getChildren().add(hbox);
+		gameLoop.stop();
+	}
+	
+	public static void gameFailed() {
+		HBox hbox = new HBox();
+		hbox.setPrefSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+		hbox.getStyleClass().add("message");
+		Text message = new Text();
+		message.getStyleClass().add("message");
+		message.setText("You don't have any castle left\nYou lost !");
 		hbox.relocate(0,40);
 		hbox.getChildren().add(message);
 		root.getChildren().add(hbox);
