@@ -35,7 +35,9 @@ public class SendArmyMenu extends ContextMenu {
 				if(n!=0)
 					castle.giveOrder(new Order(target, n, t));
 			}
+			((Human)castle.getOwner()).armySent();
 		});
+		this.getItems().addAll(send,new MenuItem("Cancel"));
 	}
 
 	private void createSlider(SoldierType type, String name) {
@@ -50,5 +52,7 @@ public class SendArmyMenu extends ContextMenu {
 		});
 		CustomMenuItem cmi2 = new CustomMenuItem(s);
 		cmi2.setHideOnClick(false);
+		
+		this.getItems().addAll(cmi,cmi2);
 	}
 }

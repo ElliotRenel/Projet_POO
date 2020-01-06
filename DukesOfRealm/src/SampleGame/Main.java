@@ -25,7 +25,7 @@ import javafx.scene.text.Text;
  */
 public class Main extends Application {
 
-	private Pane playfieldLayer;
+	private static Pane playfieldLayer;
 
 	//HUD
 	private Text round = new Text();
@@ -214,6 +214,10 @@ public class Main extends Application {
 		if((p = kingdom.update())!=null)
 			gameOver(p);
 		Thread.sleep(Settings.ROUND_TIME);
+	}
+
+	public static Pane getPlayfieldLayer() {
+		return playfieldLayer;
 	}
 	
 	/**

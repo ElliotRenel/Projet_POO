@@ -64,13 +64,19 @@ public class Human extends Player {
 	
 	public void targetAcquired(Castle target, MouseEvent event) {
 		if(highlight!=target) {
-			highlight.giveOrder(new Order(target,1,SoldierType.P));
-			target = null;
-			highlight=null;
+			SendArmyMenu menu = new SendArmyMenu(highlight, target);
+			menu.show(Main.getPlayfieldLayer(),event.getScreenX(),event.getScreenY());
+		}else {
+			armySent();
 		}
+	}
+	
+	public void armySent() {
 		for(Castle c : Main.kingdom.castles) {
 			c.updateUI();
 		}
+		target = null;
+		highlight=null;
 		Main.unpause();
 	}
 	
