@@ -1,5 +1,7 @@
 package SampleGame.player;
 
+import SampleGame.tiles.Castle;
+
 /**
  * Subclass of Player describing the absence of a player.
  * Each objects are here to describe the none presence of a player on a castle.
@@ -13,6 +15,11 @@ public class VoidPlayer extends Player {
 	
 	public VoidPlayer() {
 		super();
+	}
+
+	public void generateRandomDifficulty(Castle c) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
