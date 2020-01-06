@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import SampleGame.Kingdom;
+import SampleGame.Main;
 import SampleGame.Settings;
 import SampleGame.army.Order;
 import SampleGame.army.Soldier;
@@ -39,32 +40,20 @@ public class AI extends Player {
 		if(!owned_castle.isEmpty())
 			for(Castle c : owned_castle) {
 				c.updateRound();
-				/*
-				if(Settings.NB_CURRENT_ROUND%100 == 1)
-					c.produceArmy(SoldierType.values()[rand.nextInt(3)], 100);
-				if(Settings.NB_CURRENT_ROUND!=0 && Settings.NB_CURRENT_ROUND%100==0) {
-					Castle cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
-						while(isMine(cible))
-							cible = Kingdom.castles[rand.nextInt(Settings.NB_CASTLE)];
-						c.giveOrder(new Order(cible,c.getNbTroupe(SoldierType.P)-1,SoldierType.P));
-				}
-				*/
+				if(rand.nextGaussian()>0.9)
+					decideWhatToDo(c);
 			}
 	}
 	
-	@Override
-	public ContextMenu giveMenu(Castle castle) {
-		ContextMenu menu = new ContextMenu();
-		MenuItem info = new MenuItem();
-		
-		info.setText("Owner : "+name+"\n"
-				+ "Treasure : "+castle.getTreasure()+"\n"
-				+ "Army count : \n"
-				+ "\t> Stinger : "+castle.getNbTroupe(SoldierType.P)+"\n"
-				+ "\t> Knights : "+castle.getNbTroupe(SoldierType.C)+"\n"
-				+ "\t> Onagra : "+castle.getNbTroupe(SoldierType.O)+"\n");
-		menu.getItems().add(info);
-		return menu;
+	private void decideWhatToDo(Castle castle) {
+		Double randomizer = rand.nextGaussian();
+		if(randomizer<0.3) {
+			SoldierType t = SoldierType.values()[rand.nextInt(3)];
+			if(!castle.noMoreArmy())
+				castle.giveOrder(new Order(Main.kingdom.castles[rand.nextInt(Settings.NB_CASTLE)],rand.nextInt(castle.getNbTroupe(t)),t));
+			else
+				castle.produceArmy(t, rand.nextInt(30));
+		}
 	}
 }
 

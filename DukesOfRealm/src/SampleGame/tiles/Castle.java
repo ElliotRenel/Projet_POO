@@ -217,7 +217,7 @@ public class Castle extends Sprite{
 	 * Check if the castle has any soldier left.
 	 * @return True if there are no more soldiers, false if it found at least one.
 	 */
-	private boolean noMoreArmy() {
+	public boolean noMoreArmy() {
 		for(SoldierType t : SoldierType.values())
 			if(!army.get(t).isEmpty())
 				return false;

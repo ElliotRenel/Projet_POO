@@ -3,6 +3,7 @@ package SampleGame;
 import SampleGame.army.*;
 import SampleGame.army.soldiers.Piquier;
 import SampleGame.player.*;
+import SampleGame.player.Player.PlayerType;
 import SampleGame.tiles.Castle;
 import SampleGame.tiles.Castle.Orientation;
 import javafx.scene.image.Image;
@@ -85,7 +86,10 @@ public class Kingdom implements Serializable{
 			}
 			
 			c = new Castle(p.x , p.y , 
-					duke, 1000,  oriCastle, new Factory());			
+					duke, 1000,  oriCastle, new Factory());	
+			if(duke.getType()==PlayerType.V) {
+				((VoidPlayer)duke).generateRandomDifficulty(c);
+			}
 			castles[i] = c;		
 		}
 	}
