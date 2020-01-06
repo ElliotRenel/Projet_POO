@@ -2,7 +2,6 @@ package SampleGame;
 
 import java.io.*;
 
-import SampleGame.player.Human;
 import SampleGame.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -10,7 +9,6 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -22,6 +20,7 @@ import javafx.scene.text.Text;
  * Main gestion of the window parameters, round time, end game, etc...
  * 
  * @author thdupont
+ * 
  *
  */
 public class Main extends Application {
@@ -37,7 +36,7 @@ public class Main extends Application {
 	//private Input input;
 	private static AnimationTimer gameLoop;
 	
-	private boolean pause = false;	
+	static boolean pause = false;	
 	private boolean released = false;
 	
 	static Group root;
@@ -54,7 +53,7 @@ public class Main extends Application {
 
 		root = new Group();
 		scene = new Scene(root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT + Settings.STATUS_BAR_HEIGHT);
-		//scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
+		primaryStage.setTitle("Dukes Of Realm");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
@@ -90,7 +89,6 @@ public class Main extends Application {
 	private void loadGame() {
 		if(kingdom==null)
 			createKingdom();
-		createStatusBar();
 		menuBar = createMenuBar();
 
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -159,20 +157,6 @@ public class Main extends Application {
 	 
 	}
 
-	/**
-	 * To BE INPLEMENTED
-	 * Allows to print status of a castle in the window
-	 */
-	
-	public void createStatusBar() {
-		HBox statusBar = new HBox();
-		//statusBar.getChildren().addAll(round);
-		statusBar.getStyleClass().add("statusBar");
-		statusBar.relocate(0, 25);
-		//statusBar.setPrefSize(Settings.SCENE_WIDTH, Settings.STATUS_BAR_HEIGHT);
-		root.getChildren().add(statusBar);
-	}
-	
 	public MenuB createMenuBar() {
 		MenuB menuBar = new MenuB();
 		Menu roundCount = new Menu("Round: " + round);
@@ -219,10 +203,16 @@ public class Main extends Application {
 		gameLoop.stop();
 	}
 	
+	/**
+	 * Allows to pause the game.
+	 */
 	public static void pause() {
 		gameLoop.stop();
 	}
 	
+	/**
+	 * Allows to unpause the game.
+	 */
 	public static void unpause() {
 		gameLoop.start();
 	}
@@ -243,6 +233,10 @@ public class Main extends Application {
 		Thread.sleep(Settings.ROUND_TIME);
 	}
 
+	/**
+	 * Allows to obtain the layer of the game
+	 * @return the layer of the game
+	 */
 	public static Pane getPlayfieldLayer() {
 		return playfieldLayer;
 	}

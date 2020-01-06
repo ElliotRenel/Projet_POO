@@ -19,7 +19,6 @@ Le chateau NEUTRE doit etre de lvl aléatoire, avec une garnison aleatoire (avec 
 
 Le chateau d'un JOUEUR doit avoir armée initiale (égale pour tous les joueurs), trésor vide, et chateau de niveau 1
 
-Envoyer soldats sur la porte?
 		
 -Sauvegarde/Load
 

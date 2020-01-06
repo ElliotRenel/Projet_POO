@@ -26,6 +26,11 @@ public class Kingdom implements Serializable{
 	public Queue<Player> players = new LinkedList<Player>();
 	Random rand = new Random();
 	
+	/**
+	 * Initialize a whole game.
+	 * Images are loaded, assigment of troops, randomization of the orientation of the doors....
+	 * @param field the layer of the game
+	 */
 	public Kingdom(Pane field) {
 		
 		

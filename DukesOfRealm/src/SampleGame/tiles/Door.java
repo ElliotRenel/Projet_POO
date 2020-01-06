@@ -3,6 +3,12 @@ package SampleGame.tiles;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 
+
+/**
+ * Class designed to allow units to exit at right coordinates and to display the door
+ * @author theod
+ *
+ */
 public class Door extends Sprite {
 	
 	/**
