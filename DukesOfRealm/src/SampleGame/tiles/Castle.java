@@ -284,8 +284,10 @@ public class Castle extends Sprite{
 	 * Add a training order to the factory
 	 * @param type The soldier you want to train
 	 * @param quantity The quantity of this specific soldiers you want to train
+	 * @param check A boolean set as true if you only want to know if production is possible
+	 * @return True if the castle can produce the army, false if it can't
 	 */
-	public void produceArmy(SoldierType type, int quantity) {
+	public boolean produceArmy(SoldierType type, int quantity, boolean check) {
 		Soldier soldier;
 		switch (type) {
 		case P:
@@ -298,11 +300,27 @@ public class Castle extends Sprite{
 			soldier = new Onagre(this);
 			break;
 		default:
-			soldier = null;
-			break;
+			return false;
 		}
-		if(soldier!=null)
-			fact.addTraining(soldier, quantity);
+		int cost = (soldier.getCost()*quantity);
+		if(treasure-cost>=0) {
+			if(!check) {
+				fact.addTraining(soldier, quantity);
+				this.treasure -= cost;
+			}
+			return true;
+		}
+		else return false;	
+	}
+	
+	/**
+	 * Add a training order to the factory
+	 * @param type The soldier you want to train
+	 * @param quantity The quantity of this specific soldiers you want to train
+	 * @return True if the castle can produce the army, false if it can't
+	 */
+	public boolean produceArmy(SoldierType type, int quantity) {
+		return produceArmy(type, quantity, false);
 	}
 	
 	/**

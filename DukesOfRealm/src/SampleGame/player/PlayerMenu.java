@@ -48,14 +48,21 @@ public class PlayerMenu extends ContextMenu {
 		produce1.setOnAction(e -> {
 			castle.produceArmy(type, 1);
 		});
+		
 		MenuItem produce10 = new MenuItem("10");
 		produce10.setOnAction(e -> {
 			castle.produceArmy(type, 10);
 		});
+		
 		MenuItem produce100 = new MenuItem("100");
 		produce100.setOnAction(e -> {
 			castle.produceArmy(type, 100);
-		});		
+		});
+		
+		produce1.setDisable(!castle.produceArmy(type, 1, true));
+		produce10.setDisable(!castle.produceArmy(type, 10, true));
+		produce100.setDisable(!castle.produceArmy(type, 100, true));
+		
 		soldier.getItems().addAll(produce1,produce10,produce100);
 	}
 }
