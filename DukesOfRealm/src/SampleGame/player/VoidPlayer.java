@@ -2,6 +2,7 @@ package SampleGame.player;
 
 import java.util.Random;
 
+import SampleGame.army.Soldier.SoldierType;
 import SampleGame.tiles.Castle;
 
 /**
@@ -21,7 +22,11 @@ public class VoidPlayer extends Player {
 	}
 
 	public void generateRandomDifficulty(Castle c) {
-		c.setLevel(rand.nextInt(3)+1);		
+		c.setLevel(rand.nextInt(3)+1);
+		
+		c.addToArmy(SoldierType.P, c.getLevel()*10);
+		c.addToArmy(SoldierType.C, c.getLevel()*5);
+		c.addToArmy(SoldierType.O, c.getLevel()*2);
 	}
 
 }

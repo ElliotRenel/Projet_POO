@@ -153,6 +153,25 @@ public class Castle extends Sprite{
 		army.get(s.getType()).add(s);
 	}
 	
+	public void addToArmy(SoldierType t, int nb) {
+		for(int i=0; i<nb; i++) {
+		switch (t) {
+		case P:
+			army.get(t).add(new Piquier(this));
+			break;
+		case C:
+			army.get(t).add(new Chevalier(this));
+			break;
+		case O:
+			army.get(t).add(new Onagre(this));
+			break;
+
+		default:
+			break;
+		}
+		}
+	}
+	
 	/**
 	 * Remove a specific type of soldiers from the castle army
 	 * 
@@ -179,6 +198,7 @@ public class Castle extends Sprite{
 	 */
 	public void getAttacked(Soldier s) {
 		if(this.noMoreArmy()) {
+			System.out.println("Changement commence");
 			this.owner.removeCastle(this);
 			this.owner = s.getOwner();
 			addToArmy(s);
@@ -189,6 +209,7 @@ public class Castle extends Sprite{
 			this.owner.addCastle(this);
 			this.fact.resetFactory();
 			this.changeImage(owner.getCastleImage());
+			System.out.println("Changement fini");
 		}else {
 			Soldier challenger = this.chooseChallenger();
 			while(s.attackSoldier(challenger) && !this.noMoreArmy()) {

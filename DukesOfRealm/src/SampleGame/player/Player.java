@@ -71,6 +71,7 @@ public class Player {
 		this.moving_soldiers = new LinkedList<Soldier>();
 		this.castleImage = Settings.CastleImages[0];
 		this.playerColor = Color.BLACK;
+		this.type=PlayerType.V;
 		
 	}
 	

@@ -125,8 +125,13 @@ public class Kingdom implements Serializable{
 			return players.remove();
 		}
 		for(Player p : players)
-			if(!p.update())
-				players.remove(p);
+			if(!p.update()) {
+				if(p.getType()!=PlayerType.H)
+					players.remove(p);
+				else {
+					players.remove(p);//Main.gameFailed();
+				}
+			}
 		return null;
 	}
 	
