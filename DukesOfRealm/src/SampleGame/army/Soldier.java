@@ -124,6 +124,8 @@ public class Soldier extends Sprite{
 		moving = false;
 		if(target.getOwnerName()==this.owner.getName() || !Main.kingdom.players.contains(owner)) {
 			target.addToArmy(this);
+			this.setX(target.getDoorImg().getX_out());
+			this.setY(target.getDoorImg().getY_out());
 			this.owner = target.getOwner();
 		}else {
 			target.getAttacked(this);
