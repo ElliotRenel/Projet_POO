@@ -12,7 +12,6 @@ import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
-import javafx.scene.transform.Rotate;
 
 import java.util.Hashtable;
 import java.util.LinkedList;

@@ -1,13 +1,7 @@
 Player Features:
 
 -Click sur un chateau:
-	+Reçoit les infos
-		*Proprio
-		*Nb troupes de chaque type
-		*Trésor
-		*Lvl du chateau, revenu
-		*Production en cours
-		
+			
 	+Si proprio, possibilité d'envoi de troupes (Mettre en pause lors du choix)
 		*Choisir combien de troupes (de chaque type)
 		*Choisir ou les envoyer
@@ -18,16 +12,27 @@ Player Features:
 		*Choisir amélio du chateau
 		*Retirer de la file
 		
--Pause
-	+Peut continuer a donner des ordres
-	
--Recommencer?
+
+Faire en sorte qu'un chateau neutre aie une armée initiale, et qu'il produise 10% d'une prod normale	
+
+Le chateau NEUTRE doit etre de lvl aléatoire, avec une garnison aleatoire (avec un minimum) et un trésor aléatoire
+
+Le chateau d'un JOUEUR doit avoir armée initiale (égale pour tous les joueurs), trésor vide, et chateau de niveau 1
+
+Envoyer soldats sur la porte?
+		
 -Sauvegarde/Load
 
-
-Idée pour les soldats (affichage):
-Petit point pour les lanciers, chevaux pour les chevaux etc...
-Problème: affichage en 3 quand ils sont 3, 2 qd 2 etc...
+IA demander a Eliot
 
 Ne pas oublier de faire des tests!
+
+Revoir/ajouter de la javadoc
+
 Et un readme!
+	-Mode d'emploi de votre programme (lancement, options éventuelles de la ligne de commande)
+	-Règle du jeu complète
+	-Description claire et précise des fonctionnalités implémentées, des points à améliorer et les éventuels dysfonctionnements connus.
+
+Ne pas oublier de rename src en src_basique
+De clean le dépot si oublis
