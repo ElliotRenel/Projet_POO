@@ -43,8 +43,20 @@ public class PlayerMenu extends ContextMenu {
 		
 		army.getItems().addAll(piquier,chevalier,onagre);
 		
+		// Upgrade Castle
+		MenuItem upgrade = new MenuItem("Upgrade Castle to Lvl "+(castle.getLevel()+1)+" (cost:"+1000*(castle.getLevel()+1)+")");
 		
-		this.getItems().addAll(infos,army);
+		upgrade.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				castle.upgradeCastle();
+			}
+		});;
+		upgrade.setDisable(!castle.upgradeCastle(true) || castle.isUpgrading());
+		
+		
+		this.getItems().addAll(infos,army,upgrade);
 	}
 	
 	private void assignProducer(Menu soldier, SoldierType type) {

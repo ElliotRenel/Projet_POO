@@ -3,12 +3,14 @@ package SampleGame.tiles;
 import SampleGame.Settings;
 import SampleGame.Sprite;
 import SampleGame.army.*;
+import SampleGame.army.Factory.ProductionType;
 import SampleGame.army.Soldier.SoldierType;
 import SampleGame.army.soldiers.*;
 import SampleGame.player.*;
 import SampleGame.player.Player.PlayerType;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Pair;
 
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -73,6 +75,7 @@ public class Castle extends Sprite{
 		this.door = door;
 		
 		this.fact = fact;
+		fact.setCastle(this);
 		this.orders = new LinkedList<Order>();
 		this.current_order = null;
 		this.level = 1;
@@ -85,9 +88,27 @@ public class Castle extends Sprite{
 	 * Checks if there is a new soldier to add from production and then adds or not the right soldier to the army
 	*/
 	private void addToArmy() {
-		Soldier result = fact.update();
+		Pair<ProductionType,SoldierType> result = fact.update();
 		if(result!=null) {
-			addToArmy(result);
+			if(result.getKey()==ProductionType.U)
+				this.level++;
+			else {
+				SoldierType t = result.getValue();
+				Soldier s;
+				switch (t) {
+				case P:
+					addToArmy(new Piquier(this));
+					break;
+				case C:
+					addToArmy(new Chevalier(this));
+					break;
+				case O:
+					addToArmy(new Onagre(this));
+					break;
+				default:
+					break;
+				}
+			}
 		}
 	}
 	
@@ -321,6 +342,26 @@ public class Castle extends Sprite{
 		return produceArmy(type, quantity, false);
 	}
 	
+	public boolean upgradeCastle(boolean check) {
+		int cost = (this.level +1)*1000;
+		if(treasure-cost>=0) {
+			if(!check) {
+				fact.upgradeCastle();
+				treasure -=cost;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean upgradeCastle() {
+		return upgradeCastle(false);
+	}
+	
+	public boolean isUpgrading() {
+		return fact.upgrade;
+	}
+
 	/**
 	 * Show castle menu when the castle owner is the player, only show information if the castle
 	 * is owned by an opponent.
